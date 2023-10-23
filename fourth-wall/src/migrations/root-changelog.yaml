@@ -1,0 +1,7 @@
+databaseChangeLog:
+   - include:
+         file: changelogs/db-creation-changelog.sql
+   - include:
+         file: changelogs/default-data-insertion.sql
+   - include:
+         file: changelogs/update-admin-password.sql
