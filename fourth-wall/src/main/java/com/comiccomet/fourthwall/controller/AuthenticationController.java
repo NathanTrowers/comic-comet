@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.comiccomet.fourthwall.constant.GeneralConstants;
 import com.comiccomet.fourthwall.dto.LoginCredentials;
 import com.comiccomet.fourthwall.dto.LoginResponse;
 import com.comiccomet.fourthwall.dto.LogoutResponse;
@@ -22,8 +23,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("/admin/login")
-    public ResponseEntity<LoginResponse> postLogin(@RequestBody LoginCredentials credentials) {
-        return this.authenticationService.startSession(credentials);
+    public ResponseEntity<LoginResponse> postAdminLogin(@RequestBody LoginCredentials credentials) {
+        return this.authenticationService.startSession(credentials, GeneralConstants.ADMIN);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> postCustomerLogin(@RequestBody LoginCredentials credentials) {
+        return this.authenticationService.startSession(credentials, GeneralConstants.CUSTOMER);
     }
 
     @PostMapping("/logout")

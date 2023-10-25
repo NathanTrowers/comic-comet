@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Admin {
+public class Admin extends User {
     private @Id UUID adminId;
     private String email;
     private String name;
@@ -81,6 +81,7 @@ public class Admin {
 
     @Override
     public String toString() {
-        return "Admin [adminId=" + adminId + ", email= '" + email + "', name= '" + name + "', password=" + password + "]";
+        return "Admin [adminId=" + this.adminId + ", email= '" + this.email +
+        "', name= '" + this.name + "', password=" + this.password + "]";
     }
 }

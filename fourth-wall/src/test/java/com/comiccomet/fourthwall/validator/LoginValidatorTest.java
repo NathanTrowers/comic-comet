@@ -11,9 +11,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.comiccomet.fourthwall.constant.ErrorCodeConstants;
+import com.comiccomet.fourthwall.constant.GeneralConstants;
 import com.comiccomet.fourthwall.dto.LoginCredentials;
 import com.comiccomet.fourthwall.entity.Admin;
+import com.comiccomet.fourthwall.entity.Customer;
 import com.comiccomet.fourthwall.repository.AdminRepository;
+import com.comiccomet.fourthwall.repository.CustomerRepository;
 
 @SpringBootTest
 public class LoginValidatorTest {
@@ -22,10 +25,13 @@ public class LoginValidatorTest {
 
     @MockBean
     private AdminRepository adminRepository;
+
+    @MockBean
+    private CustomerRepository customerRepository;
     
     @ParameterizedTest
     @ValueSource(strings = {"example@test.com", "exampl3@test.co", "example.dot@test.me"})
-    void testValidateSuccess(String validEmail) {
+    void testValidateSuccessWhenAdminUser(String validEmail) {
         /** Data */
         LoginCredentials credentials = new LoginCredentials(validEmail, "SuperS!@sh3%");
         Admin admin = new Admin(credentials.getEmail(), "Example Name", "$2y$10$Z1N6ljW2G7//Dzi4eGHBTeLCRu2SJozQzufQQJUk4lHXFvE.nLKg.");
@@ -42,8 +48,27 @@ public class LoginValidatorTest {
         assertEquals(expectedResult.length, errorCodes.length);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"example@test.com", "exampl3@test.co", "example.dot@test.me"})
+    void testValidateSuccessWhenCustomerUser(String validEmail) {
+        /** Data */
+        LoginCredentials credentials = new LoginCredentials(validEmail, "SuperS!@sh3%");
+        Customer customer = new Customer(credentials.getEmail(), "Example Name", "$2y$10$Z1N6ljW2G7//Dzi4eGHBTeLCRu2SJozQzufQQJUk4lHXFvE.nLKg.");
+        int[] expectedResult = {};
+
+        /** Mocks */
+        when(this.customerRepository.findByEmail(credentials.getEmail()))
+            .thenReturn(customer);
+
+        /** Call to Test */
+        int[] errorCodes = loginValidator.validate(credentials, GeneralConstants.CUSTOMER);
+
+        /** Assertions */
+        assertEquals(expectedResult.length, errorCodes.length);
+    }
+
     @Test
-    void testValidateFailWhenEmailNotFound() {
+    void testValidateFailWhenAdminUserEmailNotFound() {
         /** Data */
         LoginCredentials credentials = new LoginCredentials("wrong.email@test.com", "SuperS!@sh3%");
        int[] expectedResult = {ErrorCodeConstants.ERROR_INVALID_EMAIL};
@@ -60,7 +85,24 @@ public class LoginValidatorTest {
     }
 
     @Test
-    void testValidateFailWhenPasswordDoesNotMatch() {
+    void testValidateFailWhenCustomerUserEmailNotFound() {
+        /** Data */
+        LoginCredentials credentials = new LoginCredentials("wrong.email@test.com", "SuperS!@sh3%");
+       int[] expectedResult = {ErrorCodeConstants.ERROR_INVALID_EMAIL};
+
+        /** Mocks */
+        when(this.customerRepository.findByEmail(credentials.getEmail()))
+            .thenReturn(null);
+
+        /** Call to Test */
+        int[] errorCodes = loginValidator.validate(credentials, GeneralConstants.CUSTOMER);
+
+        /** Assertions */
+        assertEquals(expectedResult[0], errorCodes[0]);
+    }
+
+    @Test
+    void testValidateFailWhenAdminUserPasswordDoesNotMatch() {
         /** Data */
         LoginCredentials credentials = new LoginCredentials("example@test.com", "SuperS!@sher");
         Admin admin = new Admin("example@test.com", "Example Name", "$2y$10$Z1N6ljW2G7//Dzi4eGHBTeLCRu2SJozQzufQQJUk4lHXFvE.nLKg.");
@@ -72,6 +114,24 @@ public class LoginValidatorTest {
 
         /** Call to Test */
         int[] errorCodes = loginValidator.validate(credentials);
+
+        /** Assertions */
+        assertEquals(expectedResult[0], errorCodes[0]);
+    }
+
+    @Test
+    void testValidateFailWhenCustomerUserPasswordDoesNotMatch() {
+        /** Data */
+        LoginCredentials credentials = new LoginCredentials("example@test.com", "SuperS!@sher");
+        Customer customer = new Customer("example@test.com", "Example Name", "$2y$10$Z1N6ljW2G7//Dzi4eGHBTeLCRu2SJozQzufQQJUk4lHXFvE.nLKg.");
+        int[] expectedResult = {ErrorCodeConstants.ERROR_INVALID_PASSWORD};
+
+        /** Mocks */
+        when(this.customerRepository.findByEmail(credentials.getEmail()))
+            .thenReturn(customer);
+
+        /** Call to Test */
+        int[] errorCodes = loginValidator.validate(credentials, GeneralConstants.CUSTOMER);
 
         /** Assertions */
         assertEquals(expectedResult[0], errorCodes[0]);
