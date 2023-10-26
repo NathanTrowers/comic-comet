@@ -1,0 +1,9 @@
+body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+:root {
+    --primary-color: #cc6600;
+    --secondary-color: #ffad99;
+    --accent-light: #fff;
+    --accent-dark: #000;
+}

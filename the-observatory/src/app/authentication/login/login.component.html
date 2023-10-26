@@ -1,0 +1,23 @@
+<h2>Welcome to ComicComet!</h2>  
+
+<form 
+  [formGroup]='loginForm' 
+  (submit)='onSubmitLogin()'
+>
+  <app-messages></app-messages>  
+    <label for='email'>Email Address </label>
+    <input 
+      type='email'
+      placeholder='email@example.com'
+      formControlName='email'
+      data-test='email-input'
+    />
+    <label for='password'>Password </label>
+    <input 
+      type='password'
+      placeholder='Ex@m3!lePa$$wo%d'
+      formControlName='password'
+      data-test='password-input'
+    />
+    <button type='submit'>Login</button>
+</form>

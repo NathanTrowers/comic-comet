@@ -20,6 +20,7 @@ services:
       - DATABASE_PASSWORD=AdM1n
       - SECRET_KEY=oeRaYY7Wo24sDqKSX3GM9ASEmeGPmkTd9jo1QTy4b7P9Ze5_9hKolVX8xNrQDcNRfVEdTZNOuOyqEGhXEbdJI-ZQ19k_o9MI0y3eZN2lp9jow55FfXMiINEdt1XR85VipRLSOkT6kSpzs2x-jbLDiz9iFVzkd81YKxMgPA7VfZeQUm4n-mOmnWMaVX30zGFU4L3oPBctYKkl4dYfqYWqRNfrgPJVi5DGFjywgxx0ASEiJHtV72paI3fDR2XwlSkyhhmY-ICjCRmsJN4fX1pdoL8a18-aQrvyu4j0Os6dVPYIoPvvY0SAZtWYKHfM15g7A3HD4cVREf9cUsprCRK93w;
       - SAGE_MOUNTAIN_URL=http://localhost:4200
+      - THE_OBSERVATORY_URL=http://localhost:4300
     ports:
       - 8080:8080
     volumes:
@@ -30,9 +31,16 @@ services:
     build: ./sage-mountain
     depends_on:
       - fourth-wall
-    environment:
-      - FOURTH_WALL_BASE_URL=http://fourth-wall
     ports:
       - 4200:4200
     volumes:
       - ./sage-mountain:/app
+
+  the-observatory:
+    build: ./the-observatory
+    depends_on:
+      - fourth-wall
+    ports:
+      - 4300:4200
+    volumes:
+      - ./the-observatory:/app

@@ -29,7 +29,7 @@ export class AuthenticationService {
     loginCredentials.password = Buffer.from(loginCredentials.password)
       .toString('base64');
 
-    return this.httpClient.post<LoginResponse>(`${this.fourthWallApi}/admin/login`, loginCredentials, this.httpOptions)
+    return this.httpClient.post<LoginResponse>(`${this.fourthWallApi}/login`, loginCredentials, this.httpOptions)
       .pipe(
         catchError(this.handleError<LoginResponse>('login'))
       );

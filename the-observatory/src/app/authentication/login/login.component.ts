@@ -15,7 +15,7 @@ import { MessageService } from 'src/app/message/message.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MessageComponent
+    MessageComponent,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']

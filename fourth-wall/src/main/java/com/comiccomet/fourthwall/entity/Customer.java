@@ -23,7 +23,10 @@ public class Customer extends User {
         this(UUID.randomUUID(), email, name, password, "12 Judment Boulevard", "Toronto", "M2B 3S3", "Canada");
     }
 
-    public Customer(UUID customerId, String email, String name, String password, String address, String city, String postalCode, String country) {
+    public Customer(UUID customerId, String email, String name, 
+        String password, String address, String city,
+        String postalCode, String country
+    ) {
         this.customerId = customerId;
         this.email = email;
         this.name = name;
