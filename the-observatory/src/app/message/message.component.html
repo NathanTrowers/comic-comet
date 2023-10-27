@@ -1,0 +1,12 @@
+
+<div *ngIf='messageService.message !== ""' [class]='messageService.cssClass'>
+    <p data-test='message'>{{ messageService.message }}</p>
+    <button 
+        type='button'
+        class='button'
+        aria-label='dismiss message'
+        (click)='messageService.close()'
+    >
+        X
+    </button>
+</div>

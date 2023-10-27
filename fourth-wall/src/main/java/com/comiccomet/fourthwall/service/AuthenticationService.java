@@ -27,15 +27,18 @@ public class AuthenticationService {
         this.tokenManager = tokenManager;
         this.loginValidator = loginValidator;
     }
-
-    public ResponseEntity<LoginResponse> startSession(LoginCredentials credentials) {
+/** 1) user sends login request
+ * 2) request payload is validated
+ * 3) response is reutrned based on validation (JWT or Error)
+ */
+    public ResponseEntity<LoginResponse> startSession(LoginCredentials credentials, String loginType) {
         try {
             String decodedEmail = this.decodeString(credentials.getEmail());
             String decodedPassword = this.decodeString(credentials.getPassword());
             credentials.setEmail(decodedEmail);
             credentials.setPassword(decodedPassword);
 
-            int[] errorCodes = this.loginValidator.validate(credentials);
+            int[] errorCodes = this.loginValidator.validate(credentials, loginType);
             if (errorCodes.length > 0) {
                 log.error("Authentication for email {} failed", credentials.getEmail());
 
@@ -48,7 +51,7 @@ public class AuthenticationService {
 
             return ResponseEntity
                 .accepted()
-                .body(new LoginResponse(202, this.tokenManager.generateToken("admin"), errorCodes));
+                .body(new LoginResponse(202, this.tokenManager.generateToken(loginType), errorCodes));
         } catch (Exception error) {
             log.error("Login request failed with the following error: \n {}", error);
             int[] noCodes = {};

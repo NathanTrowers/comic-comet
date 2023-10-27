@@ -1,4 +1,4 @@
-# ComicComet installation Instructions
+# ComicComet Installation Instructions
 
 On this page:
 
@@ -14,6 +14,7 @@ After running `git pull https://github.com/NathanTrowers/ComicComet`, the databa
 
 ### Database Configuration
 
+Create an empty directory in the root of the project called ***mysql***.
 Run `docker compose up mysql` to start the database container. Once started, in another command-line window, run `docker exec -it mysql bash` to enter the container.  Afterwards, enter the following respective commands:
 
 ``` shell

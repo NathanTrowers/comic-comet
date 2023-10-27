@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { LoginValidator } from './login.validator';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
-import LoginCredentials from 'src/app/interfaces/LoginCredentials';
+import LoginCredentials from 'src/app/authentication/interfaces/LoginCredentials';
 import { MessageComponent } from 'src/app/message/message.component';
 import { MessageService } from 'src/app/message/message.service';
 

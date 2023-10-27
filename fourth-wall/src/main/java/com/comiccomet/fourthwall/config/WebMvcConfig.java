@@ -12,8 +12,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         String sageMountainUrl = System.getenv("SAGE_MOUNTAIN_URL");
+        String theObservatoryUrl = System.getenv("THE_OBSERVATORY_URL");
         registry.addMapping("/**")
-            .allowedOrigins(sageMountainUrl)
+            .allowedOrigins(sageMountainUrl, theObservatoryUrl)
             .allowedMethods("POST");
     }
 }
