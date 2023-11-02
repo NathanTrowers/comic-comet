@@ -11,6 +11,8 @@ import com.comiccomet.fourthwall.constant.GeneralConstants;
 import com.comiccomet.fourthwall.dto.LoginCredentials;
 import com.comiccomet.fourthwall.dto.LoginResponse;
 import com.comiccomet.fourthwall.dto.LogoutResponse;
+import com.comiccomet.fourthwall.dto.RegistrationFields;
+import com.comiccomet.fourthwall.dto.RegistrationResponse;
 import com.comiccomet.fourthwall.service.AuthenticationService;
 
 @RestController
@@ -30,6 +32,11 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> postCustomerLogin(@RequestBody LoginCredentials credentials) {
         return this.authenticationService.startSession(credentials, GeneralConstants.CUSTOMER);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<RegistrationResponse> postCustomerRegistration(@RequestBody RegistrationFields registration) {
+        return this.authenticationService.register(registration);
     }
 
     @PostMapping("/logout")

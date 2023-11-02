@@ -1,14 +1,17 @@
 package com.comiccomet.fourthwall.entity;
 
 import java.util.Objects;
-import java.util.UUID;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Customer extends User {
-    private @Id UUID customerId;
+    @Id
+    @GeneratedValue(strategy=GenerationType.UUID)
+    private String customerId;
     private String email;
     private String name;
     private String password;
@@ -20,14 +23,13 @@ public class Customer extends User {
     public Customer() {}
 
     public Customer(String email, String name, String password) {
-        this(UUID.randomUUID(), email, name, password, "12 Judment Boulevard", "Toronto", "M2B 3S3", "Canada");
+        this(email, name, password, "12 Sage Mountain Way", "Toronto", "M2B 3S3", "Canada");
     }
 
-    public Customer(UUID customerId, String email, String name, 
-        String password, String address, String city,
-        String postalCode, String country
+    public Customer(String email, String name, String password,
+        String address, String city, String postalCode,
+        String country
     ) {
-        this.customerId = customerId;
         this.email = email;
         this.name = name;
         this.password = password;
@@ -37,11 +39,11 @@ public class Customer extends User {
         this.country = country;
     }
 
-    public UUID getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(UUID customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
