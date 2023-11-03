@@ -5,3 +5,5 @@ databaseChangeLog:
          file: changelogs/default-data-insertion.sql
    - include:
          file: changelogs/update-admin-password.sql
+   - include:
+         file: changelogs/update-comic-book-order-table-customer-id.sql

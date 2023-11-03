@@ -3,16 +3,18 @@ package com.comiccomet.fourthwall.dto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LoginCredentials {
-    
+public class RegistrationFields {
+
     private String email;
+    private String name;
     private String password;
 
-    public LoginCredentials(){}
+    public RegistrationFields() {}
 
-    public LoginCredentials(String email, String passsword) {
+    public RegistrationFields(String email, String name, String password) {
         this.email = email;
-        this.password = passsword;
+        this.name = name;
+        this.password = password;
     }
 
     public String getEmail() {
@@ -21,6 +23,14 @@ public class LoginCredentials {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {

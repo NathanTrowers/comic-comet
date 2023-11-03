@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
-import { LoginValidator } from './login.validator';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
-import LoginCredentials from 'src/app/authentication/interfaces/LoginCredentials';
+import { LoginValidator } from 'src/app/authentication/login/login.validator';
+import LoginCredentials from 'src/app/authentication/interfaces/request/LoginCredentials';
 import { MessageComponent } from 'src/app/message/message.component';
 import { MessageService } from 'src/app/message/message.service';
 
@@ -16,17 +16,16 @@ import { MessageService } from 'src/app/message/message.service';
     CommonModule,
     ReactiveFormsModule,
     MessageComponent,
+    RouterModule
   ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['../authentication.css']
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl('')
   });
-  cssClass: string = '';
-  message: string = '';
 
   constructor(
     private authenticationService: AuthenticationService, 

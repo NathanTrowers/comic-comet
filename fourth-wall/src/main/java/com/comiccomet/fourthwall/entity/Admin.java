@@ -1,14 +1,17 @@
 package com.comiccomet.fourthwall.entity;
 
 import java.util.Objects;
-import java.util.UUID;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Admin extends User {
-    private @Id UUID adminId;
+    @Id
+    @GeneratedValue(strategy=GenerationType.UUID)
+    private String adminId;
     private String email;
     private String name;
     private String password;
@@ -16,21 +19,16 @@ public class Admin extends User {
     public Admin() {}
 
     public Admin(String email, String name, String password) {
-        this(UUID.randomUUID(), email, name, password);
-    }
-
-    public Admin(UUID adminId, String email, String name, String password) {
-        this.adminId = adminId;
         this.email = email;
         this.name = name;
         this.password = password;
     }
 
-    public UUID getAdminId() {
+    public String getAdminId() {
         return adminId;
     }
 
-    public void setAdminId(UUID adminId) {
+    public void setAdminId(String adminId) {
         this.adminId = adminId;
     }
 

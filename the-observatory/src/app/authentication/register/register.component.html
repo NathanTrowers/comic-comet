@@ -1,0 +1,40 @@
+<h2>Sign-up for ComicComet!</h2>  
+
+<form 
+  [formGroup]='registrationForm' 
+  (submit)='onSubmitRegistration()'
+>
+  <app-messages></app-messages>  
+    <label for='email'>Email Address </label>
+    <input 
+      type='email'
+      placeholder='email@example.com'
+      formControlName='email'
+      data-test='email-input'
+    />
+    <label for='name'>User Name </label>
+    <input 
+      type='name'
+      placeholder='Example Name'
+      formControlName='name'
+      data-test='name-input'
+    />
+    <label for='password'>Password </label>
+    <input 
+      type='password'
+      placeholder='Ex@m3!lePa$$wo%d'
+      formControlName='password'
+      data-test='password-input'
+    />
+    <label for='password-confirmation'>Password Confirmation</label>
+    <input 
+      type='password'
+      placeholder='re-enter password here'
+      formControlName='passwordConfirmation'
+      data-test='password-confirmation-input'
+    />
+    <button type='submit'>Register</button>
+    <a routerLink='/login'>
+      <p>Already have an account? Login here!</p>
+    </a>
+</form>

@@ -7,7 +7,7 @@ export class MessageService {
   cssClass: string = '';
   message: string = '';
 
-  constructor() { }
+  constructor() {}
 
   setMessage(cssClass: string, message: string): void {
     this.cssClass = cssClass;
