@@ -34,3 +34,13 @@ button:hover {
     color: var(--secondary-color);
     cursor: pointer;
 }
+
+a {
+    text-decoration: none;
+    color: var(--accent-light);
+}
+
+a:hover {
+    text-decoration: none;
+    color: var(--accent-dark);
+}

@@ -1,12 +1,14 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Buffer } from 'buffer';
 
-import LoginResponse from './interfaces/LoginResponse';
+import LoginResponse from './interfaces/response/LoginResponse';
 import { Observable, catchError, of, tap } from 'rxjs';
-import LoginCredentials from './interfaces/LoginCredentials';
+import LoginCredentials from './interfaces/request/LoginCredentials';
 import { environment } from '../../environments/environments';
-import LogoutResponse from './interfaces/LogoutResponse';
+import LogoutResponse from './interfaces/response/LogoutResponse';
+import RegistrationCredentials from './interfaces/request/RegistrationCredentials';
+import RegistrationResponse from './interfaces/response/RegistrationResponse';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -32,6 +34,20 @@ export class AuthenticationService {
     return this.httpClient.post<LoginResponse>(`${this.fourthWallApi}/login`, loginCredentials, this.httpOptions)
       .pipe(
         catchError(this.handleError<LoginResponse>('login'))
+      );
+  }
+
+  submitRegistration(registrationCredentials: RegistrationCredentials): Observable<RegistrationResponse> {
+    registrationCredentials.email = Buffer.from(registrationCredentials.email)
+      .toString('base64');
+    registrationCredentials.name = Buffer.from(registrationCredentials.name)
+      .toString('base64');
+    registrationCredentials.password = Buffer.from(registrationCredentials.password)
+      .toString('base64');
+
+    return this.httpClient.post<RegistrationResponse>(`${this.fourthWallApi}/register`, registrationCredentials, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<RegistrationResponse>('register'))
       );
   }
   

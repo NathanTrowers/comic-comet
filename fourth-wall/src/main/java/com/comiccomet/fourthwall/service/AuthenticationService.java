@@ -60,8 +60,8 @@ public class AuthenticationService {
             int[] noCodes = {};
 
             return ResponseEntity
-                .internalServerError()
-                .body(new RegistrationResponse(500, noCodes));
+                .badRequest()
+                .body(new RegistrationResponse(400, noCodes));
 
         }
     }
@@ -92,7 +92,7 @@ public class AuthenticationService {
             int[] noCodes = {};
 
             return ResponseEntity
-                .internalServerError()
+                .badRequest()
                 .body(new LoginResponse(400, "Bad Request", noCodes));
         }
     }

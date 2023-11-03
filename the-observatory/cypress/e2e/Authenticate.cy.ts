@@ -1,4 +1,4 @@
-describe('Login Page', () => {
+describe('Authentication Test Suite', () => {
     beforeEach(() => {
         cy.visit('/login');
     });
@@ -36,5 +36,10 @@ describe('Login Page', () => {
 
         cy.contains('Logout').click();
         cy.contains('Login');
+    });
+
+    it('shows that link to register page works from login page', () => {
+        cy.contains('Don\'t have an account? Register here!').click();
+        cy.contains('Register');
     });
 });

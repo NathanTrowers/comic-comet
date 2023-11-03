@@ -48,9 +48,9 @@ public class RegistrationValidator implements ValidatorInterface {
             errorCodes.add(ErrorCodeConstants.ERROR_WRONG_PASSWORD_FORMAT);
         }
 
-        if(isEmailMatch &&
-            isNameMatch &&
-            isPasswordMatch
+        if(isEmailMatch 
+            && isNameMatch
+            && isPasswordMatch
         ){
             BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
             String encodedPassword = bcrypt.encode(registration.getPassword());
