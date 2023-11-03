@@ -5,7 +5,6 @@ import RegistrationCredentials from "../interfaces/request/RegistrationCredentia
     providedIn: 'root'
 })
 export class RegistrationValidator {
-
     constructor() {}
 
     validate(form: RegistrationCredentials, passwordConfirmation: string): boolean {

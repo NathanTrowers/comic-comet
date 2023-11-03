@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
-import { LoginValidator } from './login.validator';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
+import { LoginValidator } from 'src/app/authentication/login/login.validator';
 import LoginCredentials from 'src/app/authentication/interfaces/request/LoginCredentials';
 import { MessageComponent } from 'src/app/message/message.component';
 import { MessageService } from 'src/app/message/message.service';

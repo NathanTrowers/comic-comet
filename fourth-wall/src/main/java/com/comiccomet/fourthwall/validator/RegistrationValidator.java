@@ -48,7 +48,7 @@ public class RegistrationValidator implements ValidatorInterface {
             errorCodes.add(ErrorCodeConstants.ERROR_WRONG_PASSWORD_FORMAT);
         }
 
-        if(isEmailMatch 
+        if (isEmailMatch 
             && isNameMatch
             && isPasswordMatch
         ){

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AuthenticationService } from '../authentication/authentication.service';
-import { MessageComponent } from '../message/message.component';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
+import { MessageComponent } from 'src/app/message/message.component';
 
 @Component({
   selector: 'app-dashboard',

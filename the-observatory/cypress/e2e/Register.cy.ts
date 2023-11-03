@@ -46,7 +46,7 @@ describe('Registration Test Suite', () => {
     });
 
     // The database record must be deleted after each test
-    it('allows successful registrations', () => {
+    it('allows successful registration', () => {
         cy.getByData('email-input').type('comicchad@test.com');
         cy.getByData('name-input').type('Comic Chad');
         cy.getByData('password-input').type('com1cFanat!c@P');

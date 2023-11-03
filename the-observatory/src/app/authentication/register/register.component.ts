@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MessageComponent } from 'src/app/message/message.component';
-import { AuthenticationService } from '../authentication.service';
-import { MessageService } from 'src/app/message/message.service';
 import { Router, RouterModule } from '@angular/router';
-import RegistrationCredentials from '../interfaces/request/RegistrationCredentials';
-import { RegistrationValidator } from './registration.validator';
+
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
+import RegistrationCredentials from 'src/app/authentication/interfaces/request/RegistrationCredentials';
+import { RegistrationValidator } from 'src/app/authentication/register/registration.validator';
+import { MessageComponent } from 'src/app/message/message.component';
+import { MessageService } from 'src/app/message/message.service';
 
 @Component({
   selector: 'app-register',

@@ -62,7 +62,6 @@ public class AuthenticationService {
             return ResponseEntity
                 .badRequest()
                 .body(new RegistrationResponse(400, noCodes));
-
         }
     }
 
