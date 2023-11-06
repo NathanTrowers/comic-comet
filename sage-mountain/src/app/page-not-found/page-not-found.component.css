@@ -1,0 +1,7 @@
+section, h1, p {
+    text-align: center;
+    font-size: 4rem;
+    padding: 0.5rem;
+    color: var(--primary-color);
+    background-color: var(--accent-dark);
+}

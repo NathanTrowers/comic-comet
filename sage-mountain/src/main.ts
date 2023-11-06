@@ -1,8 +1,9 @@
-import { provideRouter } from '@angular/router';
-import { AppComponent } from './app/app.component';
-import { bootstrapApplication, provideProtractorTestingSupport } from '@angular/platform-browser';
-import routeConfig from './app/routes';
 import { provideHttpClient } from '@angular/common/http';
+import { bootstrapApplication, provideProtractorTestingSupport } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+
+import { AppComponent } from 'src/app/app.component';
+import routeConfig from 'src/app/app.routes';
 
 bootstrapApplication(AppComponent,
     {
