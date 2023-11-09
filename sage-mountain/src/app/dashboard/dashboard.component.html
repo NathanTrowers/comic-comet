@@ -1,10 +1,12 @@
-<p>dashboard works!</p>
+<menu>
+    <li>Logo</li>
+    <button 
+        type='button'
+        class='button'
+        (click)='logout()'
+    >
+        Logout
+    </button>
+</menu>
 <app-messages></app-messages>  
-<button 
-    type='button'
-    class='button'
-    (click)='logout()'
->
-    Logout
-</button>
-
+<app-comic-book-catalogue></app-comic-book-catalogue>

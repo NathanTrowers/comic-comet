@@ -2,14 +2,16 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AuthenticationService } from '../authentication/authentication.service';
-import { MessageComponent } from '../message/message.component';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
+import { ComicBookCatalogueComponent } from 'src/app/comic-book/comic-book-catalogue/comic-book-catalogue.component';
+import { MessageComponent } from 'src/app/message/message.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     CommonModule,
+    ComicBookCatalogueComponent,
     MessageComponent
   ],
   templateUrl: './dashboard.component.html',
