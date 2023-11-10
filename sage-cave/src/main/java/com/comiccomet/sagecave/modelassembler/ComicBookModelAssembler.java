@@ -17,7 +17,7 @@ public class ComicBookModelAssembler implements RepresentationModelAssembler<Com
     public EntityModel<ComicBook> toModel(ComicBook comicBook) {
         return EntityModel.of(comicBook, 
             linkTo(methodOn(AdminController.class).getComicBook("exampleInvalidToken", comicBook.getComicBookId())).withSelfRel(),
-            linkTo(methodOn(AdminController.class).getAllComicBooks("exampleInvalidToken")).withRel("comic books")
+            linkTo(methodOn(AdminController.class).getAllComicBooks("exampleInvalidToken")).withRel("comicBooks")
         );
     }
 }

@@ -12,7 +12,7 @@ describe('Dashboard Page', () => {
     it('successfully gets the page', () => {
         cy.contains('Como Agua Para Chocolate');
         cy.contains('Coiling Dragon');
-        cy.contains('Como Agua Para Chocolate');
+        cy.contains('The Last Christian');
     });
 
     it('successfully narrows search to only "Coiling Dragon"', () => {

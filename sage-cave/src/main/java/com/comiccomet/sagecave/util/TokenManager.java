@@ -20,13 +20,9 @@ public class TokenManager {
     private static String SECRET_KEY = System.getenv("SECRET_KEY");
 
     public TokenManager() {}
-    // expirationDate > currentDate
-
-// 
 
     public boolean validateToken(String token) {
         try{
-            
             Date expiresAt = Jwts.parserBuilder()
                 .requireIssuer("fourth-wall")
                 .require("role", "admin")
