@@ -1,12 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Buffer } from 'buffer';
-
-import LoginResponse from './interfaces/LoginResponse';
 import { Observable, catchError, of, tap } from 'rxjs';
-import LoginCredentials from './interfaces/LoginCredentials';
-import { environment } from '../../environments/environments';
-import LogoutResponse from './interfaces/LogoutResponse';
+
+import LoginCredentials from 'src/app/authentication/interfaces/LoginCredentials';
+import LoginResponse from 'src/app/authentication/interfaces/LoginResponse';
+import LogoutResponse from 'src/app/authentication/interfaces/LogoutResponse';
+import { environment } from 'src/environments/environments';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {

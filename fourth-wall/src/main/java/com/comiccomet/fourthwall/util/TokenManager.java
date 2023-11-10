@@ -35,7 +35,7 @@ public class TokenManager {
 				.setIssuer("fourth-wall")
 				.setExpiration(expirationDate)
 				.claim("role", role)
-				.signWith(signatureAlgorithm, signingKey);
+				.signWith(signingKey, signatureAlgorithm);
 
 		return builder.compact();
 	}

@@ -99,7 +99,7 @@ public class AuthenticationService {
     public ResponseEntity<LogoutResponse> endSession(String token) {
         try {
             String invalidToken = this.tokenManager.invalidateToken(token);
-            log.info("Logout successfull!");
+            log.info("Logout successful!");
 
             return ResponseEntity
                 .accepted()

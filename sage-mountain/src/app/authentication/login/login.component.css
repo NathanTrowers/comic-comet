@@ -1,9 +1,14 @@
+section {
+    display: grid;
+    place-items: center;
+}
+
 form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 0.8rem;
-    box-shadow: 0.2rem 0.2rem 0.8rem 1rem var(--secondary-color);
+    box-shadow: 0.2rem 0.02rem 0.8rem 1rem var(--secondary-color);
     background-color: var(--primary-color);
     color: var(--accent-light);
 }

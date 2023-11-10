@@ -1,0 +1,7 @@
+section {
+    padding: 0.5rem;
+}
+
+section:hover {
+    box-shadow: 0.2rem 0.02rem 0.8rem 0.5rem var(--secondary-color);
+}

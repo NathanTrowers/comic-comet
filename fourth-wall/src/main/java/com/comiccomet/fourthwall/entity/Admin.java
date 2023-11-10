@@ -58,7 +58,8 @@ public class Admin extends User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.adminId, this.email, this.name, this.password);
+        return Objects.hash(this.adminId, this.email, this.name,
+            this.password);
     }
 
     @Override
@@ -69,6 +70,7 @@ public class Admin extends User {
         if (!(object instanceof Admin)) {
             return false;
         }
+
         Admin admin = (Admin) object;
 
         return Objects.equals(this.adminId, admin.adminId)

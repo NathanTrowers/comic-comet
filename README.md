@@ -24,6 +24,8 @@ Enter password: AdM1n
 mysql> CREATE DATABASE comic_comet_warehouse;
 mysql> CREATE USER 'springuser'@'%' IDENTIFIED BY 'AdM1n';
 mysql> GRANT ALL ON comic_comet_warehouse.* TO 'springuser'@'%'; # grant these privileges only for the user on your local machine
+mysql> CREATE USER 'sage-cave'@'%' IDENTIFIED BY 'AdM1n';
+mysql> GRANT SELECT, INSERT, UPDATE ON comic_comet_warehouse.* TO 'sage-cave'@'%';
 mysql> exit
 bash-4.4$ exit
 ```
