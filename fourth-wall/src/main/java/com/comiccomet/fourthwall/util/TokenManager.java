@@ -2,7 +2,6 @@ package com.comiccomet.fourthwall.util;
 
 import java.security.Key;
 import java.util.Date;
-import java.util.UUID;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
@@ -20,7 +19,7 @@ public class TokenManager {
 
 	public TokenManager() {}
 
-	public String generateToken(String role) {
+	public String generateToken(String userId, String role) {
 		long millisecondsNow = System.currentTimeMillis();
 		Date dateNow = new Date(millisecondsNow);
 		Date expirationDate = new Date(millisecondsNow + 86400000);
@@ -30,7 +29,7 @@ public class TokenManager {
 		Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 		
 		JwtBuilder builder = Jwts.builder()
-				.setId(String.valueOf(UUID.randomUUID()))
+				.setId(userId)
 				.setIssuedAt(dateNow)
 				.setIssuer("fourth-wall")
 				.setExpiration(expirationDate)
