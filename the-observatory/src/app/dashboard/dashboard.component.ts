@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
+import { ComicBookCatalogueComponent } from 'src/app/comic-book/comic-book-catalogue/comic-book-catalogue.component';
 import { MessageComponent } from 'src/app/message/message.component';
+import { MessageService } from 'src/app/message/message.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     CommonModule,
+    ComicBookCatalogueComponent,
     MessageComponent
   ],
   templateUrl: './dashboard.component.html',
@@ -21,7 +24,11 @@ export class DashboardComponent {
   cssClass: string = '';
   message: string = '';
 
-  constructor(private authenticationService: AuthenticationService, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private messageService: MessageService
+  ) {
     this.token = this.authenticationService.httpOptions.headers['Authorization'];
   }
 
@@ -30,8 +37,7 @@ export class DashboardComponent {
       .subscribe(received => {
         this.invalidToken = received.invalidToken
         if (this.token === this.invalidToken) {
-          this.cssClass = 'error';
-          this.message = 'An error occurred. Try again.';
+          this.messageService.setMessage('error', 'An error occurred. Try again.');
   
           return;
         }

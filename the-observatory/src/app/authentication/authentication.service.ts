@@ -19,7 +19,7 @@ export class AuthenticationService {
      }
   };
   isLoggedIn: boolean = false;
-  redirectUrl: string | undefined = '/dashboard';
+  redirectUrl: string | undefined = '/comic-books';
   loginUrl: string = '/login';
   fourthWallApi: string = environment.FOURTH_WALL_API;
   

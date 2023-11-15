@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import RegistrationCredentials from 'src/app/authentication/interfaces/request/RegistrationCredentials';
@@ -15,8 +15,7 @@ import { MessageService } from 'src/app/message/message.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MessageComponent,
-    RouterModule
+    MessageComponent
   ],
   templateUrl: './register.component.html',
   styleUrls: ['../authentication.css']

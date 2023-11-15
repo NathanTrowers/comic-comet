@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { LoginValidator } from 'src/app/authentication/login/login.validator';
@@ -15,8 +15,7 @@ import { MessageService } from 'src/app/message/message.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MessageComponent,
-    RouterModule
+    MessageComponent
   ],
   templateUrl: './login.component.html',
   styleUrls: ['../authentication.css']

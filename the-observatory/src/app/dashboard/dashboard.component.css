@@ -1,0 +1,31 @@
+menu {
+    display: grid;
+    grid-template: auto 1fr auto;
+    width: inherit;
+    background-color: var(--primary-color);
+    box-shadow: 0.2rem 0.02rem 0.8rem 0.5rem var(--secondary-color);
+}
+
+li {
+    grid-column: 1/ span 1;
+    text-decoration: none;
+}
+
+button {
+    grid-column: 3/span 1;
+    justify-self: end;
+    align-self: center;
+    width: 10.5rem;
+    height: 1.5rem;
+    border: none;
+    background-color: var(--secondary-color);
+    transition: width 0.2s, height 0.2s;
+}
+
+button:hover {
+    width: 15rem;
+    height: 1.8rem;
+    background-color: var(--accent-dark);
+    color: var(--secondary-color);
+    cursor: pointer;
+}
