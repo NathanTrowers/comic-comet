@@ -42,14 +42,14 @@ public class AdminService {
             .body(new ErrorResponse(401, "unauthorized", errorCodes));
     }
 
-    public ResponseEntity<?> getComicBookCatalogue() {
+    public ResponseEntity<?> getComicBookCatalogue(String adminId) {
         try {
             List<EntityModel<ComicBook>> comicBooks = comicBookRepository.findAll()
                 .stream()
                 .map(comicBookModelAssembler::toModel)
                 .collect(Collectors.toList());
 
-            log.info("Comic book catalogue retrieval successful!");
+            log.info("Comic book catalogue retrieval successful for id {}!", adminId);
 
             return ResponseEntity
                 .ok()
@@ -66,18 +66,18 @@ public class AdminService {
         }
     }
 
-    public ResponseEntity<?> getSingleComicBook(String comicBookId) {
+    public ResponseEntity<?> getSingleComicBook(String adminId, String comicBookId) {
         try {
             ComicBook comicBook = this.comicBookRepository.findById(comicBookId)
                 .orElseThrow(() ->  new ComicBookNotFoundException(comicBookId));
 
-            log.info("Comic book retrieval successful!");
+            log.info("Comic book retrieval successful for id {}!", adminId);
 
             return ResponseEntity
                 .ok()
                 .body(comicBookModelAssembler.toModel(comicBook));
         } catch(ComicBookNotFoundException comicBookNotFoundException) {
-            log.error("Comic book retrieval failed with the following error: \n", comicBookNotFoundException);
+            log.error("Comic book retrieval failed for id {} with the following error: ", adminId, comicBookNotFoundException);
 
             int[] errorCodes = {ErrorCodeConstants.ERROR_COMIC_BOOK_NOT_FOUND};
 
@@ -85,7 +85,7 @@ public class AdminService {
                 .status(404)
                 .body(new ErrorResponse(404, "not found", errorCodes));
         } catch(Exception error) {
-            log.error("Comic book retrieval failed with the following error: \n", error);
+            log.error("Comic book retrieval failed for id {} with the following error: {}", adminId, error);
 
             int[] errorCodes = {ErrorCodeConstants.ERROR_GET_COMIC_BOOK_FAILED};
 

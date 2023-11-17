@@ -4,30 +4,38 @@ import java.util.Base64;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.comiccomet.fourthwall.constant.GeneralConstants;
 import com.comiccomet.fourthwall.dto.LoginCredentials;
 import com.comiccomet.fourthwall.dto.LoginResponse;
 import com.comiccomet.fourthwall.dto.LogoutResponse;
 import com.comiccomet.fourthwall.dto.RegistrationFields;
 import com.comiccomet.fourthwall.dto.RegistrationResponse;
+import com.comiccomet.fourthwall.entity.Admin;
+import com.comiccomet.fourthwall.entity.Customer;
+import com.comiccomet.fourthwall.entity.User;
+import com.comiccomet.fourthwall.repository.AdminRepository;
+import com.comiccomet.fourthwall.repository.CustomerRepository;
 import com.comiccomet.fourthwall.util.TokenManager;
 import com.comiccomet.fourthwall.validator.ValidatorInterface;
 
 @Service
 public class AuthenticationService {
     private static final Logger log = LoggerFactory.getLogger(AuthenticationService.class);
+    private final AdminRepository adminRepository;
+    private final CustomerRepository customerRepository;
 
-    @Autowired
     private TokenManager tokenManager;
-    @Autowired
     private ValidatorInterface loginValidator;
-    @Autowired
     private ValidatorInterface registrationValidator;
 
-    public AuthenticationService(TokenManager tokenManager, ValidatorInterface loginValidator, ValidatorInterface registrationValidator) {
+    public AuthenticationService(TokenManager tokenManager, ValidatorInterface loginValidator, ValidatorInterface registrationValidator,
+        AdminRepository adminRepository, CustomerRepository customerRepository
+    ) {
+        this.adminRepository = adminRepository;
+        this.customerRepository = customerRepository;
         this.tokenManager = tokenManager;
         this.loginValidator = loginValidator;
         this.registrationValidator = registrationValidator;
@@ -67,6 +75,7 @@ public class AuthenticationService {
 
     public ResponseEntity<LoginResponse> startSession(LoginCredentials credentials, String loginType) {
         try {
+            User user = null;
             String decodedEmail = this.decodeString(credentials.getEmail());
             String decodedPassword = this.decodeString(credentials.getPassword());
             credentials.setEmail(decodedEmail);
@@ -82,10 +91,22 @@ public class AuthenticationService {
             }
 
             log.info("Authentication successful for email {}", credentials.getEmail());
+   
+            if (loginType == GeneralConstants.ADMIN) {
+                Admin admin = this.adminRepository.findByEmail(credentials.getEmail());
 
-            return ResponseEntity
-                .accepted()
-                .body(new LoginResponse(202, this.tokenManager.generateToken(loginType), errorCodes));
+                return ResponseEntity
+                    .accepted()
+                    .body(new LoginResponse(202, this.tokenManager.generateToken(admin.getAdminId(), loginType), errorCodes));
+            } else {
+                Customer customer =  this.customerRepository.findByEmail(credentials.getEmail());
+                
+                return ResponseEntity
+                    .accepted()
+                    .body(new LoginResponse(202, this.tokenManager.generateToken(customer.getCustomerId(), loginType), errorCodes));
+            }
+
+ 
         } catch (Exception error) {
             log.error("Login request failed with the following error: \n {}", error);
             int[] noCodes = {};

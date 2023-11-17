@@ -48,21 +48,19 @@ public class RegistrationValidator implements ValidatorInterface {
             errorCodes.add(ErrorCodeConstants.ERROR_WRONG_PASSWORD_FORMAT);
         }
 
-        if (isEmailMatch 
+        if (isEmailMatch
             && isNameMatch
             && isPasswordMatch
         ){
             BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
             String encodedPassword = bcrypt.encode(registration.getPassword());
             registration.setPassword(encodedPassword);
-
+            
             Customer existingCustomer = this.customerRepository.findByEmail(registration.getEmail());
             if (existingCustomer != null)  {
                 errorCodes.add(ErrorCodeConstants.ERROR_CUSTOMER_ALREADY_EXISTS);
             } else {
-                Customer customer = this.customerRepository.save(
-                    new Customer(registration.getEmail(), registration.getName(), registration.getPassword())
-                );
+                Customer customer = this.customerRepository.save(new Customer(registration.getEmail(), registration.getName(), registration.getPassword()));
                 if (customer == null ) {
                     errorCodes.add(ErrorCodeConstants.ERROR_SAVE_REGISTRATION_FAILED);
                 }

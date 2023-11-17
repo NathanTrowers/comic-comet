@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MessageComponent } from '../../app/message/message.component';
+import { MessageComponent } from 'src/app/message/message.component';
 
 describe('MessagesComponent', () => {
   let component: MessageComponent;

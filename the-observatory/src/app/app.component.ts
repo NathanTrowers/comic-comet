@@ -1,9 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
 
-import { LoginComponent } from './authentication/login/login.component';
-import { MessageComponent } from './message/message.component';
+import { LoginComponent } from 'src/app/authentication/login/login.component';
+import { MessageComponent } from 'src/app/message/message.component';
 
 
 @Component({

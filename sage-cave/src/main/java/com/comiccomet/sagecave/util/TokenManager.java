@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.comiccomet.sagecave.service.AdminService;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.IncorrectClaimException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MissingClaimException;
@@ -21,36 +22,39 @@ public class TokenManager {
 
     public TokenManager() {}
 
-    public boolean validateToken(String token) {
+    public String validateToken(String token) {
+        String validationFailure = "";
+
         try{
-            Date expiresAt = Jwts.parserBuilder()
+            Claims claims = Jwts.parserBuilder()
                 .requireIssuer("fourth-wall")
                 .require("role", "admin")
                 .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
                 .build()
                 .parseClaimsJws(token.substring(7))
-                .getBody()
-                .getExpiration();
+                .getBody();
 
-            if (expiresAt.before(new Date())) {
-                return  false;
+            String adminId = claims.getId();
+            Date expiresAt = claims.getExpiration();
+            if (expiresAt.before(new Date()) || adminId == null) {
+                return validationFailure;
             }
 
-            log.info("Token validation successful!");
+            log.info("Token validation successful for id {}!", adminId);
 
-            return true;
+            return adminId;
         } catch(MissingClaimException missingClaimException) {
             log.error("A claim is missing from this token: \n", missingClaimException);
 
-            return false;
+            return validationFailure;
         } catch(IncorrectClaimException incorrectClaimException) {
             log.error("An incorect claim is present in this token: \n", incorrectClaimException);
 
-            return false;
+            return validationFailure;
         } catch(Exception error) {
             log.error("An error ocurred while validating the token: \n", error);
 
-            return false;
+            return validationFailure;
         }
     }
 }

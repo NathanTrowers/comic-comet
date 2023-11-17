@@ -1,6 +1,7 @@
 package com.comiccomet.fourthwall.validator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
@@ -34,12 +35,14 @@ public class RegistrationValidatorTest {
         /** Data */
         RegistrationFields registration = new RegistrationFields(validEmail, validName, validPassword);
         // The hashed password does not match any of the password strings used for this test.
-        Customer customer = new Customer(registration.getEmail(), validName, "$2y$10$Z1N6ljW2G7//Dzi4eGHBTeLCRu2SJozQzufQQJUk4lHXFvE.nLKg.");
+        Customer newCustomer = new Customer(registration.getEmail(), registration.getName(), registration.getPassword());
         int[] expectedResult = {};
 
         /** Mocks */
-        when(this.customerRepository.save(registration))
-            .thenReturn(customer);
+        when(this.customerRepository.findByEmail(registration.getEmail()))
+            .thenReturn(null);
+        when(this.customerRepository.save(any(Customer.class)))
+            .thenReturn(newCustomer);
 
         /** Call to Test */
         int[] errorCodes = registrationValidator.validate(registration);
@@ -121,12 +124,13 @@ public class RegistrationValidatorTest {
         String validName = "Example User";
         String validPassword = "@rmAM8n10";
         RegistrationFields registration = new RegistrationFields(validEmail, validName, validPassword);
+        Customer customer = new Customer(registration.getEmail(), validName, "$2y$10$Z1N6ljW2G7//Dzi4eGHBTeLCRu2SJozQzufQQJUk4lHXFvE.nLKg.");
         int[] expectedResult = {ErrorCodeConstants.ERROR_SAVE_REGISTRATION_FAILED};
 
         /** Mocks */
         when(this.customerRepository.findByEmail(registration.getEmail()))
             .thenReturn(null);
-        when(this.customerRepository.save(registration))
+        when(this.customerRepository.save(customer))
             .thenReturn(null);
         
             /** Call to Test */

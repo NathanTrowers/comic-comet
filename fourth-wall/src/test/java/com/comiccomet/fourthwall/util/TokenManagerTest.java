@@ -14,7 +14,7 @@ public class TokenManagerTest {
     @Test
     void testInvalidateToken() {
         /** Data */
-        String originalToken = tokenManager.generateToken("admin");
+        String originalToken = tokenManager.generateToken("6963a34d-7c0a-42ed-961f-83b31e7c8f36", "admin");
 
         /** Call to Test*/
         String result = tokenManager.invalidateToken(originalToken);

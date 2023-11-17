@@ -23,19 +23,21 @@ public class AdminController {
 
     @GetMapping("/comic-books")
     public ResponseEntity<?> getAllComicBooks(@RequestHeader(value="Authorization") String token) {
-        if (!(this.tokenManager.validateToken(token))) {
+        String adminId = this.tokenManager.validateToken(token);
+        if (adminId == "") {
             return this.adminService.sendIsUnauthorized();
         }
 
-        return this.adminService.getComicBookCatalogue();
+        return this.adminService.getComicBookCatalogue(adminId);
     }
 
     @GetMapping("/comic-books/{comicBookId}")
     public ResponseEntity<?> getComicBook(@RequestHeader(value="Authorization") String token, @PathVariable String comicBookId) {
-        if (!(this.tokenManager.validateToken(token))) {
+        String adminId = this.tokenManager.validateToken(token);
+        if (adminId == "") {
             return this.adminService.sendIsUnauthorized();
         }
 
-        return this.adminService.getSingleComicBook(comicBookId);
+        return this.adminService.getSingleComicBook(adminId, comicBookId);
     }
 }

@@ -1,0 +1,41 @@
+form, .catalogue {
+    display: flex;
+}
+
+form {
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 2rem;
+    width: 30%;
+}
+
+label {
+    color: var(--primary-color);
+    font-weight: bolder;
+}
+
+.loadingCircle {
+    margin: auto;
+    border-radius: 50%;
+    border: 0.4rem solid var(--primary-color);
+    border-top: 0.4rem solid var(--secondary-color);
+    width: 2rem;
+    height: 2rem;
+    --webkit-animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite;
+}
+
+@-webkit-keyframes rotate {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+.catalogue {
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
