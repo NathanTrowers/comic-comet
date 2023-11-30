@@ -55,7 +55,7 @@ public class RegistrationValidator implements ValidatorInterface {
             BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
             String encodedPassword = bcrypt.encode(registration.getPassword());
             registration.setPassword(encodedPassword);
-            
+
             Customer existingCustomer = this.customerRepository.findByEmail(registration.getEmail());
             if (existingCustomer != null)  {
                 errorCodes.add(ErrorCodeConstants.ERROR_CUSTOMER_ALREADY_EXISTS);
