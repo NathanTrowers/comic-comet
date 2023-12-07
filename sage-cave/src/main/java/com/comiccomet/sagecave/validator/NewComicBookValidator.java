@@ -70,4 +70,3 @@ public class NewComicBookValidator implements ValidatorInterface {
             .toArray();
     }
 }
-// https://www.baeldung.com/java-base64-image-string

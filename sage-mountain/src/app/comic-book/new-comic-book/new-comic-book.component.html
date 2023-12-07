@@ -5,8 +5,11 @@
     [formGroup]='newComicBookForm' 
     (submit)='onSubmitNewComicBook()'
   >
-    <app-messages></app-messages>  
-      <label for='name'>Book Name </label>
+    <app-messages></app-messages>
+      <div class='group'>
+        <label for='name'>Book Name </label> 
+        <app-info [bubbleText]='messages.NAME_FORMAT'></app-info>
+      </div>  
       <input
         name='name'
         type='text'
@@ -14,7 +17,10 @@
         formControlName='name'
         data-test='name-input'
       />
-      <label for='author'>Author </label>
+      <div class='group'>
+        <label for='author'>Author </label>
+        <app-info [bubbleText]='messages.NAME_FORMAT'></app-info>
+      </div>  
       <input
         name='author'
         type='text'
@@ -22,7 +28,10 @@
         formControlName='author'
         data-test='author-input'
       />
-      <label for='price'>Price </label>
+      <div class='group'>
+        <label for='price'>Price </label>
+        <app-info [bubbleText]='messages.PRICE_FORMAT'></app-info>
+      </div>  
       <input
         name='price'
         type='text'
@@ -30,7 +39,10 @@
         formControlName='price'
         data-test='price-input'
       />
-      <label for='quantity'>Quantity </label>
+      <div class='group'>
+        <label for='quantity'>Quantity </label>
+        <app-info [bubbleText]='messages.QUANTITY_FORMAT'></app-info>
+      </div>  
       <input
         class='moreSpaceBelow'
         name='quantity'
@@ -39,18 +51,21 @@
         formControlName='quantity'
         data-test='quantity-input'
       />
-
-      <label for='coverArt'>Select an image for the cover art: </label>
+      <div class='group'>
+        <label for='coverArt'>Choose a cover art image: </label>
+        <app-info [bubbleText]='messages.COVER_ART_NOTE'></app-info>
+      </div>  
       <input
         name='coverArt'
         type='file'
         accept='image/png'
         (change)='onFileSelected($event)'
       />
-      <p>To remove the file, click on "Choose file" again, then close the dialog box as soon as it opens.</p>
-      <!-- https://blog.angular-university.io/angular-file-upload/ -->
-      <p>Select a Carry Status </p>
-      <div class='radioGroup'>
+      <p class='group'>
+        Select a Carry Status
+        <app-info [bubbleText]='messages.CARRY_STATUS_NOTE'></app-info>
+      </p>
+      <div class='group'>
         <input
           name='carrying'
           type='radio'
@@ -61,7 +76,7 @@
         />
         <label for='carrying'>Carrying </label>
       </div>
-      <div class='radioGroup moreSpaceBelow'>
+      <div class='group moreSpaceBelow'>
         <input
           name='discontinued'
           type='radio'
@@ -73,7 +88,6 @@
         <label for='discontinued'>Discontinued </label>
       </div>
       <button type='submit'>Save</button>
-      <a routerLink='/dashboard'>Cancel</a>
+      <a [routerLink]="['/dashboard']">Cancel</a>
   </form>
 </section>
-  

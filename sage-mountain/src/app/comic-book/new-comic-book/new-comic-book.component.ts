@@ -2,21 +2,24 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { Buffer } from 'buffer';
 
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { ComicBookService } from 'src/app/comic-book/comic-book.service';
 import { ComicBookValidator } from 'src/app/comic-book/comic-book.validator';
 import NewComicBookForm from 'src/app/comic-book/interfaces/NewComicBookForm';
+import { formMessages } from 'src/app/message/message.constants';
+import { InfoComponent } from 'src/app/message/info/info.component';
 import { MessageComponent } from 'src/app/message/message.component';
 import { errorMessage, messageClass } from 'src/app/message/message.constants';
 import { MessageService } from 'src/app/message/message.service';
+
 
 @Component({
   selector: 'app-new-comic-book',
   standalone: true,
   imports: [
     CommonModule,
+    InfoComponent,
     ReactiveFormsModule,
     MessageComponent,
     RouterModule
@@ -26,13 +29,14 @@ import { MessageService } from 'src/app/message/message.service';
 })
 export class NewComicBookComponent {
   newComicBookForm = new FormGroup({
-    name: new FormControl(''),
-    author: new FormControl(''),
-    price: new FormControl(''),
-    quantity: new FormControl(''),
-    carryStatus: new FormControl('')
+    name:         new FormControl(''),
+    author:       new FormControl(''),
+    price:        new FormControl(''),
+    quantity:     new FormControl(''),
+    carryStatus:  new FormControl('')
   });
   coverArt: string = '';
+  messages = formMessages;
 
   constructor(
     private authenticationService: AuthenticationService, 
@@ -78,19 +82,13 @@ export class NewComicBookComponent {
       fileReader.readAsDataURL(file);
       fileReader.onload = () => {
         const url = fileReader.result ?? '';
-
         const urlString = url.toString();
         
-        let BASE64_MARKER: string = ';base64,';
-        let base64Index = urlString.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+        const BASE64_MARKER: string = ';base64,';
+        const base64Index = urlString.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
         let base64 = urlString.substring(base64Index);
 
-
         this.coverArt = base64;
-
-        console.group('debug');
-        console.log(file);
-        console.groupEnd();
       }
     }
   }

@@ -17,7 +17,7 @@ label {
     margin-top: 1rem;
 }
 
-input, p {
+input {
     width: 15rem;
     border: none;
 }
@@ -26,11 +26,11 @@ input, p {
     margin-bottom: 0.8rem;
 }
 
-.radioGroup {
+.group {
     flex-direction: row;
 }
 
-.radioGroup > input {
+.group > input {
     width: auto;
 }
 

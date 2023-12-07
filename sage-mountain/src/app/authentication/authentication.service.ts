@@ -39,7 +39,6 @@ export class AuthenticationService {
       .pipe(
         tap(() => {
           this.redirectUrl = '/dashboard';
-
         }),
         catchError(this.handleError<LogoutResponse>('logout'))
       );
@@ -69,6 +68,7 @@ export class AuthenticationService {
     if (sessionStorage.getItem('token') !== null) {
       return true;
     }
+    
     return false;
   }
 

@@ -11,7 +11,7 @@ describe('Test Suite for ComicBookValidator', () => {
             author: 'Example Book Author',
             price: 29.99,
             quantity: 7,
-            coverArt: null,
+            coverArt: '',
             carryStatus: 'carrying',
           } 
         

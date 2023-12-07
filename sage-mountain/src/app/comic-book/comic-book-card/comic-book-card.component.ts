@@ -18,6 +18,7 @@ import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
 export class ComicBookCardComponent {
   @Input() comicBook!: ComicBook;
   coverArt: string = '';
+  
   constructor() {}
 
   getSrcString(): string {

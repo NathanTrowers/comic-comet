@@ -24,7 +24,7 @@ export class DashboardComponent {
   cssClass: string = '';
   message: string = '';
 
-  constructor(private authenticationService: AuthenticationService, private router: Router, private route: ActivatedRoute) {
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
     this.token = this.authenticationService.httpOptions.headers['Authorization'];
   }
 
