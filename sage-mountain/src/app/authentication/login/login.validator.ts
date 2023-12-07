@@ -1,11 +1,8 @@
 import { Injectable } from "@angular/core";
 import LoginCredentials from "src/app/authentication/interfaces/LoginCredentials";
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class LoginValidator {
-
     constructor() {}
 
     validate(form: LoginCredentials): boolean {

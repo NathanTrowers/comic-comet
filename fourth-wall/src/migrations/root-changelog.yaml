@@ -7,3 +7,7 @@ databaseChangeLog:
          file: changelogs/update-admin-password.sql
    - include:
          file: changelogs/update-comic-book-order-table-customer-id.sql
+   - include:
+         file: changelogs/update-comic-book-table-cover-art-data-type.sql
+   - include:
+         file: changelogs/update-comic-book-table-cover-art-data-type-2.sql

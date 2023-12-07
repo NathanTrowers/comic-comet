@@ -1,0 +1,93 @@
+<section>
+  <h2>Add a New Comic Book</h2>
+  
+  <form 
+    [formGroup]='newComicBookForm' 
+    (submit)='onSubmitNewComicBook()'
+  >
+    <app-messages></app-messages>
+      <div class='group'>
+        <label for='name'>Book Name </label> 
+        <app-info [bubbleText]='messages.NAME_FORMAT'></app-info>
+      </div>  
+      <input
+        name='name'
+        type='text'
+        placeholder='Binary Barons'
+        formControlName='name'
+        data-test='name-input'
+      />
+      <div class='group'>
+        <label for='author'>Author </label>
+        <app-info [bubbleText]='messages.NAME_FORMAT'></app-info>
+      </div>  
+      <input
+        name='author'
+        type='text'
+        placeholder='Morpheus'
+        formControlName='author'
+        data-test='author-input'
+      />
+      <div class='group'>
+        <label for='price'>Price </label>
+        <app-info [bubbleText]='messages.PRICE_FORMAT'></app-info>
+      </div>  
+      <input
+        name='price'
+        type='text'
+        placeholder='99.99'
+        formControlName='price'
+        data-test='price-input'
+      />
+      <div class='group'>
+        <label for='quantity'>Quantity </label>
+        <app-info [bubbleText]='messages.QUANTITY_FORMAT'></app-info>
+      </div>  
+      <input
+        class='moreSpaceBelow'
+        name='quantity'
+        type='text'
+        placeholder='3'
+        formControlName='quantity'
+        data-test='quantity-input'
+      />
+      <div class='group'>
+        <label for='coverArt'>Choose a cover art image: </label>
+        <app-info [bubbleText]='messages.COVER_ART_NOTE'></app-info>
+      </div>  
+      <input
+        name='coverArt'
+        type='file'
+        accept='image/png'
+        (change)='onFileSelected($event)'
+      />
+      <p class='group'>
+        Select a Carry Status
+        <app-info [bubbleText]='messages.CARRY_STATUS_NOTE'></app-info>
+      </p>
+      <div class='group'>
+        <input
+          name='carrying'
+          type='radio'
+          name='carryStatus'
+          formControlName='carryStatus'
+          value='carrying'
+          data-test='radio-carrying-input'
+        />
+        <label for='carrying'>Carrying </label>
+      </div>
+      <div class='group moreSpaceBelow'>
+        <input
+          name='discontinued'
+          type='radio'
+          name='carryStatus'
+          formControlName='carryStatus'
+          value='discontinued'
+          data-test='radio-discontinued-input'
+        />
+        <label for='discontinued'>Discontinued </label>
+      </div>
+      <button type='submit'>Save</button>
+      <a [routerLink]="['/dashboard']">Cancel</a>
+  </form>
+</section>

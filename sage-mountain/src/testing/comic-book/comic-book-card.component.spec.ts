@@ -19,7 +19,7 @@ describe('ComicBookCardComponent', () => {
       author: 'Test The Author',
       price: 1.99,
       quantity: 7,
-      coverArt: null,
+      coverArt: '',
       carryStatus: 'carrying',
       _links: {
         self: {
