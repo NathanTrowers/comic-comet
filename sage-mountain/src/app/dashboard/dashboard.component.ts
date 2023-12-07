@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { ComicBookCatalogueComponent } from 'src/app/comic-book/comic-book-catalogue/comic-book-catalogue.component';
@@ -12,7 +12,8 @@ import { MessageComponent } from 'src/app/message/message.component';
   imports: [
     CommonModule,
     ComicBookCatalogueComponent,
-    MessageComponent
+    MessageComponent,
+    RouterModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
@@ -38,7 +39,7 @@ export class DashboardComponent {
           return;
         }
   
-        this.authenticationService.isLoggedIn = false;
+        this.authenticationService.deleteToken();
         this.router.navigate([this.authenticationService.loginUrl]);
       });
   }

@@ -4,7 +4,7 @@ interface ComicBook {
     author: string;
     price: number;
     quantity: number;
-    coverArt: Uint8Array | null; //byte[]
+    coverArt: string;
     carryStatus: string;
     _links: {
         self: {

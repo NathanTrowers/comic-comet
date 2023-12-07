@@ -1,13 +1,35 @@
-menu {
+header {
     display: grid;
-    grid-template: auto 1fr auto;
-    width: inherit;
+    grid-template: 1fr 1fr 1fr;
+    width: 100%;
+    margin-bottom: 0.5rem;
     background-color: var(--primary-color);
     box-shadow: 0.2rem 0.02rem 0.8rem 0.5rem var(--secondary-color);
 }
 
-li {
+a {
     grid-column: 1/ span 1;
+    width: 10.5rem;
+    height: 1.5rem;
+    text-decoration: none;
+    text-align: center;
+    align-self: center;
+    background-color: var(--primary-color);
+    color: var(--accent-light);
+    transition: width 0.2s, height 0.2s;
+}
+
+a:hover {
+    width: 15rem;
+    height: 1.8rem;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+li {
+    grid-column: 2/ span 1;
+    list-style: none;
     text-decoration: none;
 }
 

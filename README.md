@@ -38,8 +38,8 @@ After exiting the container, stop the mysql instance running in the other window
 
 ``` shell
 $# docker exec -it fourth-wall bash
-root@2345719d0f29:/app$ cd scr/migrations
-root@2345719d0f29:/app/src/migrations$ app/liquibase_libs liquibase update --changelog-file=root-changelog.yaml -u springuser -p AdM1n
+root@2345719d0f29:/app$ cd src/migrations
+root@2345719d0f29:/app/src/migrations$ /app/liquibase-libs/liquibase update --changelog-file=root-changelog.yaml --username springuser --password AdM1n
 root@2345719d0f29:/app/src/migrations$ exit
 ```
 

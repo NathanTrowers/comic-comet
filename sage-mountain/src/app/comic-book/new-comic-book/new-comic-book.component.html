@@ -1,0 +1,79 @@
+<section>
+  <h2>Add a New Comic Book</h2>
+  
+  <form 
+    [formGroup]='newComicBookForm' 
+    (submit)='onSubmitNewComicBook()'
+  >
+    <app-messages></app-messages>  
+      <label for='name'>Book Name </label>
+      <input
+        name='name'
+        type='text'
+        placeholder='Binary Barons'
+        formControlName='name'
+        data-test='name-input'
+      />
+      <label for='author'>Author </label>
+      <input
+        name='author'
+        type='text'
+        placeholder='Morpheus'
+        formControlName='author'
+        data-test='author-input'
+      />
+      <label for='price'>Price </label>
+      <input
+        name='price'
+        type='text'
+        placeholder='99.99'
+        formControlName='price'
+        data-test='price-input'
+      />
+      <label for='quantity'>Quantity </label>
+      <input
+        class='moreSpaceBelow'
+        name='quantity'
+        type='text'
+        placeholder='3'
+        formControlName='quantity'
+        data-test='quantity-input'
+      />
+
+      <label for='coverArt'>Select an image for the cover art: </label>
+      <input
+        name='coverArt'
+        type='file'
+        accept='image/png'
+        (change)='onFileSelected($event)'
+      />
+      <p>To remove the file, click on "Choose file" again, then close the dialog box as soon as it opens.</p>
+      <!-- https://blog.angular-university.io/angular-file-upload/ -->
+      <p>Select a Carry Status </p>
+      <div class='radioGroup'>
+        <input
+          name='carrying'
+          type='radio'
+          name='carryStatus'
+          formControlName='carryStatus'
+          value='carrying'
+          data-test='radio-carrying-input'
+        />
+        <label for='carrying'>Carrying </label>
+      </div>
+      <div class='radioGroup moreSpaceBelow'>
+        <input
+          name='discontinued'
+          type='radio'
+          name='carryStatus'
+          formControlName='carryStatus'
+          value='discontinued'
+          data-test='radio-discontinued-input'
+        />
+        <label for='discontinued'>Discontinued </label>
+      </div>
+      <button type='submit'>Save</button>
+      <a routerLink='/dashboard'>Cancel</a>
+  </form>
+</section>
+  
