@@ -13,7 +13,7 @@ import com.comiccomet.sagecave.constant.ErrorCodeConstants;
 import com.comiccomet.sagecave.entity.ComicBook;
 
 @Component
-public class NewComicBookValidator implements ValidatorInterface {
+public class ComicBookValidator implements ValidatorInterface {
     public int[] validate(Object payload) {
         ComicBook newComicBook = (ComicBook) payload;
         ArrayList<Integer> errorCodes = new ArrayList<Integer>();

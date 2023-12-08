@@ -13,9 +13,9 @@ import com.comiccomet.sagecave.constant.ErrorCodeConstants;
 import com.comiccomet.sagecave.entity.ComicBook;
 
 @SpringBootTest
-public class NewComicBookValidatorTest {
+public class ComicBookValidatorTest {
     @Autowired
-    private NewComicBookValidator newComicBookValidator;
+    private ComicBookValidator comicBookValidator;
 
     private ComicBook comicBook;
     
@@ -37,7 +37,7 @@ public class NewComicBookValidatorTest {
         int[] expectedResult = {};
 
         /** Call to Test */
-        int[] errorCodes = this.newComicBookValidator.validate(this.comicBook);
+        int[] errorCodes = this.comicBookValidator.validate(this.comicBook);
 
         /** Assertions */
         assertEquals(expectedResult.length, errorCodes.length);
@@ -51,7 +51,7 @@ public class NewComicBookValidatorTest {
         int[] expectedResult = {ErrorCodeConstants.ERROR_WRONG_NAME_FORMAT};
 
         /** Call to Test */
-        int[] errorCodes = this.newComicBookValidator.validate(this.comicBook);
+        int[] errorCodes = this.comicBookValidator.validate(this.comicBook);
 
         /** Assertions */
         assertEquals(expectedResult[0], errorCodes[0]);
@@ -65,7 +65,7 @@ public class NewComicBookValidatorTest {
         int[] expectedResult = {ErrorCodeConstants.ERROR_WRONG_AUTHOR_FORMAT};
 
         /** Call to Test */
-        int[] errorCodes = this.newComicBookValidator.validate(this.comicBook);
+        int[] errorCodes = this.comicBookValidator.validate(this.comicBook);
 
         /** Assertions */
         assertEquals(expectedResult[0], errorCodes[0]);
@@ -79,7 +79,7 @@ public class NewComicBookValidatorTest {
         int[] expectedResult = {ErrorCodeConstants.ERROR_WRONG_PRICE_FORMAT};
 
         /** Call to Test */
-        int[] errorCodes = this.newComicBookValidator.validate(this.comicBook);
+        int[] errorCodes = this.comicBookValidator.validate(this.comicBook);
 
         /** Assertions */
         assertEquals(expectedResult[0], errorCodes[0]);
@@ -93,7 +93,7 @@ public class NewComicBookValidatorTest {
         int[] expectedResult = {ErrorCodeConstants.ERROR_WRONG_QUANTITY_FORMAT};
 
         /** Call to Test */
-        int[] errorCodes = this.newComicBookValidator.validate(this.comicBook);
+        int[] errorCodes = this.comicBookValidator.validate(this.comicBook);
 
         /** Assertions */
         assertEquals(expectedResult[0], errorCodes[0]);
@@ -107,7 +107,7 @@ public class NewComicBookValidatorTest {
         int[] expectedResult = {ErrorCodeConstants.ERROR_WRONG_CARRY_STATUS_FORMAT};
 
         /** Call to Test */
-        int[] errorCodes = this.newComicBookValidator.validate(this.comicBook);
+        int[] errorCodes = this.comicBookValidator.validate(this.comicBook);
 
         /** Assertions */
         assertEquals(expectedResult[0], errorCodes[0]);
