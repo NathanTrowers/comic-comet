@@ -47,8 +47,6 @@ export class NewComicBookComponent {
   ) {}
 
   onSubmitNewComicBook(): void {
-   
-
     const comicBookToAdd: NewComicBookForm = {
       name: this.newComicBookForm.value.name ?? '',
       author: this.newComicBookForm.value.author ?? '',

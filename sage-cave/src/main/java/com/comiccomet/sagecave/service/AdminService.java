@@ -18,6 +18,7 @@ import com.comiccomet.sagecave.controller.AdminController;
 import com.comiccomet.sagecave.dto.ErrorResponse;
 import com.comiccomet.sagecave.entity.ComicBook;
 import com.comiccomet.sagecave.exception.ComicBookAdditionFailedException;
+import com.comiccomet.sagecave.exception.ComicBookHasNoUpdatesException;
 import com.comiccomet.sagecave.exception.ComicBookNotFoundException;
 import com.comiccomet.sagecave.exception.ComicBookUpdateFailedException;
 import com.comiccomet.sagecave.modelassembler.ComicBookModelAssembler;
@@ -152,11 +153,12 @@ public class AdminService {
                     .body(new ErrorResponse(400, "bad request", errorCodes));
             }
 
-            boolean comicBookExists = this.comicBookRepository.existsById(comicBookId);
-            if (!comicBookExists) {
-                throw new ComicBookNotFoundException(comicBookId);
-            }
+            ComicBook existingComicBook = this.comicBookRepository.findById(comicBookId)
+                .orElseThrow(() ->  new ComicBookNotFoundException(comicBookId));
 
+            if (existingComicBook.equals(updatedComicBook)) {
+                throw new ComicBookHasNoUpdatesException(updatedComicBook);
+            }
             ComicBook savedComicBook = this.comicBookRepository.save(updatedComicBook);
             if (savedComicBook == null) {
                 throw new ComicBookUpdateFailedException(updatedComicBook);

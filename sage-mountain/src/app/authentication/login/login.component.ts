@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
             return;
           }
     
+
           this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_GENERIC);
         });
     } else {
