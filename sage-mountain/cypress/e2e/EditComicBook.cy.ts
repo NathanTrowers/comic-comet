@@ -1,5 +1,4 @@
 describe('Update Existing Comic Book Page', () => {
-    //Run the New Comic Book Test Suite Before this one.
     beforeEach(() => {
         cy.visit('/login');
 

@@ -1,9 +1,9 @@
 import { HttpClientModule } from "@angular/common/http";
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { of } from "rxjs";
-import { ComicBookService } from "src/app/comic-book/comic-book.service";
 
+import { ComicBookService } from "src/app/comic-book/comic-book.service";
 import { EditComicBookComponent } from 'src/app/comic-book/edit-comic-book/edit-comic-book.component';
 
 describe('EditComicBookComponent', () => {
@@ -15,11 +15,11 @@ describe('EditComicBookComponent', () => {
     const comicBookService = jasmine.createSpyObj('ComicBookService', ['getComicBookById']);
     getComicBookByIdSpy = comicBookService.getComicBookById.and.returnValue(of({
       comicBookId: '7963b34d-7c0a-42cd-964a-93b31e7c8f34',
-      name: 'Test Comic Book',
-      author: 'Test The Author',
-      price: 1.99,
-      quantity: 7,
-      coverArt: '',
+      name:        'Test Comic Book',
+      author:      'Test The Author',
+      price:       1.99,
+      quantity:    7,
+      coverArt:    '',
       carryStatus: 'carrying',
       _links: {
         self: {
@@ -50,11 +50,11 @@ describe('EditComicBookComponent', () => {
     component = fixture.componentInstance;
     component.comicBook = {
       comicBookId: '7963b34d-7c0a-42cd-964a-93b31e7c8f34',
-      name: 'Test Comic Book',
-      author: 'Test The Author',
-      price: 1.99,
-      quantity: 7,
-      coverArt: '',
+      name:        'Test Comic Book',
+      author:      'Test The Author',
+      price:       1.99,
+      quantity:    7,
+      coverArt:    '',
       carryStatus: 'carrying',
       _links: {
         self: {

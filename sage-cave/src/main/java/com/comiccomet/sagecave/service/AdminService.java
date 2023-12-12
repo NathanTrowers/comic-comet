@@ -143,7 +143,6 @@ public class AdminService {
 
     public ResponseEntity<?> updateComicBook(String adminId, String comicBookId, ComicBook updatedComicBook) {
         try {
-
             int[] errorCodes = this.comicBookValidator.validate(updatedComicBook);
             if (errorCodes.length > 0) {
                 log.error("Update of comic book {} failed for id {} due to input validation errors", comicBookId, adminId);

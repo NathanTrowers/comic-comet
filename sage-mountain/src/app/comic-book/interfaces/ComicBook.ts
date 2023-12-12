@@ -1,11 +1,11 @@
 interface ComicBook {
-    comicBookId: string;
-    name: string;
-    author: string;
-    price: number;
-    quantity: number;
-    coverArt: string;
-    carryStatus: string;
+    comicBookId:    string;
+    name:           string;
+    author:         string;
+    price:          number;
+    quantity:       number;
+    coverArt:       string;
+    carryStatus:    string;
     _links: {
         self: {
             href: string;

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -77,13 +77,13 @@ export class EditComicBookComponent implements OnInit  {
 
   onSubmitUpdatedComicBook(): void {
     const comicBookToUpdate: EditedComicBook = {
-      comicBookId: this.comicBook.comicBookId,
-      name: this.updateComicBookForm.value.name ?? '',
-      author: this.updateComicBookForm.value.author ?? '',
-      price:Number.parseFloat(this.updateComicBookForm.value.price ?? '0.00'),
-      quantity: Number.parseInt(this.updateComicBookForm.value.quantity ?? '0'),
-      coverArt: this.coverArt,
-      carryStatus: this.updateComicBookForm.value.carryStatus ?? '',
+      comicBookId:  this.comicBook.comicBookId,
+      name:         this.updateComicBookForm.value.name ?? '',
+      author:       this.updateComicBookForm.value.author ?? '',
+      price:        Number.parseFloat(this.updateComicBookForm.value.price ?? '0.00'),
+      quantity:     Number.parseInt(this.updateComicBookForm.value.quantity ?? '0'),
+      coverArt:     this.coverArt,
+      carryStatus:  this.updateComicBookForm.value.carryStatus ?? '',
     }
 
     if (this.comicBookValidator.validate(comicBookToUpdate)) {

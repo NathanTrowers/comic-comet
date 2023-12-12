@@ -16,13 +16,13 @@ describe('ComicBookCardComponent', () => {
     fixture = TestBed.createComponent(ComicBookCardComponent);
     component = fixture.componentInstance;
     component.comicBook = {
-      comicBookId: '7963b34d-7c0a-42cd-964a-93b31e7c8f34',
-      name: 'Test Comic Book',
-      author: 'Test The Author',
-      price: 1.99,
-      quantity: 7,
-      coverArt: '',
-      carryStatus: 'carrying',
+      comicBookId:  '7963b34d-7c0a-42cd-964a-93b31e7c8f34',
+      name:         'Test Comic Book',
+      author:       'Test The Author',
+      price:        1.99,
+      quantity:     7,
+      coverArt:     '',
+      carryStatus:  'carrying',
       _links: {
         self: {
             href: 'http/localhost:8090/comic-books/7963b34d-7c0a-42cd-964a-93b31e7c8f34'
