@@ -18,7 +18,9 @@ import com.comiccomet.sagecave.controller.AdminController;
 import com.comiccomet.sagecave.dto.ErrorResponse;
 import com.comiccomet.sagecave.entity.ComicBook;
 import com.comiccomet.sagecave.exception.ComicBookAdditionFailedException;
+import com.comiccomet.sagecave.exception.ComicBookHasNoUpdatesException;
 import com.comiccomet.sagecave.exception.ComicBookNotFoundException;
+import com.comiccomet.sagecave.exception.ComicBookUpdateFailedException;
 import com.comiccomet.sagecave.modelassembler.ComicBookModelAssembler;
 import com.comiccomet.sagecave.repository.ComicBookRepository;
 import com.comiccomet.sagecave.validator.ValidatorInterface;
@@ -28,12 +30,12 @@ public class AdminService {
     private static final Logger log = LoggerFactory.getLogger(AdminService.class);
     private final ComicBookRepository comicBookRepository;
     private final ComicBookModelAssembler comicBookModelAssembler;
-    private ValidatorInterface newComicBookValidator;
+    private ValidatorInterface comicBookValidator;
 
-    public AdminService(ComicBookRepository comicBookRepository, ComicBookModelAssembler comicBookModelAssembler, ValidatorInterface newComicBookValidator) {
+    public AdminService(ComicBookRepository comicBookRepository, ComicBookModelAssembler comicBookModelAssembler, ValidatorInterface comicBookValidator) {
         this.comicBookRepository = comicBookRepository;
         this.comicBookModelAssembler = comicBookModelAssembler;
-        this.newComicBookValidator = newComicBookValidator;
+        this.comicBookValidator = comicBookValidator;
     }
 
     public ResponseEntity<ErrorResponse> sendIsUnauthorized() {
@@ -102,7 +104,7 @@ public class AdminService {
     public ResponseEntity<?> addNewComicBook(String adminId, ComicBook newComicBook) {
         try {
 
-            int[] errorCodes = this.newComicBookValidator.validate(newComicBook);
+            int[] errorCodes = this.comicBookValidator.validate(newComicBook);
             if (errorCodes.length > 0) {
                 log.error("Addition of new comic book failed for id {} due to input validation errors", adminId);
 
@@ -118,7 +120,7 @@ public class AdminService {
             
             log.info("Addition of new comic book succeeded for id {}", adminId);
 
-            EntityModel<ComicBook> response = EntityModel.of(savedComicBook, 
+            EntityModel<ComicBook> response = EntityModel.of(savedComicBook,
                 linkTo(
                     methodOn(AdminController.class)
                     .postComicBook("exampleInvalidToken", savedComicBook)
@@ -132,6 +134,59 @@ public class AdminService {
             log.error("Addition of new comic book failed for id {} with the following error: {}", adminId, error);
             
             int[] errorCodes = {ErrorCodeConstants.ERROR_ADD_COMIC_BOOK_FAILED};
+
+            return ResponseEntity
+                .badRequest()
+                .body(new ErrorResponse(400, "bad request", errorCodes));
+        }
+    }
+
+    public ResponseEntity<?> updateComicBook(String adminId, String comicBookId, ComicBook updatedComicBook) {
+        try {
+            int[] errorCodes = this.comicBookValidator.validate(updatedComicBook);
+            if (errorCodes.length > 0) {
+                log.error("Update of comic book {} failed for id {} due to input validation errors", comicBookId, adminId);
+
+                return ResponseEntity
+                    .badRequest()
+                    .body(new ErrorResponse(400, "bad request", errorCodes));
+            }
+
+            ComicBook existingComicBook = this.comicBookRepository.findById(comicBookId)
+                .orElseThrow(() ->  new ComicBookNotFoundException(comicBookId));
+
+            if (existingComicBook.equals(updatedComicBook)) {
+                throw new ComicBookHasNoUpdatesException(updatedComicBook);
+            }
+            ComicBook savedComicBook = this.comicBookRepository.save(updatedComicBook);
+            if (savedComicBook == null) {
+                throw new ComicBookUpdateFailedException(updatedComicBook);
+            }
+            
+            log.info("Update of comic book {} succeeded for id {}", comicBookId, adminId);
+
+            EntityModel<ComicBook> response = EntityModel.of(savedComicBook,
+                linkTo(
+                    methodOn(AdminController.class)
+                    .putComicBook("exampleInvalidToken", comicBookId, savedComicBook)
+                ).withSelfRel()
+            );
+
+            return ResponseEntity
+                .accepted()
+                .body(response);
+        } catch(ComicBookNotFoundException comicBookNotFoundException) {
+            log.error("Comic book retrieval failed for id {} with the following error: ", adminId, comicBookNotFoundException);
+
+            int[] errorCodes = {ErrorCodeConstants.ERROR_COMIC_BOOK_NOT_FOUND};
+
+            return ResponseEntity
+                .status(404)
+                .body(new ErrorResponse(404, "not found", errorCodes));
+        } catch(Exception error) {
+            log.error("Update of comic book {} failed for id {} with the following error: {}", comicBookId, adminId, error);
+            
+            int[] errorCodes = {ErrorCodeConstants.ERROR_UPDATE_COMIC_BOOK_FAILED};
 
             return ResponseEntity
                 .badRequest()

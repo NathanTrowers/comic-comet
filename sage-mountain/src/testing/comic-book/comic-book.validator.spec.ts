@@ -7,11 +7,11 @@ describe('Test Suite for ComicBookValidator', () => {
 
     beforeEach(() => {
         testData = {
-            name: 'Example Book Name',
-            author: 'Example Book Author',
-            price: 29.99,
-            quantity: 7,
-            coverArt: '',
+            name:        'Example Book Name',
+            author:      'Example Book Author',
+            price:       29.99,
+            quantity:    7,
+            coverArt:    '',
             carryStatus: 'carrying',
           } 
         

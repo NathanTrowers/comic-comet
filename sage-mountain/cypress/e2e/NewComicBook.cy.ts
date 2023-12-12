@@ -1,4 +1,4 @@
-describe('Dashboard Page', () => {
+describe('Add New Comic Book Page', () => {
     beforeEach(() => {
         cy.visit('/login');
 
@@ -74,8 +74,6 @@ describe('Dashboard Page', () => {
     });
 
     it('successfully cancels new comic book creation', () => {
-        cy.contains('New Comic Book').click();
-        
         cy.contains('Cancel').click();
         cy.url().should('include', '/dashboard');
     });

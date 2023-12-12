@@ -112,7 +112,7 @@ public class ComicBook {
             && Objects.equals(this.author, comicBook.author)
             && Objects.equals(this.price, comicBook.price)
             && Objects.equals(this.quantity, comicBook.quantity)
-            && Objects.equals(this.coverArt, comicBook.coverArt)
+            && Objects.deepEquals(this.coverArt, comicBook.coverArt)
             && Objects.equals(this.carryStatus, comicBook.carryStatus);
     }
 

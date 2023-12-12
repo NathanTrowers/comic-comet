@@ -1,7 +1,8 @@
 export const errorMessage = {
     ERROR_GENERIC:              'An error occurred. Try again.',
     ERROR_INVALID_CREDENTIALS:  'Invalid credentials. Try again.',
-    ERROR_WRONG_INPUT:          'There\'s something alien about what you entered. Try again.'
+    ERROR_NO_CHANGE_DETECTED:   'You did not update any data. Were you staring in space?',
+    ERROR_WRONG_INPUT:          'There\'s something alien about what you entered. Try again.',
 }
 
 export const formMessages = {

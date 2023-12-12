@@ -15,4 +15,5 @@ public final class ErrorCodeConstants {
     public static final int ERROR_WRONG_QUANTITY_FORMAT =  400002010;
     public static final int ERROR_WRONG_CARRY_STATUS_FORMAT =  400002011;
     public static final int ERROR_INVALID_COVER_ART =  400002012;
+    public static final int ERROR_UPDATE_COMIC_BOOK_FAILED =  40000203;
 }

@@ -1,4 +1,4 @@
-interface ComicBook {
+interface EditedComicBook {
     comicBookId:    string;
     name:           string;
     author:         string;
@@ -6,14 +6,6 @@ interface ComicBook {
     quantity:       number;
     coverArt:       string;
     carryStatus:    string;
-    _links: {
-        self: {
-            href: string;
-        },
-        comicBooks: {
-            "href": string;
-        }
-    }
 }
 
-export default ComicBook;
+export default EditedComicBook;

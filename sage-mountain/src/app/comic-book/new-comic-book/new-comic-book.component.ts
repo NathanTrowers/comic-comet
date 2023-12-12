@@ -47,15 +47,13 @@ export class NewComicBookComponent {
   ) {}
 
   onSubmitNewComicBook(): void {
-   
-
     const comicBookToAdd: NewComicBookForm = {
-      name: this.newComicBookForm.value.name ?? '',
-      author: this.newComicBookForm.value.author ?? '',
-      price:Number.parseFloat(this.newComicBookForm.value.price ?? '0.00'),
-      quantity: Number.parseInt(this.newComicBookForm.value.quantity ?? '0'),
-      coverArt: this.coverArt,
-      carryStatus: this.newComicBookForm.value.carryStatus ?? '',
+      name:         this.newComicBookForm.value.name ?? '',
+      author:       this.newComicBookForm.value.author ?? '',
+      price:        Number.parseFloat(this.newComicBookForm.value.price ?? '0.00'),
+      quantity:     Number.parseInt(this.newComicBookForm.value.quantity ?? '0'),
+      coverArt:     this.coverArt,
+      carryStatus:  this.newComicBookForm.value.carryStatus ?? '',
     }
 
     if (this.comicBookValidator.validate(comicBookToAdd)) {

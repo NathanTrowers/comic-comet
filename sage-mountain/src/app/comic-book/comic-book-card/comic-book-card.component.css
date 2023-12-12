@@ -1,7 +1,42 @@
 section {
+    display: flex;
+    flex-flow: column;
     padding: 0.5rem;
 }
 
 section:hover {
     box-shadow: 0.2rem 0.02rem 0.8rem 0.5rem var(--secondary-color);
+}
+
+h2 {
+    text-align: center;
+}
+
+h2, img {
+    width: 12.421875rem;/*6.625px * 30*/
+}
+
+img {
+    height: 25.6875rem;/*10.25px * 30*/
+    /* width: 12.421875rem; --- 6.625px * 30 */
+}
+
+a {
+    grid-column: 1/ span 1;
+    width: 10.5rem;
+    height: 1.5rem;
+    text-decoration: none;
+    text-align: center;
+    align-self: center;
+    background-color: var(--primary-color);
+    color: var(--accent-light);
+    transition: width 0.2s, height 0.2s;
+}
+
+a:hover {
+    width: 11rem;
+    height: 1.6rem;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
 }

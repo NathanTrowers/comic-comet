@@ -1,6 +1,6 @@
 interface LoginResponse {
-    status: number;
-    response: string;
+    status:     number;
+    response:   string;
     errorCodes: number[];
 }
 
