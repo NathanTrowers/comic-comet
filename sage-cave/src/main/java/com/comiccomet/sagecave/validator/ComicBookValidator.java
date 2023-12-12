@@ -32,7 +32,14 @@ public class ComicBookValidator implements ValidatorInterface {
         boolean isPriceMatch = priceMatcher.find();
         boolean isQuantityMatch = quantityMatcher.find();
         boolean isCarryStatusMatch = carryStatusMatcher.find();
-
+        
+        String comicBookId = newComicBook.getComicBookId();
+        if (comicBookId != null) {
+            int errorCode = this.validateId(comicBookId);
+            if (!(errorCode == 0)) {
+                errorCodes.add(errorCode);
+            }
+        }
         if (!isNameMatch) {
             errorCodes.add(ErrorCodeConstants.ERROR_WRONG_NAME_FORMAT);
         }
@@ -68,5 +75,16 @@ public class ComicBookValidator implements ValidatorInterface {
         return errorCodes.stream()
             .mapToInt(Integer::intValue)
             .toArray();
+    }
+
+    public int validateId(String comicBookId) {
+        Pattern comicBookIdPattern = Pattern.compile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$");
+        Matcher comicBookIdMatcher = comicBookIdPattern.matcher(comicBookId);
+        boolean isComicBookIdMatch = comicBookIdMatcher.find();
+        if (!isComicBookIdMatch) {
+            return ErrorCodeConstants.ERROR_WRONG_COMIC_BOOK_ID_FORMAT;
+        }
+        
+        return 0;
     }
 }

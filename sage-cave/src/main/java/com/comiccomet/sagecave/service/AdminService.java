@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.comiccomet.sagecave.constant.ErrorCodeConstants;
 import com.comiccomet.sagecave.controller.AdminController;
+import com.comiccomet.sagecave.dto.DeletionSuccessResponse;
 import com.comiccomet.sagecave.dto.ErrorResponse;
 import com.comiccomet.sagecave.entity.ComicBook;
 import com.comiccomet.sagecave.exception.ComicBookAdditionFailedException;
@@ -91,7 +92,7 @@ public class AdminService {
                 .status(404)
                 .body(new ErrorResponse(404, "not found", errorCodes));
         } catch(Exception error) {
-            log.error("Comic book retrieval failed for id {} with the following error: {}", adminId, error);
+            log.error("Comic book retrieval failed for id {} with the following error: ", adminId, error);
 
             int[] errorCodes = {ErrorCodeConstants.ERROR_GET_COMIC_BOOK_FAILED};
 
@@ -106,7 +107,7 @@ public class AdminService {
 
             int[] errorCodes = this.comicBookValidator.validate(newComicBook);
             if (errorCodes.length > 0) {
-                log.error("Addition of new comic book failed for id {} due to input validation errors", adminId);
+                log.error("Addition of new comic book failed for id {} due to the following input validation errors: {}", adminId, errorCodes);
 
                 return ResponseEntity
                     .badRequest()
@@ -145,7 +146,7 @@ public class AdminService {
         try {
             int[] errorCodes = this.comicBookValidator.validate(updatedComicBook);
             if (errorCodes.length > 0) {
-                log.error("Update of comic book {} failed for id {} due to input validation errors", comicBookId, adminId);
+                log.error("Update of comic book {} failed for id {} due to the following input validation errors: {}", comicBookId, adminId, errorCodes);
 
                 return ResponseEntity
                     .badRequest()
@@ -184,9 +185,38 @@ public class AdminService {
                 .status(404)
                 .body(new ErrorResponse(404, "not found", errorCodes));
         } catch(Exception error) {
-            log.error("Update of comic book {} failed for id {} with the following error: {}", comicBookId, adminId, error);
+            log.error("Update of comic book {} failed for id {} with the following error: ", comicBookId, adminId, error);
             
             int[] errorCodes = {ErrorCodeConstants.ERROR_UPDATE_COMIC_BOOK_FAILED};
+
+            return ResponseEntity
+                .badRequest()
+                .body(new ErrorResponse(400, "bad request", errorCodes));
+        }
+    }
+
+    public ResponseEntity<?> deleteComicBook(String adminId, String comicBookId) {
+        try {
+            int errorCode = this.comicBookValidator.validateId(comicBookId);
+            if (errorCode == 0) {
+                this.comicBookRepository.deleteById(comicBookId);
+            } else {
+                int[] errorCodes = {errorCode};
+
+                return ResponseEntity
+                    .badRequest()
+                    .body(new ErrorResponse(400, "bad request", errorCodes));
+            }
+
+            log.info("Deletion of comic book {} succeeded for admin id {}", comicBookId, adminId);
+
+            return ResponseEntity
+                .accepted()
+                .body(new DeletionSuccessResponse(202, "Deletion successful"));
+        } catch(Exception error) {
+            log.error("Deletion of comic book {} failed for id {} with the following error: ", comicBookId, adminId, error);
+            
+            int[] errorCodes = {ErrorCodeConstants.ERROR_DELETE_COMIC_BOOK_FAILED};
 
             return ResponseEntity
                 .badRequest()
