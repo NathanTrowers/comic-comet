@@ -2,6 +2,7 @@ package com.comiccomet.sagecave.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,5 +64,15 @@ public class AdminController {
         }
 
         return this.adminService.updateComicBook(adminId, comicBookId, updatedComicBook);
+    }
+
+    @DeleteMapping("/comic-books/{comicBookId}")
+    public ResponseEntity<?> putComicBook(@RequestHeader(value="Authorization") String token, @PathVariable String comicBookId) {
+        String adminId = this.tokenManager.validateToken(token);
+        if (adminId == "") {
+            return this.adminService.sendIsUnauthorized();
+        }
+
+        return this.adminService.deleteComicBook(adminId, comicBookId);
     }
 }

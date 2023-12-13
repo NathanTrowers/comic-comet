@@ -50,13 +50,17 @@ describe('Update Existing Comic Book Page', () => {
         cy.contains('You did not update any data. Were you staring in space?');
     });
 
-    // NOTE: manually reset the carrying status to carrying after the below test.
     it('successfully updates existing comic book', () => {
         cy.getByData('radio-discontinued-input').click();
         cy.getByData('update-button').click();
 
         cy.wait(5000);
-        cy.contains('Binary Barons 2');
+        cy.contains('Binary Barons 2')
+            .parent().contains('Edit').click();
+
+        // Reset the carrying status to 'carrying'.
+        cy.getByData('radio-carrying-input').click();
+        cy.getByData('update-button').click();
     });
 
     it('successfully cancels new comic book creation', () => {        

@@ -10,10 +10,35 @@
             (input)='filterResults(searchQuery.value)'
         >
     </form>
-    <div class='catalogue' *ngIf='comicBookList.length > 0 else showLoadingCircle'>
+    <app-messages></app-messages>
+    <div 
+        id='modal'
+        *ngIf='confirmDelete'
+    >
+        <div id='modalContent'>
+            <p>Are you sure you want to delete {{deletionCandidate.name}}?</p>
+            <button 
+                id='deleteButton'    
+                (click)='delete()' 
+            >
+                Delete
+            </button>
+            <button
+                id='cancelButton'
+                (click)='confirmDelete = false'
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+    <div class='catalogue' 
+        *ngIf='comicBookList.length > 0 else showLoadingCircle'
+        data-test='catalogue-section'
+    >
         <app-comic-book-card
             *ngFor='let comicBook of filteredComicBookList'
             [comicBook]='comicBook'
+            (deleteComicBookEvent)='showConfirmDeleteDialog($event)'
         >
         </app-comic-book-card>
     </div>

@@ -39,7 +39,7 @@ public class ComicBookValidatorTest {
         /** Call to Test */
         int[] errorCodes = this.comicBookValidator.validate(this.comicBook);
 
-        /** Assertions */
+        /** Assertion */
         assertEquals(expectedResult.length, errorCodes.length);
     }
 
@@ -53,7 +53,7 @@ public class ComicBookValidatorTest {
         /** Call to Test */
         int[] errorCodes = this.comicBookValidator.validate(this.comicBook);
 
-        /** Assertions */
+        /** Assertion */
         assertEquals(expectedResult[0], errorCodes[0]);
     }
 
@@ -67,7 +67,7 @@ public class ComicBookValidatorTest {
         /** Call to Test */
         int[] errorCodes = this.comicBookValidator.validate(this.comicBook);
 
-        /** Assertions */
+        /** Assertion */
         assertEquals(expectedResult[0], errorCodes[0]);
     }
 
@@ -81,7 +81,7 @@ public class ComicBookValidatorTest {
         /** Call to Test */
         int[] errorCodes = this.comicBookValidator.validate(this.comicBook);
 
-        /** Assertions */
+        /** Assertion */
         assertEquals(expectedResult[0], errorCodes[0]);
     }
 
@@ -95,7 +95,7 @@ public class ComicBookValidatorTest {
         /** Call to Test */
         int[] errorCodes = this.comicBookValidator.validate(this.comicBook);
 
-        /** Assertions */
+        /** Assertion */
         assertEquals(expectedResult[0], errorCodes[0]);
     }
 
@@ -109,8 +109,49 @@ public class ComicBookValidatorTest {
         /** Call to Test */
         int[] errorCodes = this.comicBookValidator.validate(this.comicBook);
 
-        /** Assertions */
+        /** Assertion */
         assertEquals(expectedResult[0], errorCodes[0]);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a46363a1-7767-4112-8212-ddd647df97f1", "aaaaaaaa-3333-aaaa-7777-dddddddddddd", "d03916ca-8df2-436c-b912-52759684cd8e"})
+    void testValidateSuccessWhenIdExists(String rightComicBookIdFormat) {
+        /** Data */
+        this.comicBook.setComicBookId(rightComicBookIdFormat);
+        int[] expectedResult = {};
+
+        /** Call to Test */
+        int[] errorCodes = this.comicBookValidator.validate(this.comicBook);
+
+        /** Assertion */
+        assertEquals(expectedResult.length, errorCodes.length);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a46363a1-7767-4112-8212-ddd647df97f1", "aaaaaaaa-3333-aaaa-7777-dddddddddddd", "d03916ca-8df2-436c-b912-52759684cd8e"})
+    void testValidateIdSuccess(String rightComicBookIdFormat) {
+        /** Data */
+        int expectedResult = 0;
+
+        /** Call to Test */
+        int errorCode = this.comicBookValidator.validateId(rightComicBookIdFormat);
+
+        /** Assertion */
+        assertEquals(expectedResult, errorCode);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a46363a1-7767-4112-8212-ddd647df97f", "aaaaaaa-aaaa-ddddddddddd", "DROP TABLE comic_book;"})
+    void testValidateIdFailureWhenWrongComicBookIdFormat(String wrongComicBookIdFormat) {
+        /** Data */
+        this.comicBook.setComicBookId(wrongComicBookIdFormat);
+        int expectedResult = ErrorCodeConstants.ERROR_WRONG_COMIC_BOOK_ID_FORMAT;
+
+        /** Call to Test */
+        int errorCode = this.comicBookValidator.validateId(wrongComicBookIdFormat);
+
+        /** Assertion */
+        assertEquals(expectedResult, errorCode);
     }
 
     // NOTE: Need to find a way to trigger failing file validation in test

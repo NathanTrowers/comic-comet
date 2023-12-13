@@ -44,17 +44,17 @@ button, a {
     transition: width 0.2s, height 0.2s;
 }
 
-button:hover, a:hover {
-    width: 15rem;
-    height: 1.8rem;
-    background-color: var(--accent-dark);
-    color: var(--secondary-color);
-    cursor: pointer;
-}
-
 a {
     font-size: 0.8rem;
     text-decoration: none;
     text-align: center;
     color: var(--accent-dark);
+}
+
+button:hover, button:focus, a:hover, a:focus {
+    width: 15rem;
+    height: 1.8rem;
+    background-color: var(--accent-dark);
+    color: var(--secondary-color);
+    cursor: pointer;
 }
