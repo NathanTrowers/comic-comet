@@ -203,6 +203,8 @@ public class AdminService {
             } else {
                 int[] errorCodes = {errorCode};
 
+                log.error("Deletion of comic book {} failed for id {} with the following validation error: {}", comicBookId, adminId, errorCode);
+
                 return ResponseEntity
                     .badRequest()
                     .body(new ErrorResponse(400, "bad request", errorCodes));
