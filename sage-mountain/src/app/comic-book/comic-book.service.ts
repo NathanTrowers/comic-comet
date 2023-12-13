@@ -49,6 +49,15 @@ export class ComicBookService {
       );
   }
 
+  submitDeleteComicBookRequest(comicBookId: string): Observable<any> {
+    this.authenticationService.setAuthorization();
+
+    return this.httpClient.delete<any>(`${environment.SAGE_CAVE_API}/comic-books/${comicBookId}`,this.authenticationService.httpOptions)
+      .pipe(
+        catchError(this.handleError<any>('delete-comic-book'))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

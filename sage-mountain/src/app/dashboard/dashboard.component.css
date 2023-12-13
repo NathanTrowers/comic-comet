@@ -19,7 +19,7 @@ a {
     transition: width 0.2s, height 0.2s;
 }
 
-a:hover {
+a:hover, a:focus  {
     width: 15rem;
     height: 1.8rem;
     background-color: var(--secondary-color);
@@ -44,7 +44,7 @@ button {
     transition: width 0.2s, height 0.2s;
 }
 
-button:hover {
+button:hover, button:focus  {
     width: 15rem;
     height: 1.8rem;
     background-color: var(--accent-dark);

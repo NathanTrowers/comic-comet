@@ -2,4 +2,12 @@
     <img [src]='getSrcString()' alt='comic book cover art'>
     <h2>{{ comicBook.name }}</h2>
     <a [routerLink]="['/comic-book', comicBook.comicBookId]">Edit</a>
+    <button 
+        type='button'
+        class='errorButton'
+        aria-label='dismiss message'
+        (click)='deleteComicBook()'
+    >
+        X
+    </button>
 </section>

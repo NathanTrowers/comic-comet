@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Buffer } from 'buffer';
 
@@ -17,6 +17,7 @@ import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
 })
 export class ComicBookCardComponent {
   @Input() comicBook!: ComicBook;
+  @Output() deleteComicBookEvent: EventEmitter<ComicBook> = new EventEmitter<ComicBook>;
   coverArt: string = '';
   
   constructor() {}
@@ -31,4 +32,9 @@ export class ComicBookCardComponent {
     
     return '';
   }
+
+  deleteComicBook(): void {
+    this.deleteComicBookEvent.emit(this.comicBook);
+  }
+
 }

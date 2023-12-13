@@ -14,6 +14,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         String sageMountainUrl = System.getenv("SAGE_MOUNTAIN_URL");
         registry.addMapping("/**")
             .allowedOrigins(sageMountainUrl)
-            .allowedMethods("GET","POST","PUT");
+            .allowedMethods("GET", "POST", "PUT", "DELETE");
     }
 }

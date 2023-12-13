@@ -33,10 +33,29 @@ a {
     transition: width 0.2s, height 0.2s;
 }
 
-a:hover {
+a:hover, a:focus {
     width: 11rem;
     height: 1.6rem;
     background-color: var(--secondary-color);
     color: var(--primary-color);
+    cursor: pointer;
+}
+
+.errorButton {
+    align-self: center;
+    width: 2rem;
+    height: 1.3rem;
+    margin-left: 0.3rem;
+    border: 0.01rem solid var(--secondary-color);
+    background-color: var(--accent-dark);
+    color: var(--secondary-color);
+    transition: width 0.2s;
+}
+
+.errorButton:hover, .errorButton:focus {
+    width: 11rem;
+    height: 1.6rem;
+    background-color: var(--secondary-color);
+    color: var(--accent-dark);
     cursor: pointer;
 }
