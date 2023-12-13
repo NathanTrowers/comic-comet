@@ -26,6 +26,7 @@ public class CustomerService {
     private static final Logger log = LoggerFactory.getLogger(CustomerService.class);
     private final ComicBookRepository comicBookRepository;
     private final ComicBookModelAssembler comicBookModelAssembler;
+    private final String CARRY_STATUS_CARRYING = "carrying";
 
     public CustomerService(ComicBookRepository comicBookRepository, ComicBookModelAssembler comicBookModelAssembler) {
         this.comicBookRepository = comicBookRepository;
@@ -42,14 +43,14 @@ public class CustomerService {
             .body(new ErrorResponse(401, "unauthorized", errorCodes));
     }
 
-    public ResponseEntity<?> getComicBookCatalogue(String adminId) {
+    public ResponseEntity<?> getComicBookCatalogue(String customerId) {
         try {
-            List<EntityModel<ComicBook>> comicBooks = comicBookRepository.findAll()
+            List<EntityModel<ComicBook>> comicBooks = comicBookRepository.findAllByCarryStatus(this.CARRY_STATUS_CARRYING)
                 .stream()
                 .map(comicBookModelAssembler::toModel)
                 .collect(Collectors.toList());
 
-            log.info("Comic book catalogue retrieval successful for id {}!", adminId);
+            log.info("Comic book catalogue retrieval successful for id {}!", customerId);
 
             return ResponseEntity
                 .ok()
@@ -66,18 +67,18 @@ public class CustomerService {
         }
     }
 
-    public ResponseEntity<?> getSingleComicBook(String adminId, String comicBookId) {
+    public ResponseEntity<?> getSingleComicBook(String customerId, String comicBookId) {
         try {
-            ComicBook comicBook = this.comicBookRepository.findById(comicBookId)
+            ComicBook comicBook = this.comicBookRepository.findByComicBookIdAndCarryStatus(comicBookId, this.CARRY_STATUS_CARRYING)
                 .orElseThrow(() ->  new ComicBookNotFoundException(comicBookId));
 
-            log.info("Comic book retrieval successful for id {}!", adminId);
+            log.info("Comic book retrieval successful for id {}!", customerId);
 
             return ResponseEntity
                 .ok()
                 .body(comicBookModelAssembler.toModel(comicBook));
         } catch(ComicBookNotFoundException comicBookNotFoundException) {
-            log.error("Comic book retrieval failed for id {} with the following error: ", adminId, comicBookNotFoundException);
+            log.error("Comic book retrieval failed for id {} with the following error: ", customerId, comicBookNotFoundException);
 
             int[] errorCodes = {ErrorCodeConstants.ERROR_COMIC_BOOK_NOT_FOUND};
 
@@ -85,7 +86,7 @@ public class CustomerService {
                 .status(404)
                 .body(new ErrorResponse(404, "not found", errorCodes));
         } catch(Exception error) {
-            log.error("Comic book retrieval failed for id {} with the following error: {}", adminId, error);
+            log.error("Comic book retrieval failed for id {} with the following error: {}", customerId, error);
 
             int[] errorCodes = {ErrorCodeConstants.ERROR_GET_COMIC_BOOK_FAILED};
 
