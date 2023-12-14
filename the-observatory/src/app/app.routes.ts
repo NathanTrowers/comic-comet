@@ -7,11 +7,12 @@ import { RegisterComponent } from 'src/app/authentication/register/register.comp
 import { PageNotFoundComponent } from 'src/app/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-    { path: 'login', component: LoginComponent, title: 'login' },
-    { path: 'register', component: RegisterComponent, title: 'register' },
-    { path: 'comic-books', component: DashboardComponent, title: 'comic-books', canActivate: [authenticationGuard] },
+    { path: 'login', component: LoginComponent, title: 'Login' },
+    { path: 'register', component: RegisterComponent, title: 'Register' },
+    { path: 'comic-books', component: DashboardComponent, title: 'Comic Books', canActivate: [authenticationGuard] },
+    // { path: 'comic-book/:id', component: SingleComicBookComponent, title: 'Single Comic Book', canActivate: [authenticationGuard] },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent, title: 'Page Not Found' }
-];
+];/**details, footer, addt-to-cart*/
 
 export default routes

@@ -7,7 +7,6 @@ import EditedComicBook from 'src/app/comic-book/interfaces/EditedComicBook';
 import ComicBookCatalogue from 'src/app/comic-book/interfaces/ComicBookCatalogue';
 import NewComicBookForm from 'src/app/comic-book/interfaces/NewComicBookForm';
 import { environment } from 'src/environments/environments';
-import ComicBook from './interfaces/ComicBook';
 
 @Injectable({providedIn: 'root'})
 export class ComicBookService {
@@ -19,6 +18,15 @@ export class ComicBookService {
     return this.httpClient.get<ComicBookCatalogue>(`${environment.SAGE_CAVE_API}/comic-books`, this.authenticationService.httpOptions)
       .pipe(
         catchError(this.handleError<ComicBookCatalogue>('all-comic-books'))
+      );
+  }
+
+  getComicBookById(comicBookId: string): Observable<any> {
+    this.authenticationService.setAuthorization();
+
+    return this.httpClient.get<any>(`${environment.SAGE_CAVE_API}/comic-books/${comicBookId}`,this.authenticationService.httpOptions)
+      .pipe(
+        catchError(this.handleError<any>('single-comic-book'))
       );
   }
 
@@ -37,15 +45,6 @@ export class ComicBookService {
     return this.httpClient.put<any>(`${environment.SAGE_CAVE_API}/comic-books/${comicBookToUpdate.comicBookId}`, comicBookToUpdate, this.authenticationService.httpOptions)
       .pipe(
         catchError(this.handleError<any>('update-comic-book'))
-      );
-  }
-
-  getComicBookById(comicBookId: string): Observable<any> {
-    this.authenticationService.setAuthorization();
-
-    return this.httpClient.get<any>(`${environment.SAGE_CAVE_API}/comic-books/${comicBookId}`,this.authenticationService.httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('single-comic-book'))
       );
   }
 

@@ -20,7 +20,7 @@ import { MessageComponent } from 'src/app/message/message.component';
 })
 
 export class AppComponent {
-  title: string = 'the-observatory';
+  title: string = 'ComicComet';
 
   constructor() {}
 }

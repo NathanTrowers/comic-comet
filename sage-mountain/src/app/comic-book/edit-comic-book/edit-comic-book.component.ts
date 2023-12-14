@@ -8,10 +8,9 @@ import { ComicBookService } from 'src/app/comic-book/comic-book.service';
 import { ComicBookValidator } from 'src/app/comic-book/comic-book.validator';
 import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
 import EditedComicBook from 'src/app/comic-book/interfaces/EditedComicBook';
-import { formMessages } from 'src/app/message/message.constants';
 import { InfoComponent } from 'src/app/message/info/info.component';
 import { MessageComponent } from 'src/app/message/message.component';
-import { errorMessage, messageClass } from 'src/app/message/message.constants';
+import { errorMessage, formMessages, messageClass } from 'src/app/message/message.constants';
 import { MessageService } from 'src/app/message/message.service';
 
 @Component({

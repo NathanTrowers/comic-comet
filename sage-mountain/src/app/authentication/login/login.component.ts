@@ -23,7 +23,7 @@ import { MessageService } from 'src/app/message/message.service';
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
-    email: new FormControl(''),
+    email:    new FormControl(''),
     password: new FormControl('')
   });
 
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   
   onSubmitLogin(): void {
     const loginCredentials: LoginCredentials = {
-      email: this.loginForm.value.email ?? '',
+      email:    this.loginForm.value.email ?? '',
       password: this.loginForm.value.password ?? ''
     }
 

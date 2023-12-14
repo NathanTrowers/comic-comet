@@ -5,29 +5,41 @@
     [formGroup]='registrationForm' 
     (submit)='onSubmitRegistration()'
   >
-    <app-messages></app-messages>  
-      <label for='email'>Email Address </label>
+    <app-messages></app-messages>
+      <div class='group'>
+        <label for='email'>Email Address </label>
+        <app-info [bubbleText]='messages.EMAIL_FORMAT'></app-info>
+      </div>
       <input 
         type='email'
         placeholder='email@example.com'
         formControlName='email'
         data-test='email-input'
       />
-      <label for='name'>User Name </label>
+      <div class='group'>
+        <label for='name'>User Name </label>
+        <app-info [bubbleText]='messages.NAME_FORMAT'></app-info>
+      </div>
       <input 
         type='name'
         placeholder='Example Name'
         formControlName='name'
         data-test='name-input'
       />
-      <label for='password'>Password </label>
+      <div class='group'>
+        <label for='password'>Password </label>
+        <app-info [bubbleText]='messages.PASSWORD_FORMAT'></app-info>
+      </div>
       <input 
         type='password'
         placeholder='Ex@m3!lePa$$wo%d'
         formControlName='password'
         data-test='password-input'
       />
-      <label for='password-confirmation'>Password Confirmation</label>
+      <div class='group'>
+        <label for='password-confirmation'>Password Confirmation</label>
+        <app-info [bubbleText]='messages.PASSWORD_CONFIRMATION_NOTE'></app-info>
+      </div>
       <input 
         type='password'
         placeholder='re-enter password here'
@@ -36,7 +48,7 @@
       />
       <button type='submit'>Register</button>
       <a routerLink='/login'>
-        <p>Already have an account? Login here!</p>
+        Already have an account? Login here!
       </a>
   </form>
 </section>

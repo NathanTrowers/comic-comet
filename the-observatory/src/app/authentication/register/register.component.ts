@@ -6,7 +6,9 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import RegistrationCredentials from 'src/app/authentication/interfaces/request/RegistrationCredentials';
 import { RegistrationValidator } from 'src/app/authentication/register/registration.validator';
+import { InfoComponent } from 'src/app/message/info/info.component';
 import { MessageComponent } from 'src/app/message/message.component';
+import { formMessages } from 'src/app/message/message.constants';
 import { MessageService } from 'src/app/message/message.service';
 
 @Component({
@@ -14,6 +16,7 @@ import { MessageService } from 'src/app/message/message.service';
   standalone: true,
   imports: [
     CommonModule,
+    InfoComponent,
     ReactiveFormsModule,
     MessageComponent
   ],
@@ -27,6 +30,8 @@ export class RegisterComponent implements OnInit {
     password: new FormControl(''),
     passwordConfirmation: new FormControl('')
   });
+  messages = formMessages;
+
 
   constructor(
     private authenticationService: AuthenticationService, 

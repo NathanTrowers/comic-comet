@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/authentication/authentication.ser
 import { LoginValidator } from 'src/app/authentication/login/login.validator';
 import LoginCredentials from 'src/app/authentication/interfaces/request/LoginCredentials';
 import { MessageComponent } from 'src/app/message/message.component';
+import { errorMessage, messageClass } from 'src/app/message/message.constants';
 import { MessageService } from 'src/app/message/message.service';
 
 @Component({
@@ -22,7 +23,7 @@ import { MessageService } from 'src/app/message/message.service';
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
-    email: new FormControl(''),
+    email:    new FormControl(''),
     password: new FormControl('')
   });
 
@@ -34,14 +35,14 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-      if(this.authenticationService.isLoggedIn) {
+      if(this.authenticationService.isLoggedIn()) {
         this.router.navigate([this.authenticationService.redirectUrl]);
       }
   }
   
   onSubmitLogin(): void {
     const loginCredentials: LoginCredentials = {
-      email: this.loginForm.value.email ?? '',
+      email:    this.loginForm.value.email ?? '',
       password: this.loginForm.value.password ?? ''
     }
 
@@ -49,17 +50,18 @@ export class LoginComponent implements OnInit {
       this.authenticationService.submitLogin(loginCredentials)
         .subscribe(received => {
           if (received.status === 202) {
-            this.authenticationService.httpOptions.headers['Authorization'] = `Bearer ${received.response}`;
-            this.authenticationService.isLoggedIn = true;
+            this.authenticationService.setIsLoggedIn(`Bearer ${received.response}`);
+            this.authenticationService.setAuthorization(`Bearer ${received.response}`);
+
             this.router.navigate([this.authenticationService.redirectUrl]);
 
             return;
           }
     
-          this.messageService.setMessage('error', 'An error occurred. Try again.');
+          this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_GENERIC);
         });
     } else {
-      this.messageService.setMessage('error', 'Invalid credentials. Try again.');
+      this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_INVALID_CREDENTIALS);
     }
   }
 }
