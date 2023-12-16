@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if(this.authenticationService.isLoggedIn) {
+    if(this.authenticationService.isLoggedIn()) {
       this.router.navigate([this.authenticationService.redirectUrl]);
     }
   }

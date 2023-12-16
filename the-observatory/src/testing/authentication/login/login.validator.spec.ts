@@ -7,7 +7,7 @@ describe('Test Suite for LoginValidator', () => {
 
     beforeEach(() => {
         testData = {
-            email: 'validemail@test.com',
+            email:    'validemail@test.com',
             password: 'Val!dP@$%w0rd'
           } 
         

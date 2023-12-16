@@ -56,6 +56,14 @@ describe('Registration Test Suite', () => {
         cy.contains('Login');
     });
 
+    it('shows that the info icons work', async (): Promise<any> => {
+        let infoIcons: any = await Promise.resolve(cy.get('.infoIcon'));
+        cy.wrap(infoIcons[0]).contains('Only letters, numbers, and hyphens are allowed in a valid email address.');
+        cy.wrap(infoIcons[1]).contains('Only letters, numbers, apostrophes, hyphens and spaces are allowed.');
+        cy.wrap(infoIcons[2]).contains('Only letters, numbers, and the special characters in parentheses (-.!%$&*@#?) are allowed.');
+        cy.wrap(infoIcons[3]).contains('Re-enter your password. This must match what is in the password field.');
+    });
+
     it('shows that link to login page works from register page', () => {
         cy.contains('Already have an account? Login here!').click();
         cy.contains('Login');

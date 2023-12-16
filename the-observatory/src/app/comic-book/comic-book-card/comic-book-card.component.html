@@ -1,7 +1,7 @@
 <section>
-    <img [src]='comicBook.coverArt' alt='comic book cover art'>
+    <img [src]='getSrcString()' alt='comic book cover art'>
     <h2>{{ comicBook.name }}</h2>
-    <!-- <a [routerLink]="['/comic-book', comicBook.comicBookId]">Details</a> -->
+    <a [routerLink]="['/comic-book', comicBook.comicBookId]">Details</a>
     <!-- <button 
         type='button'
         (click)='cartService.addToCart()'

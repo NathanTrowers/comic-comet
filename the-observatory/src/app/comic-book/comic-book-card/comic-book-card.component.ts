@@ -18,4 +18,14 @@ export class ComicBookCardComponent{
   @Input() comicBook!: ComicBook;
 
   constructor() {}
+
+  getSrcString(): string {
+    if (this.comicBook?.coverArt?.length > 0) {
+      const coverArtString: string = this.comicBook.coverArt?.toString() ?? '';
+
+      return `data:image/png;base64,${coverArtString}`;
+    }
+    
+    return '';
+  }
 }
