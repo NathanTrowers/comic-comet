@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { ComicBookCatalogueComponent } from 'src/app/comic-book/comic-book-catalogue/comic-book-catalogue.component';
+import { FooterComponent } from 'src/app/footer/footer.component';
 import { MessageComponent } from 'src/app/message/message.component';
 import { errorMessage, messageClass } from 'src/app/message/message.constants';
 import { MessageService } from 'src/app/message/message.service';
@@ -14,6 +15,7 @@ import { MessageService } from 'src/app/message/message.service';
   imports: [
     CommonModule,
     ComicBookCatalogueComponent,
+    FooterComponent,
     MessageComponent
   ],
   templateUrl: './dashboard.component.html',

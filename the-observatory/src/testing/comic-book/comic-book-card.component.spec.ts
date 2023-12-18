@@ -1,5 +1,7 @@
+import { HttpClientModule } from "@angular/common/http";
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { ComicBookCardComponent } from 'src/app/comic-book/comic-book-card/comic-book-card.component';
 
@@ -9,7 +11,16 @@ describe('ComicBookCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComicBookCardComponent, RouterModule]
+      imports: [ComicBookCardComponent, HttpClientModule, RouterModule],
+      providers: [ { provide: ActivatedRoute, useValue: { 
+        snapshot: {
+          paramMap: {
+            get: (id:number) => {
+              id:'7963b34d-7c0a-42cd-964a-93b31e7c8f34'
+            }
+          }
+        }
+      }}]
     });
     fixture = TestBed.createComponent(ComicBookCardComponent);
     component = fixture.componentInstance;

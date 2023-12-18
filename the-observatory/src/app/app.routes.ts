@@ -14,6 +14,6 @@ const routes: Routes = [
     { path: 'comic-book/:id', component: SingleComicBookComponent, title: 'Single Comic Book', canActivate: [authenticationGuard] },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent, title: 'Page Not Found' }
-];/**details, footer, addt-to-cart*/
+];
 
 export default routes

@@ -10,6 +10,7 @@ form {
 }
 
 label {
+    margin-top: 1rem;
     color: var(--primary-color);
     font-weight: bolder;
 }

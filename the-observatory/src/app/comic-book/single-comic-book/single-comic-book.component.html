@@ -2,6 +2,21 @@
     <div id='oneRow'>
         <h2>Comic Book Details</h2>
         <a [routerLink]="['/comic-books']">Back</a>
+        <button
+            *ngIf='!cartItem else showRemoveButton'
+            type='button'
+            (click)='addToCart()'
+        >
+            Add to Cart
+        </button>
+        <ng-template #showRemoveButton>
+            <button 
+                type='button'
+                (click)='removeFromCart()'
+            >
+                Remove from Cart
+            </button>
+        </ng-template>
     </div>
     <div id='layout'>
         <div id='coverArt'>
@@ -27,3 +42,4 @@
         </div>
     </div>
 </section>
+<app-footer></app-footer>

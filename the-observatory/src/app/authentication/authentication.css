@@ -18,7 +18,7 @@ label {
 }
 
 input {
-    width: 15rem;
+    width: 18rem;
     border: none;
 }
 
@@ -48,6 +48,7 @@ a {
 a:hover, a:focus {
     text-decoration: none;
     color: var(--accent-dark);
+    cursor: pointer;
 }
 
 .group {
