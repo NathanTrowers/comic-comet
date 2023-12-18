@@ -5,13 +5,12 @@ import { ActivatedRoute } from '@angular/router';
 import { LoginComponent } from "src/app/authentication/login/login.component";
 
 describe('LoginComponet Smoke Test', () => {
-    
     let activatedRouteStub: Partial<ActivatedRoute>;
 
     it('renders without crashing', () => {
         TestBed.configureTestingModule({
             imports: [HttpClientModule, LoginComponent],
-            providers: [ { provide: ActivatedRoute, useValue: activatedRouteStub }]
+            providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }]
         });
         const loginFixture = TestBed.createComponent(LoginComponent);
         const loginComponentInstance  = loginFixture.componentInstance;

@@ -11,6 +11,13 @@ export class CartService {
   
   constructor(private messageService: MessageService, private comicBookService: ComicBookService) { }
 
+  add(comicBook: ComicBook): void {
+    this.cart.push(comicBook);
+
+    try { localStorage.setItem(`${comicBook.comicBookId}`, comicBook.comicBookId); }
+    catch(error: any) { this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_ADD_TO_CART_FAILED); }
+  }
+
   checkCart(): void {
     if (this.cart.length === 0 && localStorage.length !== 0) {
       let comicBookId: string = '';
@@ -24,18 +31,6 @@ export class CartService {
     }
   }
 
-  add(comicBook: ComicBook): void {
-    this.cart.push(comicBook);
-
-    try { localStorage.setItem(`${comicBook.comicBookId}`, comicBook.comicBookId); }
-    catch(error: any) { this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_ADD_TO_CART_FAILED); }
-  }
-
-  remove(deletionCandidate: ComicBook): void {
-    this.cart = this.cart.filter((comicBook: ComicBook) => comicBook !== deletionCandidate);
-    localStorage.removeItem(`${deletionCandidate.comicBookId}`);
-  }
-
   isInCart(comicBookId: string): boolean {
     let storedComicBookId: string | null = localStorage.getItem(comicBookId);
     let singleComicBook = this.cart.filter((comicBook: ComicBook) => comicBook.comicBookId === storedComicBookId);
@@ -44,5 +39,10 @@ export class CartService {
     }
 
     return false;
+  }
+
+  remove(deletionCandidate: ComicBook): void {
+    this.cart = this.cart.filter((comicBook: ComicBook) => comicBook .comicBookId!== deletionCandidate.comicBookId);
+    localStorage.removeItem(`${deletionCandidate.comicBookId}`);
   }
 }

@@ -12,7 +12,9 @@ describe('SingleComicBookComponent', () => {
   let getComicBookByIdSpy;
 
   beforeEach(() => {
-    const comicBookService = jasmine.createSpyObj('ComicBookService', ['getComicBookById']);
+    const comicBookService = jasmine.createSpyObj('ComicBookService', ['getComicBookById', 'getSrcString']);
+    getComicBookByIdSpy = comicBookService.getSrcString.and.returnValue(of(''));
+
     getComicBookByIdSpy = comicBookService.getComicBookById.and.returnValue(of({
       comicBookId: '7963b34d-7c0a-42cd-964a-93b31e7c8f34',
       name:        'Test Comic Book',

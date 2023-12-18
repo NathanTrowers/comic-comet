@@ -1,6 +1,5 @@
 import { HttpClientModule } from "@angular/common/http";
 import { TestBed } from '@angular/core/testing';
-import { of } from "rxjs";
 
 import { CartService } from 'src/app/cart/cart.service';
 import ComicBook from "src/app/comic-book/interfaces/ComicBook";

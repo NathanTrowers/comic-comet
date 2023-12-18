@@ -1,0 +1,27 @@
+<section>
+    <div id='coverArt'>
+        <img [src]='comicBookService.getSrcString(cartItem)' alt='comic book cover art'>
+    </div>
+    <div id='words'>
+        <div class='row'>
+            <p>Name:</p>
+            <p>{{ cartItem.name }}</p>
+        </div>
+        <div class='row'>
+            <p>Price:</p>
+            <p>${{ cartItem.price }}</p>
+        </div>
+        <div class='row'>
+            <p>Quantity:</p>
+            <p>1</p>
+        </div>
+    </div>
+    <!-- <button 
+        class="cartButton"
+        *ngIf='!cartItem else showRemoveButton'
+        type='button'
+        (click)='removeFromCart()'
+    >
+        Add to Cart
+    </button> -->
+</section>

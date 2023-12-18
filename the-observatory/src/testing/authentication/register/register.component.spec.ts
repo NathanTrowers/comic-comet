@@ -12,7 +12,7 @@ describe('RegisterComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, RegisterComponent],
-      providers: [ { provide: ActivatedRoute, useValue: activatedRouteStub }]
+      providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }]
     });
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;

@@ -21,10 +21,11 @@ import { FooterComponent } from 'src/app/footer/footer.component';
 export class SingleComicBookComponent implements OnInit {
   comicBook!: ComicBook;
   cartItem: boolean = false;
+  comicBookService: ComicBookService;
 
   constructor(
     private cartService: CartService, 
-    private comicBookService: ComicBookService,
+    comicBookService: ComicBookService,
     private route: ActivatedRoute
   ) {
     this.comicBookService = comicBookService;
@@ -51,15 +52,5 @@ export class SingleComicBookComponent implements OnInit {
   removeFromCart(): void {
     this.cartItem = false;
     this.cartService.remove(this.comicBook);
-  }
-
-  getSrcString(): string {
-    if (this.comicBook?.coverArt?.length > 0) {
-      const coverArtString: string = this.comicBook.coverArt?.toString() ?? '';
-
-      return `data:image/png;base64,${coverArtString}`;
-    }
-    
-    return '';
   }
 }

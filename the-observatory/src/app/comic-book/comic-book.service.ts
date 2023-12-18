@@ -5,6 +5,7 @@ import { Observable, catchError, of } from 'rxjs';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import ComicBookCatalogue from 'src/app/comic-book/interfaces/ComicBookCatalogue';
 import { environment } from 'src/environments/environments';
+import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
 
 @Injectable({ providedIn: 'root' })
 export class ComicBookService {
@@ -26,6 +27,16 @@ export class ComicBookService {
       .pipe(
         catchError(this.handleError<any>('single-comic-book'))
       );
+  }
+
+  getSrcString(comicBook: ComicBook): string {
+    if (comicBook?.coverArt?.length > 0) {
+      const coverArtString: string = comicBook.coverArt?.toString() ?? '';
+
+      return `data:image/png;base64,${coverArtString}`;
+    }
+    
+    return '';
   }
   
   private handleError<T>(operation = 'operation', result?: T) {

@@ -1,23 +1,18 @@
 <section>
-    <img [src]='getSrcString()' alt='comic book cover art'>
+    <img [src]='comicBookService.getSrcString(comicBook)' alt='comic book cover art'>
     <h2>{{ comicBook.name }}</h2>
     <a [routerLink]="['/comic-book', comicBook.comicBookId]">Details</a>
-    <div
+    <button 
         class="cartButton"
         *ngIf='!cartItem else showRemoveButton'
-     >
-        <button 
-            type='button'
-            (click)='addToCart()'
-        >
-            Add to Cart
-        </button>
-    </div>
-    <ng-template
-        class="cartButton"
-        #showRemoveButton
+        type='button'
+        (click)='addToCart()'
     >
+        Add to Cart
+    </button>
+    <ng-template  #showRemoveButton>
         <button 
+            class="cartButton"
             type='button'
             (click)='removeFromCart()'
         >

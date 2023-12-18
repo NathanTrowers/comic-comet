@@ -4,6 +4,7 @@ import { LoginComponent } from 'src/app/authentication/login/login.component';
 import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
 import { authenticationGuard } from 'src/app/authentication/authentication.guard';
 import { RegisterComponent } from 'src/app/authentication/register/register.component';
+import { CartComponent } from 'src/app//cart/cart.component';
 import { SingleComicBookComponent } from 'src/app/comic-book/single-comic-book/single-comic-book.component';
 import { PageNotFoundComponent } from 'src/app/page-not-found/page-not-found.component';
 
@@ -12,6 +13,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent, title: 'Register' },
     { path: 'comic-books', component: DashboardComponent, title: 'Comic Books', canActivate: [authenticationGuard] },
     { path: 'comic-book/:id', component: SingleComicBookComponent, title: 'Single Comic Book', canActivate: [authenticationGuard] },
+    { path: 'cart', component: CartComponent, title: 'Cart', canActivate: [authenticationGuard] },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent, title: 'Page Not Found' }
 ];
