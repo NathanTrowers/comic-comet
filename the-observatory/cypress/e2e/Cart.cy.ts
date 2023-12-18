@@ -94,4 +94,31 @@ describe('Cart Test Suite', () => {
 
         cy.contains('Nothing is in orbit yet! Maybe try adding items to your cart.');
     });
+
+    it('adds two comic books to the cart from the Dashboard, navigates to the View Cart page where they are displayed'
+    + ' then removes them from the cart on the Cart page', () => {
+        cy.wait(5000);
+        cy.contains('Binary Barons 2')
+            .parent().contains('Add to Cart').click();
+        cy.contains('Coiling Dragon')
+            .parent().contains('Add to Cart').click();
+            
+        cy.contains('View Cart').click();
+
+        cy.contains('Binary Barons 2')
+            .parent().parent().contains('$99.99');
+        cy.contains('Binary Barons 2')
+            .parent().parent().contains('1');
+        cy.contains('Coiling Dragon')
+            .parent().parent().contains('$108');
+        cy.contains('Coiling Dragon')
+            .parent().parent().contains('1');
+
+        cy.contains('Binary Barons 2')
+            .parent().parent().contains('Remove').click();
+        cy.contains('Coiling Dragon')
+            .parent().parent().contains('Remove').click();
+
+        cy.contains('Nothing is in orbit yet! Maybe try adding items to your cart.');
+    });
 });
