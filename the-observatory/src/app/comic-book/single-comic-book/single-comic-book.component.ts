@@ -7,7 +7,6 @@ import { ComicBookService } from 'src/app/comic-book/comic-book.service';
 import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
 import { FooterComponent } from 'src/app/footer/footer.component';
 
-
 @Component({
   selector: 'app-single-comic-book',
   standalone: true,

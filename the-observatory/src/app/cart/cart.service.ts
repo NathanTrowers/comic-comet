@@ -17,9 +17,9 @@ export class CartService {
       for (let iterator: number = 0; iterator < localStorage.length; iterator++) {
         comicBookId = String(localStorage.key(iterator));
         this.comicBookService.getComicBookById(comicBookId)
-        .subscribe( (comicBook: ComicBook) => {
-          this.cart.push(comicBook);
-        });
+          .subscribe( (comicBook: ComicBook) => {
+            this.cart.push(comicBook);
+          });
       }
     }
   }
@@ -28,7 +28,7 @@ export class CartService {
     this.cart.push(comicBook);
 
     try { localStorage.setItem(`${comicBook.comicBookId}`, comicBook.comicBookId); }
-    catch(error: any) { this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_ADD_TO_CART_FAILED) }
+    catch(error: any) { this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_ADD_TO_CART_FAILED); }
   }
 
   remove(deletionCandidate: ComicBook): void {

@@ -28,7 +28,6 @@ export class DashboardComponent {
     private authenticationService: AuthenticationService,
     private messageService: MessageService,
     private router: Router
-
   ) {
     this.token = this.authenticationService.httpOptions.headers['Authorization'];
   }
