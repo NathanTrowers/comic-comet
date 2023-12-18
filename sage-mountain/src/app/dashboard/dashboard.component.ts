@@ -5,6 +5,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { ComicBookCatalogueComponent } from 'src/app/comic-book/comic-book-catalogue/comic-book-catalogue.component';
 import { MessageComponent } from 'src/app/message/message.component';
+import { errorMessage, messageClass } from 'src/app/message/message.constants';
+import { MessageService } from 'src/app/message/message.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,10 +23,12 @@ import { MessageComponent } from 'src/app/message/message.component';
 export class DashboardComponent {
   token: string | null  = '';
   invalidToken: string = '';
-  cssClass: string = '';
-  message: string = '';
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
+  constructor(
+    private authenticationService: AuthenticationService,
+    private messageService: MessageService,
+    private router: Router
+  ) {
     this.token = this.authenticationService.httpOptions.headers['Authorization'];
   }
 
@@ -33,8 +37,7 @@ export class DashboardComponent {
       .subscribe(received => {
         this.invalidToken = received.invalidToken
         if (this.token === this.invalidToken) {
-          this.cssClass = 'error';
-          this.message = 'An error occurred. Try again.';
+          this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_GENERIC);
   
           return;
         }

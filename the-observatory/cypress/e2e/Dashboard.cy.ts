@@ -10,6 +10,7 @@ describe('Dashboard Page', () => {
     });
 
     it('successfully gets the page', () => {
+        cy.wait(5000);
         cy.contains('Como Agua Para Chocolate');
         cy.contains('Coiling Dragon');
         cy.contains('The Last Christian');

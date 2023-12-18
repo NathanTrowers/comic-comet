@@ -1,14 +1,19 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 
 import { RegisterComponent } from 'src/app/authentication/register/register.component';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
+  let activatedRouteStub: Partial<ActivatedRoute>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({imports: [HttpClientModule, RegisterComponent]});
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule, RegisterComponent],
+      providers: [ { provide: ActivatedRoute, useValue: activatedRouteStub }]
+    });
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,4 +1,4 @@
-menu {
+header {
     display: grid;
     grid-template: auto 1fr auto;
     width: inherit;

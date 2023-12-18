@@ -18,7 +18,6 @@ export class AuthenticationService {
       'Authorization': ''
      }
   };
-  isLoggedIn: boolean = false;
   redirectUrl: string | undefined = '/comic-books';
   loginUrl: string = '/login';
   fourthWallApi: string = environment.FOURTH_WALL_API;
@@ -57,6 +56,34 @@ export class AuthenticationService {
         tap(() => this.redirectUrl = '/dashboard'),
         catchError(this.handleError<LogoutResponse>('logout'))
       );
+  }
+
+  deleteToken(): void {
+    sessionStorage.removeItem('token');
+  }
+
+  setIsLoggedIn(token: string): void {
+    sessionStorage.setItem('token', token);
+  }
+
+  setAuthorization(token: string = ''): void {
+    if (token !== '') {
+      this.httpOptions.headers.Authorization = token;
+
+      return;
+    }
+
+    this.httpOptions.headers.Authorization = `${sessionStorage.getItem('token')}`;
+
+    return;
+  }
+
+  isLoggedIn(): boolean {
+    if (sessionStorage.getItem('token') !== null) {
+      return true;
+    }
+    
+    return false;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

@@ -11,3 +11,5 @@ databaseChangeLog:
          file: changelogs/update-comic-book-table-cover-art-data-type.sql
    - include:
          file: changelogs/update-comic-book-table-cover-art-data-type-2.sql
+   - include:
+         file: changelogs/update-comic-book-table-add-discontinued-comic-book.sql

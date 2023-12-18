@@ -10,7 +10,10 @@
             (input)='filterResults(searchQuery.value)'
         >
     </form>
-    <div class='catalogue' *ngIf='comicBookList.length > 0 else showLoadingCircle'>
+    <div 
+        class='catalogue' 
+        *ngIf='comicBookList.length > 0 else showLoadingCircle'
+    >
         <app-comic-book-card
             *ngFor='let comicBook of filteredComicBookList'
             [comicBook]='comicBook'

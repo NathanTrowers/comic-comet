@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import RegistrationCredentials from 'src/app/authentication/interfaces/request/RegistrationCredentials';
 import { RegistrationValidator } from 'src/app/authentication/register/registration.validator';
+import { InfoComponent } from 'src/app/message/info/info.component';
 import { MessageComponent } from 'src/app/message/message.component';
+import { formMessages } from 'src/app/message/message.constants';
 import { MessageService } from 'src/app/message/message.service';
 
 @Component({
@@ -14,8 +16,10 @@ import { MessageService } from 'src/app/message/message.service';
   standalone: true,
   imports: [
     CommonModule,
+    InfoComponent,
     ReactiveFormsModule,
-    MessageComponent
+    MessageComponent,
+    RouterModule
   ],
   templateUrl: './register.component.html',
   styleUrls: ['../authentication.css']
@@ -27,6 +31,8 @@ export class RegisterComponent implements OnInit {
     password: new FormControl(''),
     passwordConfirmation: new FormControl('')
   });
+  messages = formMessages;
+
 
   constructor(
     private authenticationService: AuthenticationService, 
@@ -36,7 +42,7 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if(this.authenticationService.isLoggedIn) {
+    if(this.authenticationService.isLoggedIn()) {
       this.router.navigate([this.authenticationService.redirectUrl]);
     }
   }

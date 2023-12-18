@@ -34,6 +34,7 @@ describe('Authentication Test Suite', () => {
         cy.getByData('password-input').type('com1cFanat!c');
         cy.contains('Login').click();
 
+        cy.wait(5000);
         cy.contains('Logout').click();
         cy.contains('Login');
     });

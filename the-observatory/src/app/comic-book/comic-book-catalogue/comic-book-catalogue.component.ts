@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
+import { CartService } from 'src/app/cart/cart.service';
 import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
 import ComicBookCatalogue from 'src/app/comic-book/interfaces/ComicBookCatalogue';
 import { ComicBookCardComponent } from 'src/app/comic-book/comic-book-card/comic-book-card.component';
@@ -20,12 +21,14 @@ export class ComicBookCatalogueComponent {
   comicBookList: ComicBook[] = [];
   filteredComicBookList: ComicBook[] = [];
 
-  constructor(private comicBookService: ComicBookService) {
+  constructor(private cartService: CartService, private comicBookService: ComicBookService) {
     this.comicBookService.getComicBookCatalogue()
       .subscribe((receivedComicBooks: ComicBookCatalogue) =>{
         this.comicBookList = receivedComicBooks._embedded.comicBookList;
         this.filteredComicBookList = receivedComicBooks._embedded.comicBookList;
       });
+      
+    this.cartService.checkCart();
   }
 
   filterResults(searchQuery: string) {

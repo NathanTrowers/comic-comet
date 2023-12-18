@@ -18,7 +18,7 @@ label {
 }
 
 input {
-    width: 15rem;
+    width: 18rem;
     border: none;
 }
 
@@ -32,7 +32,7 @@ button {
     transition: width 0.2s, height 0.2s;
 }
 
-button:hover {
+button:hover, button:focus {
     width: 15rem;
     height: 1.8rem;
     background-color: var(--accent-dark);
@@ -45,7 +45,16 @@ a {
     color: var(--accent-light);
 }
 
-a:hover {
+a:hover, a:focus {
     text-decoration: none;
     color: var(--accent-dark);
+    cursor: pointer;
+}
+
+.group {
+    flex-direction: row;
+}
+
+.group > input {
+    width: auto;
 }

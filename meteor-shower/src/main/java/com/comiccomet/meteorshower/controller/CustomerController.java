@@ -23,21 +23,21 @@ public class CustomerController {
 
     @GetMapping("/comic-books")
     public ResponseEntity<?> getAllComicBooks(@RequestHeader(value="Authorization") String token) {
-        String cusotmerId = this.tokenManager.validateToken(token);
-        if (cusotmerId == "") {
+        String customerId = this.tokenManager.validateToken(token);
+        if (customerId == "") {
             return this.customerService.sendIsUnauthorized();
         }
 
-        return this.customerService.getComicBookCatalogue(cusotmerId);
+        return this.customerService.getComicBookCatalogue(customerId);
     }
 
     @GetMapping("/comic-books/{comicBookId}")
     public ResponseEntity<?> getComicBook(@RequestHeader(value="Authorization") String token, @PathVariable String comicBookId) {
-        String cusotmerId = this.tokenManager.validateToken(token);
-        if (cusotmerId == "") {
+        String customerId = this.tokenManager.validateToken(token);
+        if (customerId == "") {
             return this.customerService.sendIsUnauthorized();
         }
 
-        return this.customerService.getSingleComicBook(cusotmerId, comicBookId);
+        return this.customerService.getSingleComicBook(customerId, comicBookId);
     }
 }
