@@ -13,6 +13,10 @@ export const formMessages = {
     PASSWORD_CONFIRMATION_NOTE: 'Re-enter your password. This must match what is in the password field.',
 }
 
+export const infoMessages = {
+    EMPTY_CART: 'Nothing is in orbit yet! Maybe try adding items to your cart.',
+}
+
 export const messageClass = {
     ERROR: 'error',
 }

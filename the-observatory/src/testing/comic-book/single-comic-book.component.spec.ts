@@ -1,9 +1,9 @@
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { of } from "rxjs";
+import { of } from 'rxjs';
 
-import { ComicBookService } from "src/app/comic-book/comic-book.service";
+import { ComicBookService } from 'src/app/comic-book/comic-book.service';
 import { SingleComicBookComponent } from 'src/app/comic-book/single-comic-book/single-comic-book.component';
 
 describe('SingleComicBookComponent', () => {
@@ -12,7 +12,9 @@ describe('SingleComicBookComponent', () => {
   let getComicBookByIdSpy;
 
   beforeEach(() => {
-    const comicBookService = jasmine.createSpyObj('ComicBookService', ['getComicBookById']);
+    const comicBookService = jasmine.createSpyObj('ComicBookService', ['getComicBookById', 'getSrcString']);
+    getComicBookByIdSpy = comicBookService.getSrcString.and.returnValue(of(''));
+
     getComicBookByIdSpy = comicBookService.getComicBookById.and.returnValue(of({
       comicBookId: '7963b34d-7c0a-42cd-964a-93b31e7c8f34',
       name:        'Test Comic Book',

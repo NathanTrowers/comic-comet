@@ -1,0 +1,22 @@
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+img {
+    height: 25.6875rem;/*10.25px * 30 * 16*/
+    width: 12.421875rem;/*6.625px * 30 * 16*/
+}
+
+#coverArt, #words {
+    flex: 1 1 12.5rem;
+}
+
+#words {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: var(--accent-light);
+}

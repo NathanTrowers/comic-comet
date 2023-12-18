@@ -1,1 +1,19 @@
-<p>cart works!</p>
+<section>
+    <div class='row'>
+        <h2>Cart</h2>
+        <a [routerLink]="['/comic-books']">Back</a>
+    </div>
+    <div 
+        id='cart' 
+        *ngIf='cart.length > 0 else showEmptyCartMessage'
+    >
+        <app-cart-item
+            *ngFor='let comicBook of cart'
+            [cartItem]='comicBook'
+        >
+        </app-cart-item>
+    </div>
+    <ng-template #showEmptyCartMessage>
+        <p>{{ emptyCartMessage }}</p>
+    </ng-template>
+</section>
