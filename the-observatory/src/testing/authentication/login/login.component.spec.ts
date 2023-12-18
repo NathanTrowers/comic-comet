@@ -1,8 +1,8 @@
-import { HttpClientModule } from "@angular/common/http";
-import { TestBed } from "@angular/core/testing";
+import { HttpClientModule } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 
-import { LoginComponent } from "src/app/authentication/login/login.component";
+import { LoginComponent } from 'src/app/authentication/login/login.component';
 
 describe('LoginComponet Smoke Test', () => {
     let activatedRouteStub: Partial<ActivatedRoute>;

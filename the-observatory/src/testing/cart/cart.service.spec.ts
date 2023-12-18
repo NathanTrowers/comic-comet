@@ -1,8 +1,8 @@
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
 import { CartService } from 'src/app/cart/cart.service';
-import ComicBook from "src/app/comic-book/interfaces/ComicBook";
+import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
 
 describe('CartService Test Suite', () => {
   let cartService: CartService;

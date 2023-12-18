@@ -1,5 +1,5 @@
-import { LoginValidator } from "src/app/authentication/login/login.validator";
-import LoginCredentials from "src/app/authentication/interfaces/request/LoginCredentials";
+import { LoginValidator } from 'src/app/authentication/login/login.validator';
+import LoginCredentials from 'src/app/authentication/interfaces/request/LoginCredentials';
 
 describe('Test Suite for LoginValidator', () => {
     let testData: LoginCredentials;

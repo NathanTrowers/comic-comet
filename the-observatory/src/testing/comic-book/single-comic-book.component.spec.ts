@@ -1,9 +1,9 @@
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { of } from "rxjs";
+import { of } from 'rxjs';
 
-import { ComicBookService } from "src/app/comic-book/comic-book.service";
+import { ComicBookService } from 'src/app/comic-book/comic-book.service';
 import { SingleComicBookComponent } from 'src/app/comic-book/single-comic-book/single-comic-book.component';
 
 describe('SingleComicBookComponent', () => {

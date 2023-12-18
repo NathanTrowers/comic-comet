@@ -1,7 +1,6 @@
 import { HttpClientModule } from "@angular/common/http";
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 import { ComicBookCardComponent } from 'src/app/comic-book/comic-book-card/comic-book-card.component';
 

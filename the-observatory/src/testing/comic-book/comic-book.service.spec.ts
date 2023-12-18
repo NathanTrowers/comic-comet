@@ -1,9 +1,8 @@
-import { HttpClientModule } from "@angular/common/http";
-import { TestBed } from "@angular/core/testing";
+import { HttpClientModule } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
 
-import { ComicBookService } from "src/app/comic-book/comic-book.service";
-import ComicBook from "src/app/comic-book/interfaces/ComicBook";
-
+import { ComicBookService } from 'src/app/comic-book/comic-book.service';
+import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
 
 describe('Comic Book Service Test Suite', () => {
     let comicBookService: ComicBookService;
