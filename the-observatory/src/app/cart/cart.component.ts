@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { CartService } from 'src/app/cart/cart.service';
@@ -24,6 +24,11 @@ export class CartComponent {
 
   constructor(private cartService: CartService) {
     this.cartService.checkCart();
+    this.cart = this.cartService.cart;
+  }
+
+  removeCartItem(cartItem: ComicBook): void {
+    this.cartService.remove(cartItem);
     this.cart = this.cartService.cart;
   }
 }

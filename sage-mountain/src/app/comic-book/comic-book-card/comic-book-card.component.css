@@ -41,7 +41,7 @@ a:hover, a:focus {
     cursor: pointer;
 }
 
-.errorButton {
+.removeButton {
     align-self: center;
     width: 2rem;
     height: 1.3rem;
@@ -52,7 +52,7 @@ a:hover, a:focus {
     transition: width 0.2s;
 }
 
-.errorButton:hover, .errorButton:focus {
+.removeButton:hover, .removeButton:focus {
     width: 11rem;
     height: 1.6rem;
     background-color: var(--secondary-color);

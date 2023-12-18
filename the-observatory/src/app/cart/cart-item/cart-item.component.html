@@ -15,13 +15,12 @@
             <p>Quantity:</p>
             <p>1</p>
         </div>
+        <button 
+            class='removeButton'
+            type='button'
+            (click)='removeFromCart()'
+        >
+            Remove
+        </button>
     </div>
-    <!-- <button 
-        class="cartButton"
-        *ngIf='!cartItem else showRemoveButton'
-        type='button'
-        (click)='removeFromCart()'
-    >
-        Add to Cart
-    </button> -->
 </section>

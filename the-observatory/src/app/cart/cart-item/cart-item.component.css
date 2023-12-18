@@ -20,3 +20,22 @@ img {
     background-color: var(--primary-color);
     color: var(--accent-light);
 }
+
+.removeButton {
+    align-self: center;
+    width: 8rem;
+    height: 1.3rem;
+    margin-left: 0.3rem;
+    border: 0.01rem solid var(--secondary-color);
+    background-color: var(--accent-dark);
+    color: var(--secondary-color);
+    transition: width 0.2s;
+}
+
+.removeButton:hover, .removeButton:focus {
+    width: 10rem;
+    height: 1.5rem;
+    background-color: var(--secondary-color);
+    color: var(--accent-dark);
+    cursor: pointer;
+}
