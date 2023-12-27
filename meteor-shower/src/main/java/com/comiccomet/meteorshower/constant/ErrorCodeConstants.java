@@ -14,4 +14,6 @@ public final class ErrorCodeConstants {
     public static final int ERROR_WRONG_ORDER_DATE_FORMAT = 400003009;
     public static final int ERROR_WRONG_RETURN_STATUS_FORMAT = 400003010;
     public static final int ERROR_COMIC_BOOK_OUT_OF_STOCK = 400003011;
+    public static final int ERROR_CUSTOMER_NOT_FOUND = 400003012;
+    public static final int ERROR_GET_ADDRESS_FAILED = 400003013;
 }
