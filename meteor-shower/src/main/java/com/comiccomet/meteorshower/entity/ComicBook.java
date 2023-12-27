@@ -118,8 +118,8 @@ public class ComicBook {
 
     @Override
     public String toString() {
-        return "ComicBook [comicBookId=" + comicBookId + ", name='" + name +
-            "', author='" + author + "', price='" + price + "', quantity='" + quantity +
-            "', coverArt='" + Arrays.toString(coverArt) + "', carryStatus='" + carryStatus + "']";
+        return "ComicBook [comicBookId=" + this.comicBookId + ", name='" + this.name +
+            "', author='" + this.author + "', price='" + this.price + "', quantity='" + this.quantity +
+            "', coverArt='" + Arrays.toString(this.coverArt) + "', carryStatus='" + this.carryStatus + "']";
     }
 }

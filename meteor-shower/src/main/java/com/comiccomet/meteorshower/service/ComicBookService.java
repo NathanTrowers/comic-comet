@@ -14,7 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.comiccomet.meteorshower.constant.ErrorCodeConstants;
-import com.comiccomet.meteorshower.controller.CustomerController;
+import com.comiccomet.meteorshower.constant.GeneralConstants;
+import com.comiccomet.meteorshower.controller.ComicBookController;
 import com.comiccomet.meteorshower.dto.ErrorResponse;
 import com.comiccomet.meteorshower.entity.ComicBook;
 import com.comiccomet.meteorshower.exception.ComicBookNotFoundException;
@@ -22,13 +23,12 @@ import com.comiccomet.meteorshower.modelassembler.ComicBookModelAssembler;
 import com.comiccomet.meteorshower.repository.ComicBookRepository;
 
 @Service
-public class CustomerService {
-    private static final Logger log = LoggerFactory.getLogger(CustomerService.class);
+public class ComicBookService {
+    private static final Logger log = LoggerFactory.getLogger(ComicBookService.class);
     private final ComicBookRepository comicBookRepository;
     private final ComicBookModelAssembler comicBookModelAssembler;
-    private final String CARRY_STATUS_CARRYING = "carrying";
 
-    public CustomerService(ComicBookRepository comicBookRepository, ComicBookModelAssembler comicBookModelAssembler) {
+    public ComicBookService(ComicBookRepository comicBookRepository, ComicBookModelAssembler comicBookModelAssembler) {
         this.comicBookRepository = comicBookRepository;
         this.comicBookModelAssembler = comicBookModelAssembler;
     }
@@ -45,7 +45,7 @@ public class CustomerService {
 
     public ResponseEntity<?> getComicBookCatalogue(String customerId) {
         try {
-            List<EntityModel<ComicBook>> comicBooks = comicBookRepository.findAllByCarryStatus(this.CARRY_STATUS_CARRYING)
+            List<EntityModel<ComicBook>> comicBooks = comicBookRepository.findAllByCarryStatus(GeneralConstants.CARRY_STATUS_CARRYING)
                 .stream()
                 .map(comicBookModelAssembler::toModel)
                 .collect(Collectors.toList());
@@ -55,7 +55,7 @@ public class CustomerService {
             return ResponseEntity
                 .ok()
                 .body(CollectionModel.of(comicBooks,
-                    linkTo(methodOn(CustomerController.class).getAllComicBooks("exampleInvalidToken")).withSelfRel()));
+                    linkTo(methodOn(ComicBookController.class).getAllComicBooks("exampleInvalidToken")).withSelfRel()));
         } catch(Exception error) {
             log.error("Comic book catalogue retrieval failed with the following error: \n", error);
             
@@ -69,7 +69,7 @@ public class CustomerService {
 
     public ResponseEntity<?> getSingleComicBook(String customerId, String comicBookId) {
         try {
-            ComicBook comicBook = this.comicBookRepository.findByComicBookIdAndCarryStatus(comicBookId, this.CARRY_STATUS_CARRYING)
+            ComicBook comicBook = this.comicBookRepository.findByComicBookIdAndCarryStatus(comicBookId, GeneralConstants.CARRY_STATUS_CARRYING)
                 .orElseThrow(() ->  new ComicBookNotFoundException(comicBookId));
 
             log.info("Comic book retrieval successful for id {}!", customerId);

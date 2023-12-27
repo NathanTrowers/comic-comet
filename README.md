@@ -75,6 +75,6 @@ Below is a list of commands for running JUnit tests:
 
 ``` docker
 root@2345719d0f29:/app$ ./mvnw test # run all tests
-root@2345719d0f29:/app$ ./mvnw -Dtest="ClassName" # run a single test class
-root@2345719d0f29:/app$ ./mvnw -Dtest="ClassName#testName" # run a single test
+root@2345719d0f29:/app$ ./mvnw test -Dtest="ClassName" # run a single test class
+root@2345719d0f29:/app$ ./mvnw test -Dtest="ClassName#testName" # run a single test
 ```

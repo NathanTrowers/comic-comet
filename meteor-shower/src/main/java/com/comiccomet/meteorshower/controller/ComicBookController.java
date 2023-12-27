@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.comiccomet.meteorshower.service.CustomerService;
+import com.comiccomet.meteorshower.service.ComicBookService;
 import com.comiccomet.meteorshower.util.TokenManager;
 
 @RestController
-public class CustomerController {
+public class ComicBookController {
     @Autowired
-    private final CustomerService customerService;
+    private final ComicBookService comicBookService;
     private TokenManager tokenManager;
 
-    public CustomerController(CustomerService customerService, TokenManager tokenManager) {
-        this.customerService = customerService;
+    public ComicBookController(ComicBookService comicBookService, TokenManager tokenManager) {
+        this.comicBookService = comicBookService;
         this.tokenManager = tokenManager;
     }
 
@@ -25,19 +25,19 @@ public class CustomerController {
     public ResponseEntity<?> getAllComicBooks(@RequestHeader(value="Authorization") String token) {
         String customerId = this.tokenManager.validateToken(token);
         if (customerId == "") {
-            return this.customerService.sendIsUnauthorized();
+            return this.comicBookService.sendIsUnauthorized();
         }
 
-        return this.customerService.getComicBookCatalogue(customerId);
+        return this.comicBookService.getComicBookCatalogue(customerId);
     }
 
     @GetMapping("/comic-books/{comicBookId}")
     public ResponseEntity<?> getComicBook(@RequestHeader(value="Authorization") String token, @PathVariable String comicBookId) {
         String customerId = this.tokenManager.validateToken(token);
         if (customerId == "") {
-            return this.customerService.sendIsUnauthorized();
+            return this.comicBookService.sendIsUnauthorized();
         }
 
-        return this.customerService.getSingleComicBook(customerId, comicBookId);
+        return this.comicBookService.getSingleComicBook(customerId, comicBookId);
     }
 }
