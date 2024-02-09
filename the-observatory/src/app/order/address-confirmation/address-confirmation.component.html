@@ -1,0 +1,62 @@
+<section>
+    <h2>Address Confirmation.</h2>
+    <p>Edit the address below if your mailing address is not shown.</p>
+    
+    <form 
+      [formGroup]='addressConfirmationForm' 
+      (submit)='onSubmitAddressConfirmation()'
+    >
+      <app-messages></app-messages>
+        <div class='group'>
+          <label for='address'>Address </label>
+          <app-info [bubbleText]='messages.ADDRESS_FORMAT'></app-info>
+        </div>
+        <input
+          name='address'
+          type='text'
+          placeholder='1 Example Address'
+          formControlName='address'
+          data-test='address-input'
+        />
+        <div class='group'>
+          <label for='city'>City </label>
+          <app-info [bubbleText]='messages.CITY_FORMAT'></app-info>
+        </div>
+        <input
+          name='city'
+          type='text'
+          placeholder='Example City'
+          formControlName='city'
+          data-test='city-input'
+        />
+        <div class='group'>
+          <label for='postalCode'>Postal Code </label>
+          <app-info [bubbleText]='messages.POSTAL_CODE_FORMAT'></app-info>
+        </div>
+        <input
+          name='postalCode'
+          type='text'
+          placeholder='99.99'
+          formControlName='postalCode'
+          data-test='postal-code-input'
+        />
+        <div class='group'>
+          <label for='country'>Country </label>
+          <app-info [bubbleText]='messages.COUNTRY_FORMAT'></app-info>
+        </div>
+        <input
+          name='country'
+          type='text'
+          placeholder='Example State'
+          formControlName='country'
+          data-test='country-input'
+        />
+        <button
+          type='submit'
+          data-test='confirm-button'
+        >
+          Confirm
+        </button>
+        <a [routerLink]="['/cart']">Back</a>
+    </form>
+  </section>

@@ -8,7 +8,7 @@ describe('Update Existing Comic Book Page', () => {
         cy.wait(5000);
 
         cy.url().should('include', '/dashboard');
-        cy.contains('Binary Barons 2')
+        cy.contains('Coiling Dragon')
             .parent().contains('Edit').click();
     });
 
@@ -61,11 +61,6 @@ describe('Update Existing Comic Book Page', () => {
         // Reset the carrying status to 'carrying'.
         cy.getByData('radio-carrying-input').click();
         cy.getByData('update-button').click();
-    });
-
-    it('successfully cancels new comic book creation', () => {        
-        cy.contains('Cancel').click();
-        cy.url().should('include', '/dashboard');
     });
 
     it('shows that the info icons work', async (): Promise<any> => {

@@ -2,7 +2,7 @@
 
 --changeset NathanTrowers:1 labels:admin-table context:table-population
 INSERT INTO admin (admin_id, email,	password, name)
-VALUES ('a46363a1-7767-4112-8212-ddd647df97f1',  'admin@test.com', '$2y$10$rnUWc7SqdCm2kncWizt7kefggSAKvNZLKSWnQNhkRleFCovhrQKgW', 'Comic Book Sage'); -- -p AdM1n
+VALUES ('a46363a1-7767-4112-8212-ddd647df97f1',  'admin@test.com', '$2y$10$FGpq6rdzVEwIbkX9KyanmuFda8qeOaAEHOUs.1SmXRT5C33KdJmMu', 'Comic Book Sage'); -- -p @dM1nistr8tor
 --rollback DELETE FROM admin ;
 
 --changeset NathanTrowers:2 labels:customer-table context:table-population
@@ -15,11 +15,12 @@ VALUES
 
 --changeset NathanTrowers:3 labels:comic-book-table context:table-population
 --comment: accepts BLOBs
-INSERT INTO comic_book (comic_book_id, name, author, price, quantity, cover_art)
+INSERT INTO comic_book (comic_book_id, name, author, price, quantity, cover_art, carry_status)
 VALUES
-	('6963a34d-7c0a-42ed-961f-83b31e7c8f33', 'Coiling Dragon', 'I Eat Tomatoes', 108.00, 108, LOAD_FILE('/app/src/main/resources/static/studyLogLogo.png') ),
-	('d17f85b9-dc7e-42a4-b917-9cf5f8033fed', 'The Last Christian', 'David Gregory', 50.00, 1, LOAD_FILE('/app/src/main/resources/static/studyLogLogo.png') ),
-	('383e7a0f-d3b9-47bf-8fa7-ae8be787f4df', 'Como Agua Para Chocolate', 'Laura Esquivel', 24.00, 2, LOAD_FILE('/app/src/main/resources/static/studyLogLogo.png') );
+	('6963a34d-7c0a-42ed-961f-83b31e7c8f33', 'Coiling Dragon', 'I Eat Tomatoes', 108.00, 108, null, 'carrying'),
+	('d17f85b9-dc7e-42a4-b917-9cf5f8033fed', 'The Last Christian', 'David Gregory', 50.00, 1, null, 'carrying'),
+	('383e7a0f-d3b9-47bf-8fa7-ae8be787f4df', 'Como Agua Para Chocolate', 'Laura Esquivel', 24.00, 2, null, 'carrying'),
+	('6969a34d-7c1a-42ed-461f-83e31e7c8f34', 'Coiling Dragon Fandom 1', 'The Fangirls', 108.00, 108, null, 'discontinued');
 --rollback DELETE FROM comic_book;
 
 --changeset NathanTrowers:4 labels:order-table context:table-population
