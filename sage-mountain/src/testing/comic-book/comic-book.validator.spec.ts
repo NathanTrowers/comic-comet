@@ -80,7 +80,7 @@ describe('Test Suite for ComicBookValidator', () => {
     });
     it('tests "validate" returns "false" when the price is invalid #2', () => {
         /** Data */
-        testData.price = 999.777;
+        testData.price = -999.77;
 
         /** Call to Test */
         let response: boolean = comicBookValidator.validate(testData);

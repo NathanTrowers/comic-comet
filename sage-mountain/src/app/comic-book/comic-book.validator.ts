@@ -15,7 +15,7 @@ export class ComicBookValidator {
 
         if (!(nameFormat.test(form.name)
             && authorFormat.test(form.author)
-            && priceFormat.test(form.price.toString())
+            && priceFormat.test(Number.parseFloat(form.price.toString()).toFixed(2))
             && quantityFormat.test(form.quantity.toString())
             && carryStatusFormat.test(form.carryStatus))
         ) {

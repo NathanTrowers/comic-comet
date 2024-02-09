@@ -4,7 +4,7 @@ interface EditedComicBook {
     author:         string;
     price:          number;
     quantity:       number;
-    coverArt:       string;
+    coverArt:       string | null;
     carryStatus:    string;
 }
 
