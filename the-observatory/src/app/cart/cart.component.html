@@ -1,5 +1,8 @@
 <section>
-    <div class='row'>
+    <div 
+        class='row'
+        data-test='cart-section'
+    >
         <h2>Cart</h2>
         <a [routerLink]="['/comic-books']">Back</a>
         <a
@@ -21,6 +24,6 @@
         </app-cart-item>
     </div>
     <ng-template #showEmptyCartMessage>
-        <p>{{ emptyCartMessage }}</p>
+        <p> {{ emptyCartMessage }}</p>
     </ng-template>
 </section>

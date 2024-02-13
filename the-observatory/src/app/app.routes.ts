@@ -17,7 +17,7 @@ const routes: Routes = [
     { path: 'comic-book/:id', component: SingleComicBookComponent, title: 'Single Comic Book', canActivate: [authenticationGuard] },
     { path: 'cart', component: CartComponent, title: 'Cart', canActivate: [authenticationGuard] },
     { path: 'address-confirmation', component: AddressConfirmationComponent, title: 'Address Confirmation', canActivate: [authenticationGuard] },
-    { path: 'order', component: OrderConfirmationComponent, title: 'Order Confirmation', canActivate: [authenticationGuard] },
+    { path: 'order-confirmation', component: OrderConfirmationComponent, title: 'Order Confirmation', canActivate: [authenticationGuard] },
     // { path: 'order', component: OrderComponent, title: 'Order', canActivate: [authenticationGuard] },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent, title: 'Page Not Found' }

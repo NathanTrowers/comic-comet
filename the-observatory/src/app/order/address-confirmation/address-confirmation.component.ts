@@ -52,7 +52,9 @@ export class AddressConfirmationComponent implements OnInit{
           city:       new FormControl(savedAddress.city),
           postalCode: new FormControl(savedAddress.postalCode),
           country:    new FormControl(savedAddress.country)
-        }); 
+        });
+
+        this.oldAddress = savedAddress;
       });
   }
 
@@ -75,22 +77,18 @@ export class AddressConfirmationComponent implements OnInit{
           .subscribe(response => {
             if (response.address === '') {
               // this.error = true;
-              this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_GENERIC);
-              
+              this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_GENERIC);              
+            
               return;
             }
             
-            // this.error = false;
+            this.router.navigate(['/order-confirmation']);            
           });
+      } else {
+        this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_WRONG_INPUT);
       }
-
-      this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_WRONG_INPUT);
-
-      return;
-    }
-    
-    // if (!this.error){
+    } else {
       this.router.navigate(['/order-confirmation']);
-    // }
+    }
   }
 }
