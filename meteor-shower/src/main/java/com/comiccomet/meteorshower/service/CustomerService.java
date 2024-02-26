@@ -111,6 +111,8 @@ public class CustomerService {
                 updatedCustomer.getCountry()
             );
 
+            log.info("Address update successful for id {}!", customerId);
+
             return ResponseEntity
                 .accepted()
                 .body(EntityModel.of(addressResponse, 

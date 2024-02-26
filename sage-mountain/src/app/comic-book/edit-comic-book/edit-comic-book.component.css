@@ -45,6 +45,8 @@ button, a {
 }
 
 a {
+    padding-top: 0.5rem;
+    height: 1.2rem;
     font-size: 0.8rem;
     text-decoration: none;
     text-align: center;
@@ -57,4 +59,9 @@ button:hover, button:focus, a:hover, a:focus {
     background-color: var(--accent-dark);
     color: var(--secondary-color);
     cursor: pointer;
+}
+
+a:hover, a:focus {
+    padding-top: 0.7rem;
+    height: 1.5rem;
 }

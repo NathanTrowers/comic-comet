@@ -64,7 +64,7 @@ public class OrderService {
                 
                 String comicBookId = orderItem.getComicBookId();
                 ComicBook comicBook = this.comicBookRepository.findByComicBookIdAndCarryStatus(comicBookId, GeneralConstants.CARRY_STATUS_CARRYING)
-                .orElseThrow(() ->  new ComicBookNotFoundException(comicBookId));
+                    .orElseThrow(() ->  new ComicBookNotFoundException(comicBookId));
                 int quantity = comicBook.getQuantity();
                 comicBook.setQuantity(quantity-1);
                 ComicBook updatedComicBook = this.comicBookRepository.save(comicBook);
@@ -74,6 +74,8 @@ public class OrderService {
             }
 
             ComicBookOrderResponse[] comicBookOrderResponse =  this.prepareComicBookOrderListResponse(placedOrders);
+
+            log.info("Addition of new order for id {} successful!", customerId);
 
             return ResponseEntity
                 .accepted()

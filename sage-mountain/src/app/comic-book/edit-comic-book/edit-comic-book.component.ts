@@ -68,9 +68,6 @@ export class EditComicBookComponent implements OnInit  {
           quantity:     new FormControl(comicBook.quantity),
           carryStatus:  new FormControl(comicBook.carryStatus)
         });
-
-        Promise.resolve(this.onFileSelected(comicBook.coverArt))
-          .catch(silentError => silentError);
       });
   }
 

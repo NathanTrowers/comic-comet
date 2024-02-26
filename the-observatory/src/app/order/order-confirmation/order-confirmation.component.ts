@@ -26,8 +26,10 @@ import { JWTParser } from 'src/app/order/order-confirmation/JWTParser';
 export class OrderConfirmationComponent implements OnInit{
   itemsToPurchase: ComicBook[] = [];
   subTotal: number = 0;
-  tax: number = 12;
-  total: number = 0;
+  subTotalString: string = '0.00';
+  tax: number = 0.12;
+  taxAmount: number = 0;
+  total: string = '0.00';
 
   constructor(
     private cartService: CartService,
@@ -39,14 +41,18 @@ export class OrderConfirmationComponent implements OnInit{
 
   ngOnInit(): void {
     this.cartService.checkCart();
-    
     this.itemsToPurchase = this.cartService.cart;
-    this.itemsToPurchase.forEach( (item: ComicBook) =>  {
+
+    this.itemsToPurchase[0];
+    this.itemsToPurchase.map( (item: ComicBook) =>  {
       this.subTotal += item.price;
     });
-
-    const placeholder: number = this.subTotal + (this.subTotal * (this.tax/100));
-    this.total = Number.parseFloat(placeholder.toFixed(2));
+    
+    this.subTotalString = this.subTotal.toFixed(2);
+    const taxPlaceholder: number = this.subTotal * this.tax;
+    this.taxAmount = Number.parseFloat(taxPlaceholder.toFixed(2));
+    const totalPlaceholder: number = this.subTotal + this.taxAmount;
+    this.total = totalPlaceholder.toFixed(2);
   }
 
   onSubmitOrder(): void {
@@ -63,11 +69,13 @@ export class OrderConfirmationComponent implements OnInit{
       }
 
       newOrder.push(orderItem);
+      
+      this.cartService.remove(item);
     });
 
     this.orderService.postOrder(newOrder)
       .subscribe( (response: any) => {
-        if (response.length !== newOrder.length) {
+        if (response._embedded.length !== newOrder.length) {
           this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_GENERIC);              
           
           return;
