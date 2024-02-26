@@ -1,10 +1,10 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { OrderService } from 'src/app/order/order.service';
 import { AddressConfirmationComponent } from 'src/app/order/address-confirmation/address-confirmation.component';
-import { ActivatedRoute } from '@angular/router';
 
 describe('AddressConfirmationComponent', () => {
   let component: AddressConfirmationComponent;

@@ -46,7 +46,6 @@ export class AddressConfirmationComponent implements OnInit{
   ngOnInit(): void {
     this.orderService.getCustomerAddress()
       .subscribe((savedAddress: AddressResponse) => {
-
         this.addressConfirmationForm = new FormGroup({
           address:    new FormControl(savedAddress.address),
           city:       new FormControl(savedAddress.city),
@@ -76,7 +75,6 @@ export class AddressConfirmationComponent implements OnInit{
         this.orderService.updateCustomerAddress(addressToUpdate)
           .subscribe(response => {
             if (response.address === '') {
-              // this.error = true;
               this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_GENERIC);              
             
               return;

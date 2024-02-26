@@ -1,1 +1,29 @@
-<p>Order Confirmation Page works!</p>
+<section>
+    <h2>Order Confirmation Page </h2>
+
+      <app-messages></app-messages>
+      <table>
+        <tr>
+            <th>Order Summary</th>
+        </tr>
+        <tr>
+            <td>Item:</td>
+            <td>Shipping:</td>
+            <td>Sub-total:</td>
+            <td>Tax:</td>
+            <td>Order Total:</td>
+        </tr>
+        <tr>
+            <td>${{ this.subTotal }}</td>
+            <td>$0.00</td>
+            <td>${{ this.subTotal }}</td>
+            <td>{{ this.tax }}%</td>
+            <td>{{ this.total }}</td>
+        </tr>
+      </table>
+      <button
+        (click)='onSubmitOrder()'
+      >
+        Place Order
+      </button>
+</section>
