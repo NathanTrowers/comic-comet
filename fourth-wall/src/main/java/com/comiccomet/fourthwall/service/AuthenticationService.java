@@ -105,8 +105,6 @@ public class AuthenticationService {
                     .accepted()
                     .body(new LoginResponse(202, this.tokenManager.generateToken(customer.getCustomerId(), loginType), errorCodes));
             }
-
- 
         } catch (Exception error) {
             log.error("Login request failed with the following error: \n {}", error);
             int[] noCodes = {};

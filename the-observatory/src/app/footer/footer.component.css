@@ -7,6 +7,11 @@ footer {
     background-color: var(--accent-dark);
 }
 
+nav {
+    display: flex;
+    flex-flow: column wrap;
+}
+
 a {
     grid-column: 1/ span 1;
     width: 10.5rem;
@@ -26,8 +31,10 @@ a:hover, a:focus {
     background-color: var(--primary-color);
     color: var(--accent-dark);
     cursor: pointer;
+    padding-bottom: 0.2rem;
 }
 
 p {
     color: var(--primary-color);
+    text-align: center;
 }

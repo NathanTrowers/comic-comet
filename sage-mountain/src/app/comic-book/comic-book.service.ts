@@ -8,7 +8,7 @@ import ComicBookCatalogue from 'src/app/comic-book/interfaces/ComicBookCatalogue
 import NewComicBookForm from 'src/app/comic-book/interfaces/NewComicBookForm';
 import { environment } from 'src/environments/environments';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ComicBookService {
   constructor(private httpClient: HttpClient, private authenticationService: AuthenticationService) {}
 

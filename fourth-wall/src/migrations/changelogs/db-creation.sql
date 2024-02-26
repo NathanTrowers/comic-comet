@@ -11,7 +11,7 @@ CREATE TABLE admin (
 
 --changeset NathanTrowers:2 labels:customer-table context:table-creation
 CREATE TABLE customer (
-	customer_id 		varchar(36) 	PRIMARY KEY,
+	customer_id 		varchar(255)	PRIMARY KEY,
 	email 				varchar(50) 	NOT NULL UNIQUE,
 	password 			varchar(255) 	NOT NULL,
 	name 				varchar(50) 	NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE comic_book (
 	author 			varchar(100) 	NOT NULL,
 	price 			float(24)		NOT NULL,
 	quantity 		integer(10) 	NOT NULL,
-	cover_art		blob,
+	cover_art		varbinary(45400),
 	carry_status	varchar(36) DEFAULT 'carrying'
 );
 --rollback DROP TABLE comic_book;
@@ -38,7 +38,7 @@ CREATE TABLE comic_book (
 --changeset NathanTrowers:4 labels:order-table context:table-creation
 CREATE TABLE comic_book_order (
 	order_id 		varchar(36) NOT NULL,
-	customer_id 	varchar(36) NOT NULL,
+	customer_id 	varchar(255) NOT NULL,
 	comic_book_id 	varchar(36) NOT NULL,
 	order_date  	timestamp 	DEFAULT CURRENT_TIMESTAMP,
 	return_status	varchar(36) DEFAULT 'none',

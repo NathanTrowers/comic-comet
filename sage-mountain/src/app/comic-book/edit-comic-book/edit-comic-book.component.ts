@@ -64,13 +64,10 @@ export class EditComicBookComponent implements OnInit  {
         this.updateComicBookForm = new FormGroup({
           name:         new FormControl(comicBook.name),
           author:       new FormControl(comicBook.author),
-          price:        new FormControl(comicBook.price),
+          price:        new FormControl(Number.parseFloat(comicBook.price).toFixed(2)),
           quantity:     new FormControl(comicBook.quantity),
           carryStatus:  new FormControl(comicBook.carryStatus)
         });
-
-        Promise.resolve(this.onFileSelected(comicBook.coverArt))
-          .catch(silentError => silentError);
       });
   }
 
@@ -81,7 +78,7 @@ export class EditComicBookComponent implements OnInit  {
       author:       this.updateComicBookForm.value.author ?? '',
       price:        Number.parseFloat(this.updateComicBookForm.value.price ?? '0.00'),
       quantity:     Number.parseInt(this.updateComicBookForm.value.quantity ?? '0'),
-      coverArt:     this.coverArt,
+      coverArt:     this.changeToNullIfEmptyString(this.coverArt),
       carryStatus:  this.updateComicBookForm.value.carryStatus ?? '',
     }
 
@@ -90,6 +87,12 @@ export class EditComicBookComponent implements OnInit  {
         this.messageService.setMessage(messageClass.ERROR, errorMessage.ERROR_NO_CHANGE_DETECTED);
 
         return;
+      }
+
+      let priceInQuestion = comicBookToUpdate.price;
+      let priceInQuestionHasDecimalValues =  /^[0-9]{1,3}\.[0-9]{2}?$/.test(comicBookToUpdate.price.toString());
+      if (!priceInQuestionHasDecimalValues) {
+        comicBookToUpdate.price = priceInQuestion + 0.01;
       }
 
       this.comicBookService.submitUpdatedComicBook(comicBookToUpdate)
@@ -139,5 +142,13 @@ export class EditComicBookComponent implements OnInit  {
     }
 
     return false;
+  }
+
+  private changeToNullIfEmptyString(coverArt: string | null): string | null {
+    if (coverArt === "") {
+      coverArt = null;
+    }
+    
+    return coverArt;
   }
 }

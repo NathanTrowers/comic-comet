@@ -11,6 +11,10 @@ export const formMessages = {
     NAME_FORMAT:                'Only letters, numbers, apostrophes, hyphens and spaces are allowed.',
     PASSWORD_FORMAT:            'Only letters, numbers, and the special characters in parentheses (-.!%$&*@#?) are allowed.',
     PASSWORD_CONFIRMATION_NOTE: 'Re-enter your password. This must match what is in the password field.',
+    ADDRESS_FORMAT:             'Only letters, numbers, hpyhens, forward slashes (/) and spaces are allowed in a valid address.',
+    CITY_FORMAT:                'Only letters, and spaces are allowed in a valid city name.',
+    POSTAL_CODE_FORMAT:         'Only letters and numebrs are allowed for valid postal codes, using the following format, where "L" is a letter and "#" is a number: L#L #L#.',
+    COUNTRY_FORMAT:             'Only letters, hyphens (-), apostophes (\') and spaces are allowed in a valid country name.',
 }
 
 export const infoMessages = {

@@ -1,0 +1,38 @@
+<section>
+  <div>
+    <h2>Order Confirmation Page </h2>
+    <div id='words'>
+          <app-messages></app-messages>
+          <h3>Order Summary</h3>
+          <div class='row'>
+            <p>Cart Total:</p>
+            <p>${{ this.subTotalString }}</p>
+          </div>
+          <div class='row'>
+            <p>Shipping:</p>
+            <p>$0.00</p>
+          </div>
+          <div class='row'>
+            <p>Sub-total:</p>
+            <p>${{ this.subTotalString }}</p>
+          </div>
+          <div class='row'>
+            <p>Tax:</p>
+            <p>${{ this.taxAmount }}</p>
+          </div>
+          <div class='row'>
+            <p>Order Total:</p>
+            <p>${{ this.total }}</p>
+          </div>
+          <div class='row'>
+            <p></p>
+            <p></p>
+          </div>
+          <button
+            (click)='onSubmitOrder()'
+          >
+            Place Order
+          </button>
+        </div>
+  </div>
+</section>

@@ -14,6 +14,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         String theObservatoryUrl = System.getenv("THE_OBSERVATORY_URL");
         registry.addMapping("/**")
             .allowedOrigins(theObservatoryUrl)
-            .allowedMethods("GET","POST","PUT");
+            .allowedMethods("GET","POST","PATCH");
     }
 }

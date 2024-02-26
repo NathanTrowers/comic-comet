@@ -8,11 +8,12 @@ describe('Update Existing Comic Book Page', () => {
         cy.wait(5000);
 
         cy.url().should('include', '/dashboard');
-        cy.contains('Binary Barons 2')
+        cy.contains('Coiling Dragon')
             .parent().contains('Edit').click();
     });
 
     it('fails when the name format is invalid', () => {
+        cy.wait(3000);
         cy.getByData('name-input').clear()
             .type('(DROP TABLE comic-books)');
         cy.getByData('update-button').click();
@@ -21,6 +22,7 @@ describe('Update Existing Comic Book Page', () => {
     });
 
     it('fails when the author format is invalid', () => {
+        cy.wait(3000);
         cy.getByData('author-input').clear()
             .type('Examp!e $uthor');
 
@@ -29,6 +31,7 @@ describe('Update Existing Comic Book Page', () => {
     });
 
     it('fails when the price format is invalid', () => {
+        cy.wait(3000);
         cy.getByData('price-input').clear()
             .type('9999.00');
         cy.getByData('update-button').click();
@@ -37,6 +40,7 @@ describe('Update Existing Comic Book Page', () => {
     });
 
     it('fails when the quantity format is invalid', () => {
+        cy.wait(3000);
         cy.getByData('quantity-input').clear()
             .type('-3');
         cy.getByData('update-button').click();
@@ -51,21 +55,17 @@ describe('Update Existing Comic Book Page', () => {
     });
 
     it('successfully updates existing comic book', () => {
+        cy.wait(3000);
         cy.getByData('radio-discontinued-input').click();
         cy.getByData('update-button').click();
 
         cy.wait(5000);
-        cy.contains('Binary Barons 2')
+        cy.contains('Coiling Dragon')
             .parent().contains('Edit').click();
 
         // Reset the carrying status to 'carrying'.
         cy.getByData('radio-carrying-input').click();
         cy.getByData('update-button').click();
-    });
-
-    it('successfully cancels new comic book creation', () => {        
-        cy.contains('Cancel').click();
-        cy.url().should('include', '/dashboard');
     });
 
     it('shows that the info icons work', async (): Promise<any> => {

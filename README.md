@@ -2,9 +2,12 @@
 
 On this page:
 
-1. [General Start-up Instructions](#general-start-up-instructions)
-2. [Servic Summary](#service-summary)
-3. [Notes on the Testing Procedures](#notes-on-the-testing-procedures)
+- [ComicComet Installation Instructions](#comiccomet-installation-instructions)
+  - [General Start-up Instructions](#general-start-up-instructions)
+    - [Database Configuration](#database-configuration)
+    - [Database Migration](#database-migration)
+  - [Service Summary](#service-summary)
+  - [Notes on the Testing Procedures](#notes-on-the-testing-procedures)
 
 ## General Start-up Instructions
 
@@ -15,7 +18,10 @@ After running `git pull https://github.com/NathanTrowers/ComicComet`, the databa
 ### Database Configuration
 
 Create an empty directory in the root of the project called ***mysql***.
-Run `docker compose up mysql` to start the database container. Once started, in another command-line window, run `docker exec -it mysql bash` to enter the container.  Afterwards, enter the following respective commands:
+Run `docker compose up mysql` to create the database container. Wait until you see the below as part of the console message before doing anything else:
+`[Server] /usr/sbin/mysqld: ready for connections. Version: '8.1.0'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.`
+
+In another command-line window, run `docker exec -it mysql bash` to enter the container.  Afterwards, enter the following respective commands:
 
 ``` shell
 bash-4.4$ mysql 
@@ -29,15 +35,30 @@ mysql> GRANT SELECT, INSERT, UPDATE, DELETE ON comic_comet_warehouse.* TO 'sage-
 mysql> CREATE USER 'meteor-shower'@'%' IDENTIFIED BY 'AdM1n';
 mysql> GRANT SELECT, INSERT, UPDATE ON comic_comet_warehouse.* TO 'meteor-shower'@'%';
 mysql> exit
+...
 bash-4.4$ exit
 ```
 
 ### Database Migration
 
-After exiting the container, stop the mysql instance running in the other window, then run `docker compose up`  This will start-up the entire application.  Once started, in another window, run the following commands:
+After exiting the container, stop the mysql instance running in the other window.
+
+Before moviing on, ensure that NodeJS is installed locally.  If installed, go into the ***sage-mountain*** and ***the-observatory*** folders and run the following command: `npm install`.
+
+Next run `docker compose up`  This will start-up the entire application.  Once started, in another window, run the following commands:
 
 ``` shell
-$# docker exec -it fourth-wall bash
+$# docker exec -it comiccomet-mysql-1 bash
+bash-4.4$ mysql 
+Enter password: AdM1n
+...
+mysql> USE comic_comet_warehouse;
+mysql> DROP TABLE admin, customer;
+mysql> exit
+...
+bash-4.4$ exit
+...
+$# docker exec -it comiccomet-fourth-wall-1 bash
 root@2345719d0f29:/app$ cd src/migrations
 root@2345719d0f29:/app/src/migrations$ /app/liquibase-libs/liquibase update --changelog-file=root-changelog.yaml --username springuser --password AdM1n
 root@2345719d0f29:/app/src/migrations$ exit
@@ -75,6 +96,6 @@ Below is a list of commands for running JUnit tests:
 
 ``` docker
 root@2345719d0f29:/app$ ./mvnw test # run all tests
-root@2345719d0f29:/app$ ./mvnw -Dtest="ClassName" # run a single test class
-root@2345719d0f29:/app$ ./mvnw -Dtest="ClassName#testName" # run a single test
+root@2345719d0f29:/app$ ./mvnw test -Dtest="ClassName" # run a single test class
+root@2345719d0f29:/app$ ./mvnw test -Dtest="ClassName#testName" # run a single test
 ```

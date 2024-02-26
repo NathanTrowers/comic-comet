@@ -7,7 +7,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-import com.comiccomet.meteorshower.controller.CustomerController;
+import com.comiccomet.meteorshower.controller.ComicBookController;
 import com.comiccomet.meteorshower.entity.ComicBook;
 
 @Component
@@ -16,8 +16,8 @@ public class ComicBookModelAssembler implements RepresentationModelAssembler<Com
     @Override
     public EntityModel<ComicBook> toModel(ComicBook comicBook) {
         return EntityModel.of(comicBook, 
-            linkTo(methodOn(CustomerController.class).getComicBook("exampleInvalidToken", comicBook.getComicBookId())).withSelfRel(),
-            linkTo(methodOn(CustomerController.class).getAllComicBooks("exampleInvalidToken")).withRel("comicBooks")
+            linkTo(methodOn(ComicBookController.class).getComicBook("exampleInvalidToken", comicBook.getComicBookId())).withSelfRel(),
+            linkTo(methodOn(ComicBookController.class).getAllComicBooks("exampleInvalidToken")).withRel("comicBooks")
         );
     }
 }

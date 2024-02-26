@@ -14,9 +14,12 @@ describe('Footer Test Suite', () => {
         cy.contains('Binary Barons 2')
             .parent().contains('Details').click();
         
-        cy.contains('This website is a part of the NOT Software Portfolio © 2023. All Rights Reserved');
-        cy.contains('Dashboard').click();
+        cy.contains(`This website is a part of the NOT Software Portfolio © ${new Date().getFullYear()}. All Rights Reserved`);
 
+        cy.contains('Dashboard').click();
         cy.contains('Binary Barons 2');
+
+        cy.contains('Cart').click();
+        cy.contains('Nothing is in orbit yet! Maybe try adding items to your cart.');
     });
 });

@@ -1,7 +1,16 @@
 <section>
-    <div class='row'>
+    <div 
+        class='row top'
+        data-test='cart-section'
+    >
         <h2>Cart</h2>
         <a [routerLink]="['/comic-books']">Back</a>
+        <a
+            *ngIf='cart.length > 0'
+            [routerLink]="['/address-confirmation']"
+        >
+            Proceed to Checkout
+        </a>
     </div>
     <div 
         id='cart' 
@@ -15,6 +24,6 @@
         </app-cart-item>
     </div>
     <ng-template #showEmptyCartMessage>
-        <p>{{ emptyCartMessage }}</p>
+        <p> {{ emptyCartMessage }}</p>
     </ng-template>
 </section>

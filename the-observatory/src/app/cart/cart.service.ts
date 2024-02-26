@@ -42,7 +42,7 @@ export class CartService {
   }
 
   remove(deletionCandidate: ComicBook): void {
-    this.cart = this.cart.filter((comicBook: ComicBook) => comicBook .comicBookId!== deletionCandidate.comicBookId);
+    this.cart = this.cart.filter((comicBook: ComicBook) => comicBook.comicBookId !== deletionCandidate.comicBookId);
     localStorage.removeItem(`${deletionCandidate.comicBookId}`);
   }
 }
