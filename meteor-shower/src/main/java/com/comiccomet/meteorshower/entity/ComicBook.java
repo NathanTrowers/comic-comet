@@ -1,24 +1,33 @@
 package com.comiccomet.meteorshower.entity;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="comic_book")
 public class ComicBook {
     @Id
     @GeneratedValue(strategy=GenerationType.UUID)
     private String comicBookId;
+
     private String name;
     private String author;
     private float price;
     private int quantity;
     private byte[] coverArt;
     private String carryStatus;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "comicBook")
+    private List<ComicBookOrder> comicBookOrder;
 
     public ComicBook() {}
 

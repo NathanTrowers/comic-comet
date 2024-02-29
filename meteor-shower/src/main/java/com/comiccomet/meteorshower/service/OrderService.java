@@ -1,18 +1,25 @@
 package com.comiccomet.meteorshower.service;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.comiccomet.meteorshower.constant.ErrorCodeConstants;
 import com.comiccomet.meteorshower.constant.GeneralConstants;
+import com.comiccomet.meteorshower.controller.OrderController;
 import com.comiccomet.meteorshower.dto.ComicBookOrderResponse;
 import com.comiccomet.meteorshower.dto.ErrorResponse;
 import com.comiccomet.meteorshower.dto.ResponseLinkWrapper;
+import com.comiccomet.meteorshower.dto.SavedComicBookOrder;
 import com.comiccomet.meteorshower.dto.Self;
 import com.comiccomet.meteorshower.entity.ComicBook;
 import com.comiccomet.meteorshower.entity.ComicBookOrder;
@@ -40,6 +47,8 @@ public class OrderService {
     
     https://www.baeldung.com/java-string-to-timestamp
     */ 
+
+
     public ResponseEntity<?> placeNewOrder(String customerId, ComicBookOrder[] newOrder) {
         List<ComicBookOrder> placedOrders = new ArrayList<ComicBookOrder>();
         
@@ -79,7 +88,7 @@ public class OrderService {
 
             return ResponseEntity
                 .accepted()
-                .body(new ResponseLinkWrapper(comicBookOrderResponse, new Self("http://localhost:8091/order/new")));
+                .body(new ResponseLinkWrapper(comicBookOrderResponse, new Self("/order/new")));
         } catch(PlaceNewOrderFailedException placeNewOrderFailedException) {
             log.error("Addition of new order for {} failed during the datbase operation with the following error: \n", customerId, placeNewOrderFailedException);
             
@@ -96,6 +105,41 @@ public class OrderService {
             return ResponseEntity
                 .badRequest()
                 .body(new ErrorResponse(400, "bad request", errorCodes));
+        }
+    }
+
+    public ResponseEntity<?> getPastOrders(String customerId) {
+        try {
+            // get order where customer_id is current customer's ID
+            List<ComicBookOrder> orders = this.comicBookOrderRepository.findAllByCustomerId(customerId);
+            List<SavedComicBookOrder> results = new ArrayList<>();
+            for(ListIterator<ComicBookOrder> iterator = orders.listIterator(); iterator.hasNext();) {
+                ComicBookOrder currentOrder = iterator.next();
+                ComicBookOrder result = this.comicBookOrderRepository.findComicBooksByOrderIdAndComicBookId(currentOrder.getOrderId(), currentOrder.getComicBookId());
+                SavedComicBookOrder savedComicBookOrder = new SavedComicBookOrder(
+                    result.getOrderId(),
+                    result.getOrderDate(),
+                    result.getReturnStatus(),
+                    result.getComicBook()
+                );
+                results.add(savedComicBookOrder);
+            }
+
+            log.info("Past orders retrieval successful for id {}!", customerId);
+            
+            return ResponseEntity
+                .ok()
+                .body(CollectionModel.of(results,
+                    linkTo(methodOn(OrderController.class).getOrders("exampleInvalidToken")).withSelfRel()));
+
+        } catch(Exception error) {
+            log.error("Past orders retrieval failed with the following error: \n", error);
+            
+            int[] errorCodes = {ErrorCodeConstants.ERROR_GET_PAST_ORDERS_FAILED};
+
+            return ResponseEntity
+                .status(404)
+                .body(new ErrorResponse(404, "not found", errorCodes));
         }
     }
 

@@ -2,6 +2,7 @@ package com.comiccomet.meteorshower.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -33,5 +34,15 @@ public class OrderController {
         }
 
         return this.orderService.placeNewOrder(customerId, newOrder);
+    }
+
+    @GetMapping("/orders")
+    public ResponseEntity<?> getOrders(@RequestHeader(value="Authorization") String token) {
+        String customerId = this.tokenManager.validateToken(token);
+        if (customerId == "") {
+            return this.comicBookService.sendIsUnauthorized();
+        }
+
+        return this.orderService.getPastOrders(customerId);
     }
 }
