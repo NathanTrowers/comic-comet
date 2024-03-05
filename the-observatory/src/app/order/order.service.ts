@@ -4,8 +4,9 @@ import { Observable, catchError, of } from 'rxjs';
 
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import Address from 'src/app/order/interfaces/Address';
-import Order from 'src/app/order/interfaces/Order';
 import AddressResponse from 'src/app/order/interfaces/AddressResponse';
+import Order from 'src/app/order/interfaces/Order';
+import SavedComicBookOrdersListResponse from 'src/app/order/interfaces/SavedComicBookOrdersListResponse';
 import { environment } from 'src/environments/environments';
 
 
@@ -20,6 +21,15 @@ export class OrderService {
     return this.httpClient.get<AddressResponse>(`${environment.METEOR_SHOWER_API}/customer/address`, this.authenticationService.httpOptions)
       .pipe(
         catchError(this.handleError<AddressResponse>('get-current-customer-address'))
+      );
+  }
+
+  getPastOrders(): Observable<SavedComicBookOrdersListResponse> {
+    this.authenticationService.setAuthorization();
+
+    return this.httpClient.get<SavedComicBookOrdersListResponse>(`${environment.METEOR_SHOWER_API}/orders`, this.authenticationService.httpOptions)
+      .pipe(
+        catchError(this.handleError<SavedComicBookOrdersListResponse>('get-current-customer-address'))
       );
   }
 

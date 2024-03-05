@@ -1,0 +1,61 @@
+form {
+    display: flex;
+    flex-flow: column wrap;
+    margin: auto;
+    margin-bottom: 2rem;
+    width: 30%;
+}
+
+a {
+    margin-bottom: 2rem;
+    width: 10.5rem;
+    height: 1.5rem;
+    text-decoration: none;
+    text-align: center;
+    align-self: center;
+    box-shadow: 0.2rem 0.02rem 0.8rem 0.5rem var(--secondary-color);
+    background-color: var(--primary-color);
+    color: var(--accent-light);
+    transition: width 0.2s, height 0.2s;
+}
+
+a:hover, a:focus {
+    width: 11rem;
+    height: 1.6rem;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+label {
+    margin-top: 1rem;
+    color: var(--primary-color);
+    font-weight: bolder;
+}
+
+.loadingCircle {
+    margin: auto;
+    border-radius: 50%;
+    border: 0.4rem solid var(--primary-color);
+    border-top: 0.4rem solid var(--secondary-color);
+    width: 2rem;
+    height: 2rem;
+    --webkit-animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite;
+}
+
+@-webkit-keyframes rotate {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+.ordersList {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

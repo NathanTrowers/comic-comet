@@ -43,12 +43,6 @@ public class OrderService {
         this.comicBookOrderValidator = comicBookOrderValidator;
     }
 
-    /* FOR THE TICKET WHERE THE DATE AND TIME NEED TO BE RETURNED;
-    
-    https://www.baeldung.com/java-string-to-timestamp
-    */ 
-
-
     public ResponseEntity<?> placeNewOrder(String customerId, ComicBookOrder[] newOrder) {
         List<ComicBookOrder> placedOrders = new ArrayList<ComicBookOrder>();
         

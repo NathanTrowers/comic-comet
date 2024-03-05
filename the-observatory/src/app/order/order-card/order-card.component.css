@@ -1,0 +1,72 @@
+section {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    margin: 0.5rem;
+}
+
+#orderBlock {
+    display: grid;
+    grid-template-areas: 
+        "orderId orderId"
+        "orderDate returnStatus";
+    padding-left: 0.4rem;
+    border: 0.4rem solid var(--secondary-color);
+}
+
+#orderId {
+    grid-area: orderId;
+}
+
+#orderDate {
+    grid-area: orderDate;
+}
+
+#returnStatus {
+    grid-area: returnStatus;
+}
+
+#comicBookBlock {
+    display: flex;
+}
+
+img {
+    height: 25.6875rem;/*10.25px * 30 * 16*/
+    width: 12.421875rem;/*6.625px * 30 * 16*/
+}
+
+#coverArt, #words {
+    flex: 1 1 12.5rem;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#words {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: var(--accent-light);
+}
+
+/* .removeButton {
+    align-self: center;
+    width: 8rem;
+    height: 1.3rem;
+    margin-left: 0.3rem;
+    border: 0.01rem solid var(--secondary-color);
+    background-color: var(--accent-dark);
+    color: var(--secondary-color);
+    transition: width 0.2s;
+}
+
+.removeButton:hover, .removeButton:focus {
+    width: 10rem;
+    height: 1.5rem;
+    background-color: var(--secondary-color);
+    color: var(--accent-dark);
+    cursor: pointer;
+} */

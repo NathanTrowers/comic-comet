@@ -21,5 +21,9 @@ describe('Footer Test Suite', () => {
 
         cy.contains('Cart').click();
         cy.contains('Nothing is in orbit yet! Maybe try adding items to your cart.');
+        cy.contains('Back').click();
+
+        cy.contains('Orders').click();
+        cy.contains('Order ID:');
     });
 });

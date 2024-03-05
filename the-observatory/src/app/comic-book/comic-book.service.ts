@@ -29,9 +29,9 @@ export class ComicBookService {
       );
   }
 
-  getSrcString(comicBook: ComicBook): string {
-    if (comicBook?.coverArt?.length > 0) {
-      const coverArtString: string = comicBook.coverArt?.toString() ?? '';
+  getSrcString(coverArt: string): string {
+    if (coverArt?.length > 0) {
+      const coverArtString: string = coverArt?.toString() ?? '';
 
       return `data:image/png;base64,${coverArtString}`;
     }
