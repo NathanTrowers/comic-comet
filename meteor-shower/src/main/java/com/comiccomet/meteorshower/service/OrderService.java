@@ -104,7 +104,6 @@ public class OrderService {
 
     public ResponseEntity<?> getPastOrders(String customerId) {
         try {
-            // get order where customer_id is current customer's ID
             List<ComicBookOrder> orders = this.comicBookOrderRepository.findAllByCustomerId(customerId);
             List<SavedComicBookOrder> results = new ArrayList<>();
             for(ListIterator<ComicBookOrder> iterator = orders.listIterator(); iterator.hasNext();) {
