@@ -23,7 +23,7 @@ export class ComicBookCatalogueComponent {
 
   constructor(private cartService: CartService, private comicBookService: ComicBookService) {
     this.comicBookService.getComicBookCatalogue()
-      .subscribe((receivedComicBooks: ComicBookCatalogue) =>{
+      .subscribe((receivedComicBooks: ComicBookCatalogue) => {
         this.comicBookList = receivedComicBooks._embedded.comicBookList;
         this.filteredComicBookList = receivedComicBooks._embedded.comicBookList;
       });

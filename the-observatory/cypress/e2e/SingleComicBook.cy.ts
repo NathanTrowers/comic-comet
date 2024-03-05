@@ -17,7 +17,7 @@ describe('Details Page Page', () => {
         cy.contains('Binary Barons');
         cy.contains('Morpheus');
         cy.contains('99.99');
-        cy.contains('7');
+        cy.contains('No. In-Stock:');
     });
 
     it('successfully navigates back to the Dashboard', () => {

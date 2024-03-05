@@ -22,4 +22,5 @@ public final class ErrorCodeConstants {
     public static final int ERROR_WRONG_POSTAL_CODE_FORMAT = 400003017;
     public static final int ERROR_WRONG_COUNTRY_FORMAT = 400003018;
     public static final int ERROR_ADDRESS_UNCHANGED = 400003019;
+    public static final int ERROR_GET_PAST_ORDERS_FAILED = 400003020;
 }

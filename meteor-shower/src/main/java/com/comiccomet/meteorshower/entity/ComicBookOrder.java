@@ -4,11 +4,13 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name="comic_book_order")
@@ -18,12 +20,13 @@ public class ComicBookOrder {
     private String orderId;
     @Id
     private String comicBookId;
+    private String customerId;
     private Timestamp orderDate;
     private String returnStatus;
 
-    @ManyToOne
-    @JoinColumn(name="customerId", nullable=false)
-    private Customer customer = new Customer();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "comicBookId", insertable = false)
+    private ComicBook comicBook;
 
     public ComicBookOrder() {}
 
@@ -31,18 +34,14 @@ public class ComicBookOrder {
         Timestamp orderDate, String returnStatus
     ) {
         this.orderId = orderId;
-        this.customer.setCustomerId(customerId);
+        this.customerId = customerId;
         this.comicBookId = comicBookId;
         this.orderDate = orderDate;
         this.returnStatus = returnStatus;
     }
 
-    public Customer getCustomer() {
-        return this.customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public ComicBook getComicBook() {
+        return this.comicBook;
     }
 
     public String getOrderId() {
@@ -54,11 +53,11 @@ public class ComicBookOrder {
     }
 
     public String getCustomerId() {
-        return this.customer.getCustomerId();
+        return this.customerId;
     }
 
     public void setCustomerId(String customerId) {
-        this.customer.setCustomerId(customerId);
+        this.customerId = customerId;
     }
 
     public String getComicBookId() {
@@ -87,7 +86,7 @@ public class ComicBookOrder {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.orderId, this.customer.getCustomerId(), this.comicBookId,
+        return Objects.hash(this.orderId, this.customerId, this.comicBookId,
             this.orderDate, this.returnStatus);
     }
 
@@ -103,7 +102,7 @@ public class ComicBookOrder {
         ComicBookOrder comicBookOrder = (ComicBookOrder) object;
 
         return Objects.equals(this.orderId , comicBookOrder.orderId)
-            && Objects.equals(this.customer.getCustomerId() , comicBookOrder.customer.getCustomerId())
+            && Objects.equals(this.customerId , comicBookOrder.customerId)
             && Objects.equals(this.comicBookId , comicBookOrder.comicBookId)
             && Objects.equals(this.orderDate , comicBookOrder.orderDate)
             && Objects.equals(this.returnStatus , comicBookOrder.returnStatus);
@@ -111,7 +110,7 @@ public class ComicBookOrder {
 
     @Override
     public String toString() {
-        return "ComicBookOrder [orderId=" + this.orderId + ", customerId=" + this.customer.getCustomerId() + ", comicBookId=" + this.comicBookId
+        return "ComicBookOrder [orderId=" + this.orderId + ", customerId=" + this.customerId + ", comicBookId=" + this.comicBookId
                 + ", orderDate=" + this.orderDate + ", returnStatus='" + this.returnStatus + "'']";
     }
 }

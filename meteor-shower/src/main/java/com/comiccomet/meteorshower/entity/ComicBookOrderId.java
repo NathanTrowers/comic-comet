@@ -3,9 +3,6 @@ package com.comiccomet.meteorshower.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-import jakarta.persistence.Embeddable;
-
-@Embeddable
 public class ComicBookOrderId implements Serializable {
     private String orderId;
     private String comicBookId;

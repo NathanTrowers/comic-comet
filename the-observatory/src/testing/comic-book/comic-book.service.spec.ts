@@ -39,7 +39,7 @@ describe('Comic Book Service Test Suite', () => {
 
     it('tests "getSrcString" returns an empty string when no cover art is given', ()  => {
         /** Call to Test */
-        let result: string = comicBookService.getSrcString(comicBook);
+        let result: string = comicBookService.getSrcString(comicBook.coverArt);
 
         /** Expectation */
         expect(result).toEqual('');
@@ -51,7 +51,7 @@ describe('Comic Book Service Test Suite', () => {
         let expectedResult: string = `data:image/png;base64,${comicBook.coverArt}`;
 
         /** Call to Test */
-        let result: string = comicBookService.getSrcString(comicBook);
+        let result: string = comicBookService.getSrcString(comicBook.coverArt);
 
         /** Expectation */
         expect(result).toEqual(expectedResult);

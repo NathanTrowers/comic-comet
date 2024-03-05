@@ -1,1 +1,27 @@
-<p>order works!</p>
+<section>
+    <form>
+        <a [routerLink]="['/comic-books']">Back</a>
+        <label for='searchBar'>Search Bar </label>
+        <input 
+            name='searchBar'
+            data-test='search-bar-input'
+            type='text'
+            placeholder='Filter by comic book name'
+            #searchQuery
+            (input)='filterResults(searchQuery.value)'
+        >
+    </form>
+    <div 
+        class='ordersList' 
+        *ngIf='filteredOrderList.length > 0 else showLoadingCircle'
+    >
+        <app-order-card
+            *ngFor='let comicBookOrder of filteredOrderList'
+            [comicBookOrder]='comicBookOrder'
+        >
+        </app-order-card>
+    </div>
+    <ng-template #showLoadingCircle>
+        <div class='loadingCircle'></div>
+    </ng-template>
+</section>

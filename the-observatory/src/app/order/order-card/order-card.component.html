@@ -1,0 +1,48 @@
+<section>
+    <div id='orderBlock'>
+        <div id='orderId'>
+            <p>Order ID: {{ comicBookOrder.orderId }}</p>
+        </div>
+        <div id='orderDate'>
+            <p>Order Date: {{ getFormattedDate(comicBookOrder.orderDate) }}</p>
+        </div>
+        <div id='returnStatus'>
+            <p>Return Status: {{ comicBookOrder.returnStatus }}</p>
+        </div>
+        <!-- THE BELOW WILL BE MODIFIED FOR THE RETURN ORDER -->
+        <!-- <button
+            *ngIf='!cartItem else showRemoveButton'
+            type='button'
+            (click)='addToCart()'
+        >
+            Add to Cart
+        </button>
+        <ng-template #showRemoveButton>
+            <button 
+                type='button'
+                (click)='removeFromCart()'
+            >
+                Remove from Cart
+            </button>
+        </ng-template> -->
+    </div>
+    <div id='comicBookBlock'>
+        <div id='coverArt'>
+            <img [src]='comicBookService.getSrcString(comicBookOrder.comicBook.coverArt)' alt='comic book cover art'>
+        </div>
+        <div id='words'>
+            <div class='row'>
+                <p>Name:</p>
+                <p>{{ comicBookOrder.comicBook.name }}</p>
+            </div>
+            <div class='row'>
+                <p>Author:</p>
+                <p>{{ comicBookOrder.comicBook.author }}</p>
+            </div>
+            <div class='row'>
+                <p>Price:</p>
+                <p>${{ comicBookOrder.comicBook.price.toFixed(2) }}</p>
+            </div>
+        </div>
+    </div>
+</section>

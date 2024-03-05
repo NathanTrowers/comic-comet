@@ -1,13 +1,17 @@
 header {
     display: grid;
-    grid-template: 1fr 1fr 1fr;
+    grid-template: 1fr 1fr 1fr 1fr;
     width: inherit;
     background-color: var(--primary-color);
     box-shadow: 0.2rem 0.02rem 0.8rem 0.5rem var(--secondary-color);
 }
 
-a {
+nav {
     grid-column: 1/ span 1;
+    display: flex;
+}
+
+a {
     width: 10.5rem;
     height: 1.5rem;
     text-decoration: none;
