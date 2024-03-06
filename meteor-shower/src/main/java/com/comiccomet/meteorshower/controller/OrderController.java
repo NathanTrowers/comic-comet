@@ -3,11 +3,14 @@ package com.comiccomet.meteorshower.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.comiccomet.meteorshower.dto.OrderReturn;
 import com.comiccomet.meteorshower.entity.ComicBookOrder;
 import com.comiccomet.meteorshower.service.ComicBookService;
 import com.comiccomet.meteorshower.service.OrderService;
@@ -44,5 +47,15 @@ public class OrderController {
         }
 
         return this.orderService.getPastOrders(customerId);
+    }
+
+    @PatchMapping("/orders/{orderId}")
+    public ResponseEntity<?> returnOrder(@RequestHeader(value="Authorization") String token, @PathVariable String orderId, @RequestBody OrderReturn orderReturn) {
+        String customerId = this.tokenManager.validateToken(token);
+        if (customerId == "") {
+            return this.comicBookService.sendIsUnauthorized();
+        }
+
+        return this.orderService.patchOrderStatus(customerId, orderId, orderReturn);
     }
 }

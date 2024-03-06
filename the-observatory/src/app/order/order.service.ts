@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/authentication/authentication.ser
 import Address from 'src/app/order/interfaces/Address';
 import AddressResponse from 'src/app/order/interfaces/AddressResponse';
 import Order from 'src/app/order/interfaces/Order';
+import OrderReturn from 'src/app/order/interfaces/OrderReturn';
 import SavedComicBookOrdersListResponse from 'src/app/order/interfaces/SavedComicBookOrdersListResponse';
 import { environment } from 'src/environments/environments';
 
@@ -48,6 +49,15 @@ export class OrderService {
     return this.httpClient.post<any>(`${environment.METEOR_SHOWER_API}/order/new`, newOrder, this.authenticationService.httpOptions)
       .pipe(
         catchError(this.handleError<any>('post-new-order'))
+      );
+  }
+  
+  submitReturnOfOrder(orderId: string, orderReturnForm: OrderReturn): Observable<any> {
+    this.authenticationService.setAuthorization();
+
+    return this.httpClient.patch<any>(`${environment.METEOR_SHOWER_API}/orders/${orderId}`, orderReturnForm, this.authenticationService.httpOptions)
+      .pipe(
+        catchError(this.handleError<any>('patch-return-order'))
       );
   }
 

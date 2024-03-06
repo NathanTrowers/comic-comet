@@ -9,22 +9,14 @@
         <div id='returnStatus'>
             <p>Return Status: {{ comicBookOrder.returnStatus }}</p>
         </div>
-        <!-- THE BELOW WILL BE MODIFIED FOR THE RETURN ORDER -->
-        <!-- <button
-            *ngIf='!cartItem else showRemoveButton'
+        <button 
             type='button'
-            (click)='addToCart()'
+            class='returnButton'
+            aria-label='return comic book'
+            (click)='returnComicBook()'
         >
-            Add to Cart
+            Return Order
         </button>
-        <ng-template #showRemoveButton>
-            <button 
-                type='button'
-                (click)='removeFromCart()'
-            >
-                Remove from Cart
-            </button>
-        </ng-template> -->
     </div>
     <div id='comicBookBlock'>
         <div id='coverArt'>

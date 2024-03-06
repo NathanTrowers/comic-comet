@@ -10,6 +10,7 @@ import java.util.ListIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -18,26 +19,29 @@ import com.comiccomet.meteorshower.constant.GeneralConstants;
 import com.comiccomet.meteorshower.controller.OrderController;
 import com.comiccomet.meteorshower.dto.ComicBookOrderResponse;
 import com.comiccomet.meteorshower.dto.ErrorResponse;
+import com.comiccomet.meteorshower.dto.OrderReturn;
 import com.comiccomet.meteorshower.dto.ResponseLinkWrapper;
 import com.comiccomet.meteorshower.dto.SavedComicBookOrder;
 import com.comiccomet.meteorshower.dto.Self;
+import com.comiccomet.meteorshower.dto.SuccessResponse;
 import com.comiccomet.meteorshower.entity.ComicBook;
 import com.comiccomet.meteorshower.entity.ComicBookOrder;
 import com.comiccomet.meteorshower.exception.ComicBookNotFoundException;
+import com.comiccomet.meteorshower.exception.ComicBookOrderUpdateFailedException;
 import com.comiccomet.meteorshower.exception.ComicBookUpdateFailedException;
 import com.comiccomet.meteorshower.exception.PlaceNewOrderFailedException;
 import com.comiccomet.meteorshower.repository.ComicBookOrderRepository;
 import com.comiccomet.meteorshower.repository.ComicBookRepository;
-import com.comiccomet.meteorshower.validator.ValidatorInterface;
+import com.comiccomet.meteorshower.validator.ComicBookOrderValidatorInterface;
 
 @Service
 public class OrderService {
     private static final Logger log = LoggerFactory.getLogger(OrderService.class);
     private final ComicBookRepository comicBookRepository;
     private final ComicBookOrderRepository comicBookOrderRepository;
-    private final ValidatorInterface comicBookOrderValidator;
+    private final ComicBookOrderValidatorInterface comicBookOrderValidator;
 
-    public OrderService(ComicBookRepository comicBookRepository, ComicBookOrderRepository comicBookOrderRepository, ValidatorInterface comicBookOrderValidator) {
+    public OrderService(ComicBookRepository comicBookRepository, ComicBookOrderRepository comicBookOrderRepository, ComicBookOrderValidatorInterface comicBookOrderValidator) {
         this.comicBookRepository = comicBookRepository;
         this.comicBookOrderRepository = comicBookOrderRepository;
         this.comicBookOrderValidator = comicBookOrderValidator;
@@ -149,5 +153,46 @@ public class OrderService {
         }
 
         return orderList;
+    }
+
+    public ResponseEntity<?> patchOrderStatus(String customerId, String orderId, OrderReturn orderReturn) {
+        try {
+            int[] errorCodes = this.comicBookOrderValidator.validateOrderReturn(orderReturn);
+            if (errorCodes.length > 0) {
+                log.error("Addition of new order for {} failed due to the following validation errors: {}", customerId, errorCodes);
+             
+                return ResponseEntity
+                    .badRequest()
+                    .body(new ErrorResponse(400, "bad request", errorCodes));
+            }
+
+            int returnedOrder = this.comicBookOrderRepository.setReturnStatusFor(orderReturn.getReturnStatus(), orderReturn.getComicBookId(), orderId);
+            if (returnedOrder == 0) {
+                throw new ComicBookOrderUpdateFailedException(orderId, orderReturn.getComicBookId());
+            }
+
+            log.info("Return of order {} with comicBookId {} successful for customer {}!", orderId , orderReturn.getComicBookId(), customerId);
+
+            return ResponseEntity
+                .accepted()
+                .body(EntityModel.of(new SuccessResponse(202, "accepted"),
+                    linkTo(methodOn(OrderController.class).returnOrder("exampleInvalidToken", "exampleInvalidId", orderReturn)).withSelfRel()));
+        } catch(ComicBookOrderUpdateFailedException comicBookOrderUpdateFailedException) {
+            log.error("Order return failed for customer {} during database operation with the following error: \n", customerId, comicBookOrderUpdateFailedException);
+            
+            int[] errorCodes = {ErrorCodeConstants.ERROR_PATCH_ORDER_RETURN_FAILED};
+
+            return ResponseEntity
+                .badRequest()
+                .body(new ErrorResponse(400, "bad request", errorCodes));
+        } catch(Exception error) {
+            log.error("Order return failed with the following error: \n", error);
+            
+            int[] errorCodes = {ErrorCodeConstants.ERROR_PATCH_ORDER_RETURN_FAILED};
+
+            return ResponseEntity
+                .badRequest()
+                .body(new ErrorResponse(400, "bad request", errorCodes));
+        }
     }
 }
