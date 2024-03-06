@@ -171,6 +171,8 @@ public class OrderService {
                 throw new ComicBookOrderUpdateFailedException(orderId, orderReturn.getComicBookId());
             }
 
+            log.info("Return of order {} with comicBookId {} successful for customer {}!", orderId , orderReturn.getComicBookId(), customerId);
+
             return ResponseEntity
                 .accepted()
                 .body(EntityModel.of(new SuccessResponse(202, "accepted"),

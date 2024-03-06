@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Buffer } from 'buffer';
 
 import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
 

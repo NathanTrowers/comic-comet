@@ -52,7 +52,7 @@ img {
     color: var(--accent-light);
 }
 
-/* .removeButton {
+.returnButton {
     align-self: center;
     width: 8rem;
     height: 1.3rem;
@@ -63,10 +63,10 @@ img {
     transition: width 0.2s;
 }
 
-.removeButton:hover, .removeButton:focus {
-    width: 10rem;
-    height: 1.5rem;
+.returnButton:hover, .returnButton:focus {
+    width: 11rem;
+    height: 1.6rem;
     background-color: var(--secondary-color);
     color: var(--accent-dark);
     cursor: pointer;
-} */
+}

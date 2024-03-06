@@ -33,6 +33,97 @@ label {
     font-weight: bolder;
 }
 
+#modal {
+    position: fixed;
+    z-index: 1;
+    padding-top: 6.25rem;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--accent-dark); /*fallback*/
+    background-color: rgb(0,0,0,0.4);
+}
+
+#modalContent {
+    flex-direction: column;
+    margin: auto;
+    position: relative;
+    text-align: center;
+    width: 80%;
+    padding: 0.8rem;
+    box-shadow: 0.2rem 0.02rem 0.8rem 1rem var(--secondary-color);
+    background-color: var(--primary-color);
+    color: var(--accent-light);
+    --webkit-animation: cometSlide 0.4s ease-in;
+    animation: cometSlide 0.4s ease-in;
+}
+
+@-webkit-keyframes cometSlide {
+    0% {
+        top: -18.75rem;
+        opacity: 0;
+        width: 10%;
+        height: auto;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+        width: 80%;
+        height: auto;
+    }
+}
+
+@keyframes cometSlide {
+    0% {
+        top: -18.75rem;
+        opacity: 0;
+        width: 10%;
+        height: auto;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+        width: 80%;
+        height: auto;
+    }
+}
+
+button {
+    align-self: center;
+    margin-top: 1rem;
+    width: 10.5rem;
+    height: 1.5rem;
+    border: none;
+    transition: width 0.2s, height 0.2s;
+}
+
+button:hover, button:focus {
+    width: 15rem;
+    height: 1.8rem;
+    cursor: pointer;
+}
+
+#cancelButton {
+    border: 0.01rem solid var(--accent-light);
+    background-color: var(--primary-color);
+    color: var(--accent-light);
+}
+
+#cancelButton:hover, #cancelButton:focus {
+    background-color: var(--accent-light);
+    color: var(--primary-color);
+}
+
+#returnButton {
+    background-color: var(--secondary-color);
+}
+
+#returnButton:hover, #returnButton:focus {
+    background-color: var(--accent-dark);
+    color: var(--secondary-color);
+}
+
 .loadingCircle {
     margin: auto;
     border-radius: 50%;

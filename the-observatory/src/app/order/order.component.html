@@ -11,6 +11,28 @@
             (input)='filterResults(searchQuery.value)'
         >
     </form>
+    <app-messages></app-messages>
+    <div 
+        id='modal'
+        *ngIf='confirmReturn'
+    >
+        <div id='modalContent'>
+            <p>Are you sure you want to return comic book {{ returnedOrder.comicBook.name }} from order {{returnedOrder.orderId}} ?</p>
+            <button 
+                id='returnButton'
+                data-test='return-confirmation-button'
+                (click)='return()' 
+            >
+                Return
+            </button>
+            <button
+                id='cancelButton'
+                (click)='confirmReturn = false'
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
     <div 
         class='ordersList' 
         *ngIf='filteredOrderList.length > 0 else showLoadingCircle'
@@ -18,6 +40,7 @@
         <app-order-card
             *ngFor='let comicBookOrder of filteredOrderList'
             [comicBookOrder]='comicBookOrder'
+            (returnComicBookOrderEvent)='showConfirmReturnDialog($event)'
         >
         </app-order-card>
     </div>

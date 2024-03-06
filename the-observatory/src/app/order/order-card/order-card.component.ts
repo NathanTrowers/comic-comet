@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ComicBookService } from 'src/app/comic-book/comic-book.service';
 import ComicBookOrder from 'src/app/order/interfaces/ComicBookOrder';
@@ -13,6 +13,7 @@ import ComicBookOrder from 'src/app/order/interfaces/ComicBookOrder';
 })
 export class OrderCardComponent {
   @Input() comicBookOrder!: ComicBookOrder;
+  @Output() returnComicBookOrderEvent: EventEmitter<ComicBookOrder> = new EventEmitter<ComicBookOrder>;
   comicBookService: ComicBookService;
 
   constructor(comicBookService: ComicBookService) {
@@ -21,5 +22,9 @@ export class OrderCardComponent {
 
   getFormattedDate(unformattedDate: string): Date {
     return new Date(Date.parse(this.comicBookOrder?.orderDate));
+  }
+
+  returnComicBook(): void {
+    this.returnComicBookOrderEvent.emit(this.comicBookOrder);
   }
 }
