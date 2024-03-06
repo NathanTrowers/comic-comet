@@ -18,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.comiccomet.meteorshower.constant.ErrorCodeConstants;
 import com.comiccomet.meteorshower.constant.GeneralConstants;
+import com.comiccomet.meteorshower.dto.OrderReturn;
 import com.comiccomet.meteorshower.entity.ComicBook;
 import com.comiccomet.meteorshower.entity.ComicBookOrder;
 import com.comiccomet.meteorshower.repository.ComicBookRepository;
@@ -163,5 +164,46 @@ public class ComicBookOrderValidatorTest {
         for(int iterator = 0; iterator > expectedResult.length - 1; iterator++) {
             assertEquals(expectedResult[iterator], errorCodes[iterator]);
         }
+    }
+
+    @Test
+    void testValidateOrderReturnSuccess() {
+        /** Data */
+        int[] expectedResult = {};
+        OrderReturn validOrderReturn = new OrderReturn(this.comicBookOrder[0].getComicBookId(), "return");
+
+        /** Call to Test */
+        int[] errorCodes = this.comicBookOrderValidator.validateOrderReturn(validOrderReturn);
+
+        /** Assertion */
+        assertEquals(expectedResult.length, errorCodes.length);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a46363a1-7767-4112-8212-ddd647df97f", "aaaaaaa-aaaa-ddddddddddd", "DROP TABLE comic_book_order;"})
+    void testValidateOrderReturnFailureWhenWrongComicBookIdFormat(String wrongComicBookIdFormat) {
+        /** Data */
+        int[] expectedResult = {ErrorCodeConstants.ERROR_WRONG_COMIC_BOOK_ID_FORMAT};
+        OrderReturn invalidOrderReturn = new OrderReturn(wrongComicBookIdFormat, "return");
+
+        /** Call to Test */
+        int[] errorCodes = this.comicBookOrderValidator.validateOrderReturn(invalidOrderReturn);
+
+        /** Assertion */
+        assertEquals(expectedResult[0], errorCodes[0]);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"none", "none|return", "DROP DATABASE db;"})
+    void testValidateOrderReturnFailureWhenWrongReturnStatusFormat(String wrongReturnStatusFormat) {
+        /** Data */
+        int[] expectedResult = {ErrorCodeConstants.ERROR_WRONG_RETURN_STATUS_FORMAT};
+        OrderReturn invalidOrderReturn = new OrderReturn(this.comicBookOrder[0].getComicBookId(), wrongReturnStatusFormat);
+
+        /** Call to Test */
+        int[] errorCodes = this.comicBookOrderValidator.validateOrderReturn(invalidOrderReturn);
+
+        /** Assertion */
+        assertEquals(expectedResult[0], errorCodes[0]);
     }
 }

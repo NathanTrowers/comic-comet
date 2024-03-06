@@ -8,13 +8,14 @@ import org.springframework.stereotype.Component;
 
 import com.comiccomet.meteorshower.constant.ErrorCodeConstants;
 import com.comiccomet.meteorshower.constant.GeneralConstants;
+import com.comiccomet.meteorshower.dto.OrderReturn;
 import com.comiccomet.meteorshower.entity.ComicBook;
 import com.comiccomet.meteorshower.entity.ComicBookOrder;
 import com.comiccomet.meteorshower.exception.ComicBookNotFoundException;
 import com.comiccomet.meteorshower.repository.ComicBookRepository;
 
 @Component
-public class ComicBookOrderValidator implements ValidatorInterface {
+public class ComicBookOrderValidator implements ComicBookOrderValidatorInterface {
     private final ComicBookRepository comicBookRepository;
 
     public ComicBookOrderValidator(ComicBookRepository comicBookRepository) {
@@ -69,6 +70,29 @@ public class ComicBookOrderValidator implements ValidatorInterface {
                     errorCodes.add(ErrorCodeConstants.ERROR_COMIC_BOOK_OUT_OF_STOCK);
                 }
             }
+        }
+
+        return errorCodes.stream()
+            .mapToInt(Integer::intValue)
+            .toArray();
+    }
+
+    public int[] validateOrderReturn(OrderReturn orderReturn) {
+        ArrayList<Integer> errorCodes = new ArrayList<Integer>();
+        String comicBookId = orderReturn.getComicBookId();
+
+        Pattern idPattern = Pattern.compile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$");
+        Pattern returnStatusPattern = Pattern.compile("^return$");
+        Matcher comicBookIdMatcher = idPattern.matcher(comicBookId);
+        Matcher returnStatusMatcher = returnStatusPattern.matcher(orderReturn.getReturnStatus());
+        boolean isComicBookIdMatch = comicBookIdMatcher.find();
+        boolean isReturnStatusMatch = returnStatusMatcher.find();
+
+        if (!isComicBookIdMatch) {
+            errorCodes.add(ErrorCodeConstants.ERROR_WRONG_COMIC_BOOK_ID_FORMAT);
+        }
+        if (!isReturnStatusMatch) {
+            errorCodes.add(ErrorCodeConstants.ERROR_WRONG_RETURN_STATUS_FORMAT);
         }
 
         return errorCodes.stream()
