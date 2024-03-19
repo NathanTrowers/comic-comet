@@ -14,8 +14,8 @@ public class MailObjectValidator implements ValidatorInterface {
     public int[] validate(Object payload) {
         ArrayList<Integer> errorCodes = new ArrayList<Integer>();
         MailObject mailObject = (MailObject) payload;
-        Pattern subjectPattern = Pattern.compile("^[0-9A-Za-z'\\-. #]{2,}?$");
-        Pattern textPattern = Pattern.compile("^[0-9A-Za-z'\\-. #_!?/()@$%+*\r]{2,}?$");
+        Pattern subjectPattern = Pattern.compile("^[/0-9A-Za-z'\\-. #]{2,}?$");
+        Pattern textPattern = Pattern.compile("^[/0-9A-Za-z'\\-. #_!?/()@$%+*\r]{2,}?$");
         Matcher subjectMatcher = subjectPattern.matcher(mailObject.getSubject());
         Matcher textMatcher = textPattern.matcher(mailObject.getText());
         boolean isSubjectMatch = subjectMatcher.find();

@@ -15,6 +15,8 @@ export const formMessages = {
     CITY_FORMAT:                'Only letters, and spaces are allowed in a valid city name.',
     POSTAL_CODE_FORMAT:         'Only letters and numebrs are allowed for valid postal codes, using the following format, where "L" is a letter and "#" is a number: L#L #L#.',
     COUNTRY_FORMAT:             'Only letters, hyphens (-), apostophes (\') and spaces are allowed in a valid country name.',
+    SUBJECT_FORMAT:             'Only letters, numbers, hyphens (-), apostrophes (\'), forward slashes (\/), number signs (#) and spaces are allowed in a valid subject name',
+    TEXT_FORMAT:                'Only letters, numbers, and the special characters in parentheses (.#_!?/()@$%+*) are allowed in a valid message',
 }
 
 export const infoMessages = {

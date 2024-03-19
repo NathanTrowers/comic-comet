@@ -6,6 +6,10 @@ form {
     width: 30%;
 }
 
+h2 {
+    align-self: center;
+}
+
 a {
     margin-bottom: 2rem;
     width: 10.5rem;

@@ -25,5 +25,9 @@ describe('Footer Test Suite', () => {
 
         cy.contains('Orders').click();
         cy.contains('Order ID:');
+        cy.contains('Back').click();
+        
+        cy.contains('Contact Us').click();
+        cy.contains('Subject');
     });
 });
