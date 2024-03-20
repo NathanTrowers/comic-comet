@@ -1,0 +1,31 @@
+<section>
+    <h2>Contact Us</h2>
+    <a [routerLink]="['/comic-books']">Back to Comic Books</a>
+    <form 
+        [formGroup]='contactForm' 
+        (submit)='onSubmitContactForm()'
+    >
+        <app-messages></app-messages>  
+        <div class='group'>
+            <label for='address'>Subject </label>
+            <app-info [bubbleText]='messages.SUBJECT_FORMAT'></app-info>
+        </div>
+        <input 
+            type='text'
+            placeholder='Example Subject'
+            formControlName='subject'
+            data-test='subject-input'
+        />
+        <div class='group'>
+            <label for='address'>Message </label>
+            <app-info [bubbleText]='messages.TEXT_FORMAT'></app-info>
+        </div>
+        <input 
+            type='text'
+            placeholder='Example Text'
+            formControlName='text'
+            data-test='text-input'
+        />
+        <button type='submit'>Send Message</button>
+    </form>
+</section>

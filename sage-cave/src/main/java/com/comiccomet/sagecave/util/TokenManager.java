@@ -8,8 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.comiccomet.sagecave.service.AdminService;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.IncorrectClaimException;
 import io.jsonwebtoken.Jwts;
@@ -17,7 +15,7 @@ import io.jsonwebtoken.MissingClaimException;
 
 @Component
 public class TokenManager {
-    private static final Logger log = LoggerFactory.getLogger(AdminService.class);
+    private static final Logger log = LoggerFactory.getLogger(TokenManager.class);
     private static String SECRET_KEY = System.getenv("SECRET_KEY");
 
     public TokenManager() {}

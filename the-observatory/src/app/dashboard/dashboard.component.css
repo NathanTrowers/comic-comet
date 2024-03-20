@@ -1,6 +1,6 @@
 header {
     display: grid;
-    grid-template: 1fr 1fr 1fr 1fr;
+    grid-template: 1fr 1fr 1fr 1fr 1fr;
     width: inherit;
     background-color: var(--primary-color);
     box-shadow: 0.2rem 0.02rem 0.8rem 0.5rem var(--secondary-color);
@@ -36,8 +36,14 @@ li {
     text-decoration: none;
 }
 
-button {
+div {
     grid-column: 3/span 1;
+    display: flex;
+    justify-self: end;
+}
+
+button {
+    grid-column: 4/span 1;
     justify-self: end;
     align-self: center;
     width: 10.5rem;

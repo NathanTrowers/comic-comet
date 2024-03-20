@@ -6,6 +6,7 @@ On this page:
   - [General Start-up Instructions](#general-start-up-instructions)
     - [Database Configuration](#database-configuration)
     - [Database Migration](#database-migration)
+  - [Shooting Star Configuration](#shooting-star-configuration)
   - [Service Summary](#service-summary)
   - [Notes on the Testing Procedures](#notes-on-the-testing-procedures)
 
@@ -34,6 +35,8 @@ mysql> CREATE USER 'sage-cave'@'%' IDENTIFIED BY 'AdM1n';
 mysql> GRANT SELECT, INSERT, UPDATE, DELETE ON comic_comet_warehouse.* TO 'sage-cave'@'%';
 mysql> CREATE USER 'meteor-shower'@'%' IDENTIFIED BY 'AdM1n';
 mysql> GRANT SELECT, INSERT, UPDATE ON comic_comet_warehouse.* TO 'meteor-shower'@'%';
+mysql> CREATE USER 'shooting-star'@'%' IDENTIFIED BY 'AdM1n';
+mysql> GRANT SELECT ON comic_comet_warehouse.* TO 'shooting-star'@'%';
 mysql> exit
 ...
 bash-4.4$ exit
@@ -64,7 +67,19 @@ root@2345719d0f29:/app/src/migrations$ /app/liquibase-libs/liquibase update --ch
 root@2345719d0f29:/app/src/migrations$ exit
 ```
 
-The above commands will have you enter teh ***fourth-wall*** container, change the directory to the folder container the database migrations, running those migrations, then finally exiting the container.
+The above commands will have you enter the ***fourth-wall*** container, change the directory to the folder container the database migrations, running those migrations, then finally exiting the container.
+
+## Shooting Star Configuration
+
+In the ***docker-compose.yaml*** file, under `shooting-star` replace the values for the following environment variables with ones relevant to your own email, username, app password, email username, and sending address.  Based on the services current architecture, the sending and receiving email addresses are pre-determined.
+
+``` yaml
+      - EMAIL_HOST=my.host.com
+      - EMAIL_PASSWORD=myAppPassword
+      ...
+      - EMAIL_USERNAME=myEmailUsername@host.com
+      - EMAIL_RECEIVING_ADDRESS=myEmailUsername@host.com
+```
 
 ## Service Summary
 

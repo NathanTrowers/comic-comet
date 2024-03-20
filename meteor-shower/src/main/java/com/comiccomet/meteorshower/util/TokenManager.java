@@ -32,15 +32,15 @@ public class TokenManager {
                 .parseClaimsJws(token.substring(7))
                 .getBody();
 
-            String adminId = claims.getId();
+            String customerId = claims.getId();
             Date expiresAt = claims.getExpiration();
-            if (expiresAt.before(new Date()) || adminId == null) {
+            if (expiresAt.before(new Date()) || customerId == null) {
                 return validationFailure;
             }
 
-            log.info("Token validation successful for id {}!", adminId);
+            log.info("Token validation successful for id {}!", customerId);
 
-            return adminId;
+            return customerId;
         } catch(MissingClaimException missingClaimException) {
             log.error("A claim is missing from this token: \n", missingClaimException);
 

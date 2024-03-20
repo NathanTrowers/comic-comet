@@ -5,7 +5,6 @@ import { Observable, catchError, of } from 'rxjs';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import ComicBookCatalogue from 'src/app/comic-book/interfaces/ComicBookCatalogue';
 import { environment } from 'src/environments/environments';
-import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
 
 @Injectable({ providedIn: 'root' })
 export class ComicBookService {
