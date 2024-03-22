@@ -1,3 +1,13 @@
+#imageContainer {
+    display: grid;
+    align-items: center;
+    background-color: var(--secondary-color);
+}
+
+#imageContainer > img {
+    height: 10rem;
+}
+
 header {
     display: grid;
     grid-template: 1fr 1fr 1fr 1fr 1fr;
@@ -30,10 +40,9 @@ a:hover, a:focus  {
     cursor: pointer;
 }
 
-li {
+img {
     grid-column: 2/ span 1;
-    list-style: none;
-    text-decoration: none;
+    height: inherit;
 }
 
 div {

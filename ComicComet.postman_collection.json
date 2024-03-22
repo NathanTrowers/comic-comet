@@ -1,0 +1,2213 @@
+{
+	"info": {
+		"_postman_id": "d7112fe2-0c37-4028-ad58-9b4dc3b88ef0",
+		"name": "ComicComet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8385097"
+	},
+	"item": [
+		{
+			"name": "Fourth Wall",
+			"item": [
+				{
+					"name": "Admin: Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let adminLoginIterator = pm.variables.get('adminLoginIterator');",
+									"if (!adminLoginIterator) {",
+									"    pm.variables.set('adminLoginIterator', 0);",
+									"    adminLoginIterator = 0;",
+									"}",
+									"",
+									"// wrong email format v1",
+									"if (adminLoginIterator === 0) {",
+									"    let base64Email = Buffer.from('admin!@test.com').toString('base64');",
+									"    let base64Password = Buffer.from('@dM1nistr8tor').toString('base64');",
+									"    pm.variables.set('admin-login-email', base64Email);",
+									"    pm.variables.set('admin-login-password', base64Password);",
+									"}",
+									"// wrong email format v2",
+									"if (adminLoginIterator === 1) {",
+									"    let base64Email = Buffer.from('admin@test%%.com').toString('base64');",
+									"    pm.variables.set('admin-login-email', base64Email);",
+									"}",
+									"",
+									"// wrong password format",
+									"if (adminLoginIterator === 2) {",
+									"    let base64Email = Buffer.from('admin@test.com').toString('base64');",
+									"    let base64Password = Buffer.from('wrran(_)-bang').toString('base64');",
+									"    pm.variables.set('admin-login-email', base64Email);",
+									"    pm.variables.set('admin-login-password', base64Password);",
+									"}",
+									"",
+									"// wrong password",
+									"if (adminLoginIterator === 3) {",
+									"    let base64Password = Buffer.from('wrrang{}bang').toString('base64');",
+									"    pm.variables.set('admin-login-password', base64Password);",
+									"}",
+									"",
+									"// user not found ",
+									"if (adminLoginIterator === 4) {",
+									"    let base64Email = Buffer.from('unknown@test.com').toString('base64');",
+									"    let base64Password = Buffer.from('@dM1nistr8tor').toString('base64');",
+									"    pm.variables.set('admin-login-email', base64Email);",
+									"    pm.variables.set('admin-login-password', base64Password);",
+									"}",
+									"",
+									"// credentials are correct",
+									"if (adminLoginIterator === 5) {",
+									"    let base64Email = Buffer.from('admin@test.com').toString('base64');",
+									"    pm.variables.set('admin-login-email', base64Email);",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let adminLoginIterator = pm.variables.get('adminLoginIterator');",
+									"",
+									"if (adminLoginIterator < 5) {",
+									"    pm.test('invalid credentials returns 400 response', () => {",
+									"        pm.response.to.have.status(400);",
+									"    });",
+									"}",
+									"",
+									"if (adminLoginIterator === 5) {",
+									"    pm.test('valid login returns username and JWT', () => {",
+									"        pm.response.to.have.status(202);",
+									"        const response = pm.response.json().response;",
+									"        console.log(\"Token: \", response);",
+									"        pm.variables.set('admin-authorization', `Bearer ${response}`);",
+									"    });",
+									"}",
+									"",
+									"adminLoginIterator < 5",
+									"    ? postman.setNextRequest('Admin: Login')",
+									"    : postman.setNextRequest('Admin: Comic Books');",
+									"",
+									"adminLoginIterator++;",
+									"pm.variables.set('adminLoginIterator', adminLoginIterator);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{admin-login-email}}\",\n    \"password\": \"{{admin-login-password}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fourth-wall-base-url}}/admin/login",
+							"host": [
+								"{{fourth-wall-base-url}}"
+							],
+							"path": [
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer: Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let customerLoginIterator = pm.variables.get('customerLoginIterator');",
+									"if (!customerLoginIterator) {",
+									"    pm.variables.set('customerLoginIterator', 0);",
+									"    customerLoginIterator = 0;",
+									"}",
+									"",
+									"// wrong email format v1",
+									"if (customerLoginIterator === 0) {",
+									"    let base64Email = Buffer.from('comicman!@test.com').toString('base64');",
+									"    let base64Password = Buffer.from('com1cFanat!c').toString('base64');",
+									"    pm.variables.set('customer-login-email', base64Email);",
+									"    pm.variables.set('customer-login-password', base64Password);",
+									"}",
+									"// wrong email format v2",
+									"if (customerLoginIterator === 1) {",
+									"    let base64Email = Buffer.from('customer@test%%.com').toString('base64');",
+									"    pm.variables.set('customer-login-email', base64Email);",
+									"}",
+									"",
+									"// wrong password format",
+									"if (customerLoginIterator === 2) {",
+									"    let base64Email = Buffer.from('comicman@test.com').toString('base64');",
+									"    let base64Password = Buffer.from('wrran(_)-bang').toString('base64');",
+									"    pm.variables.set('customer-login-email', base64Email);",
+									"    pm.variables.set('customer-login-password', base64Password);",
+									"}",
+									"",
+									"// wrong password",
+									"if (customerLoginIterator === 3) {",
+									"    let base64Password = Buffer.from('wrrang-bang').toString('base64');",
+									"    pm.variables.set('customer-login-password', base64Password);",
+									"}",
+									"",
+									"// user not found ",
+									"if (customerLoginIterator === 4) {",
+									"    let base64Email = Buffer.from('unknown@test.com').toString('base64');",
+									"    let base64Password = Buffer.from('com1cFanat!c').toString('base64');",
+									"    pm.variables.set('customer-login-email', base64Email);",
+									"    pm.variables.set('customer-login-password', base64Password);",
+									"}",
+									"",
+									"// credentials are correct",
+									"if (customerLoginIterator === 5) {",
+									"    let base64Email = Buffer.from('comicman@test.com').toString('base64');",
+									"    pm.variables.set('customer-login-email', base64Email);",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let customerLoginIterator = pm.variables.get('customerLoginIterator');",
+									"",
+									"if (customerLoginIterator < 5) {    ",
+									"    pm.test('invalid credentials returns 400 response', () => {",
+									"        pm.response.to.have.status(400);",
+									"    });",
+									"}",
+									"",
+									"if (customerLoginIterator === 5) {",
+									"    pm.test('valid login returns username and JWT', () => {",
+									"        pm.response.to.have.status(202);",
+									"        const response = pm.response.json().response;",
+									"        console.log(\"Token: \", response);",
+									"        pm.variables.set('customer-authorization', `Bearer ${response}`);",
+									"    });",
+									"}",
+									"",
+									"if (customerLoginIterator < 5) {",
+									"    postman.setNextRequest('Customer: Login');",
+									"}",
+									"",
+									"if (customerLoginIterator === 5) {",
+									"    postman.setNextRequest('Customer: Comic Books');",
+									"}",
+									"",
+									"customerLoginIterator++;",
+									"pm.variables.set('customerLoginIterator', customerLoginIterator);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{customer-login-email}}\",\n    \"password\": \"{{customer-login-password}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fourth-wall-base-url}}/login",
+							"host": [
+								"{{fourth-wall-base-url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer: Login (Email)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let base64Email = Buffer.from('comicmanbrother@test.com').toString('base64');",
+									"let base64Password = Buffer.from('com1cFanat!c').toString('base64');",
+									"pm.variables.set('customer-login-email', base64Email);",
+									"pm.variables.set('customer-login-password', base64Password);",
+									"",
+									"postman.setNextRequest('Message from Customer');",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('valid login returns username and JWT', () => {",
+									"    pm.response.to.have.status(202);",
+									"    const response = pm.response.json().response;",
+									"    console.log(\"Token: \", response);",
+									"    pm.variables.set('customer-authorization', `Bearer ${response}`);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{customer-login-email}}\",\n    \"password\": \"{{customer-login-password}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fourth-wall-base-url}}/login",
+							"host": [
+								"{{fourth-wall-base-url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin: Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('User successfully logs out', () => {",
+									"    pm.response.to.have.status(202);",
+									"    const response = pm.response.json().invalidToken;",
+									"    console.log(\"Invalid Token: \", response);",
+									"});",
+									"",
+									"postman.setNextRequest('Customer: Login');",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{admin-authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{fourth-wall-base-url}}/logout",
+							"host": [
+								"{{fourth-wall-base-url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer: Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('User successfully logs out', () => {",
+									"    pm.response.to.have.status(202);",
+									"    const response = pm.response.json().invalidToken;",
+									"    console.log(\"Invalid Token: \", response);",
+									"});",
+									"",
+									"postman.setNextRequest('Register Customer');",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customer-authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{fourth-wall-base-url}}/logout",
+							"host": [
+								"{{fourth-wall-base-url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer: Logout (Email)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('User successfully logs out', () => {",
+									"    pm.response.to.have.status(202);",
+									"    const response = pm.response.json().invalidToken;",
+									"    console.log(\"Invalid Token: \", response);",
+									"});",
+									"",
+									"postman.setNextRequest(null);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customer-authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{fourth-wall-base-url}}/logout",
+							"host": [
+								"{{fourth-wall-base-url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Customer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let registerIterator = pm.variables.get('registerIterator');",
+									"if (!registerIterator) {",
+									"    pm.variables.set('registerIterator', 0);",
+									"    registerIterator = 0;",
+									"}",
+									"",
+									"// wrong email format v1",
+									"if (registerIterator === 0) {",
+									"    let base64Email = Buffer.from('comicchad!@test.com').toString('base64');",
+									"    let base64Name = Buffer.from('Comic Chad').toString('base64');",
+									"    let base64Password = Buffer.from('com1cFanat!cLt!m').toString('base64');",
+									"    pm.variables.set('customer-login-email', base64Email);",
+									"    pm.variables.set('customer-name', base64Name);",
+									"    pm.variables.set('customer-login-password', base64Password);",
+									"}",
+									"// wrong email format v2",
+									"if (registerIterator === 1) {",
+									"    let base64Email = Buffer.from('comicchad@test%%.com').toString('base64');",
+									"    pm.variables.set('customer-login-email', base64Email);",
+									"}",
+									"// wrong email format v3",
+									"if (registerIterator === 2) {",
+									"    let base64Email = Buffer.from('comicch!d@test%%.c').toString('base64');",
+									"    pm.variables.set('customer-login-email', base64Email);",
+									"}",
+									"// wrong password format v1",
+									"if (registerIterator === 3) {",
+									"    let base64Email = Buffer.from('comicchad@test.com').toString('base64');",
+									"    let base64Password = Buffer.from('comicFa').toString('base64');",
+									"    pm.variables.set('customer-login-email', base64Email);",
+									"    pm.variables.set('customer-login-password', base64Password);",
+									"}",
+									"// wrong password format v2",
+									"if (registerIterator === 4) {",
+									"    let base64Password = Buffer.from('c()micFanat!c').toString('base64');",
+									"    pm.variables.set('customer-login-password', base64Password);",
+									"}",
+									"// wrong password format v3",
+									"if (registerIterator === 5) {",
+									"    let base64Password = Buffer.from('c%micFanat!ccccccccccccccccccccc').toString('base64');",
+									"    pm.variables.set('customer-login-password', base64Password);",
+									"}",
+									"// wrong user name format v1",
+									"if (registerIterator === 6) {",
+									"    let base64Name = Buffer.from('Comic_Ch!d').toString('base64');",
+									"    let base64Password = Buffer.from('com1cFanat!cLt!m').toString('base64');",
+									"    pm.variables.set('customer-login-password', base64Password);",
+									"    pm.variables.set('customer-name', base64Name);",
+									"}",
+									"// wrong user name format v2",
+									"if (registerIterator === 7) {",
+									"    let base64Name = Buffer.from('Comic Chad{mongodb:injectionAttack}').toString('base64');",
+									"    pm.variables.set('customer-name', base64Name);",
+									"}",
+									"// wrong user name format v3",
+									"if (registerIterator === 8) {",
+									"    let base64Name = Buffer.from('Comic_Ch!d').toString('base64');",
+									"    pm.variables.set('customer-name', base64Name);",
+									"}",
+									"",
+									"// request is made with known user's email",
+									"if (registerIterator === 9) {",
+									"    let base64Email = Buffer.from('comicman@test.com').toString('base64');",
+									"    let base64Name = Buffer.from('Comic Chad').toString('base64');",
+									"    pm.variables.set('customer-login-email', base64Email);",
+									"    pm.variables.set('customer-name', base64Name);",
+									"}",
+									"",
+									"// credentials are correct",
+									"if (registerIterator === 10) {",
+									"    let base64Email = Buffer.from('comicchad@test.com').toString('base64');",
+									"    pm.variables.set('customer-login-email', base64Email);",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let registerIterator = pm.variables.get('registerIterator');",
+									"",
+									"    if (registerIterator < 3) {",
+									"        pm.test(\"Status code is 400 when an improperly formatted email is entered\", () => {",
+									"            pm.response.to.have.status(400);",
+									"            pm.expect(pm.response.json().errorCodes).to.eql([400001001]);",
+									"        });",
+									"    }",
+									"    if (registerIterator > 2 && registerIterator < 6) {",
+									"        pm.test(\"Status code is 400 when an improperly formatted password is entered\", () => {",
+									"            pm.response.to.have.status(400);",
+									"            pm.expect(pm.response.json().errorCodes).to.eql([400001002]);",
+									"        });",
+									"    }",
+									"    if (registerIterator > 5 && registerIterator < 9) {",
+									"        pm.test(\"Status code is 400 when an improperly formatted user name is entered\", () => {",
+									"            pm.response.to.have.status(400);",
+									"            pm.expect(pm.response.json().errorCodes).to.eql([400001005]);",
+									"        });",
+									"    }",
+									"    if (registerIterator === 9) {",
+									"        pm.test(\"Status code is 400 when a known email address is entered\", () => {",
+									"            pm.response.to.have.status(400);",
+									"            pm.expect(pm.response.json().errorCodes).to.eql([400001007]);",
+									"        });",
+									"    }",
+									"    if (registerIterator === 10) { ",
+									"        //NOTE: A manual deletion of the test user is required after each run of the below test.",
+									"        pm.test(\"Status code is 202 when the right credentials are entered\", () => {",
+									"            pm.response.to.have.status(202);",
+									"        });",
+									"    }",
+									"",
+									"    registerIterator < 10",
+									"        ? postman.setNextRequest('Register Customer')",
+									"        : postman.setNextRequest(\"Customer: Login (Email)\");",
+									"",
+									"    registerIterator++;",
+									"    pm.variables.set('registerIterator', registerIterator);                    ",
+									"  "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{customer-login-email}}\",\n    \"name\": \"{{customer-name}}\",\n    \"password\": \"{{customer-login-password}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fourth-wall-base-url}}/register",
+							"host": [
+								"{{fourth-wall-base-url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Manual Admin Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let base64Email = Buffer.from('admin@test.com').toString('base64');",
+									"let base64Password = Buffer.from('@dM1nistr8tor').toString('base64');",
+									"pm.variables.set('admin-login-email', base64Email);",
+									"pm.variables.set('admin-login-password', base64Password);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json().response;",
+									"console.log(\"Token: \", response);",
+									"pm.variables.set('admin-authorization', `Bearer ${response}`);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{admin-login-email}}\",\n    \"password\": \"{{admin-login-password}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fourth-wall-base-url}}/admin/login",
+							"host": [
+								"{{fourth-wall-base-url}}"
+							],
+							"path": [
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Manual Customer Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let base64Email = Buffer.from('comicman@test.com').toString('base64');",
+									"let base64Password = Buffer.from('com1cFanat!c').toString('base64');",
+									"pm.variables.set('customer-login-email', base64Email);",
+									"pm.variables.set('customer-login-password', base64Password);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json().response;",
+									"console.log(\"Token: \", response);",
+									"pm.variables.set('customer-authorization', `Bearer ${response}`);",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{customer-login-email}}\",\n    \"password\": \"{{customer-login-password}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fourth-wall-base-url}}/login",
+							"host": [
+								"{{fourth-wall-base-url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sage Cave",
+			"item": [
+				{
+					"name": "Admin: Comic Books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('request returns 200 response', () => {",
+									"    pm.response.to.have.status(200);",
+									"    const targetComicBook = pm.response.json()._embedded.comicBookList.filter(comicBook => comicBook.name === 'Como Agua Para Chocolate');",
+									"    pm.expect(targetComicBook[0].name).to.eql('Como Agua Para Chocolate');",
+									"});",
+									"",
+									"postman.setNextRequest('Admin: Single Comic Book');",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{admin-authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{sage-cave-base-url}}/comic-books",
+							"host": [
+								"{{sage-cave-base-url}}"
+							],
+							"path": [
+								"comic-books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin: Single Comic Book",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let adminSingleComicIterator = pm.variables.get('adminSingleComicIterator');",
+									"if (!adminSingleComicIterator) {",
+									"    pm.variables.set('adminSingleComicIterator', 0);",
+									"    adminSingleComicIterator = 0;",
+									"}",
+									"",
+									"if (adminSingleComicIterator == 1) {",
+									"    pm.variables.set('comic-book-id', '6963a34d-7c0a-42ed-961f-83b31e7c8f36');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let adminSingleComicIterator = pm.variables.get('adminSingleComicIterator');",
+									"",
+									"if (adminSingleComicIterator === 0) {",
+									"    pm.test('request returns 200 response', () => {",
+									"        pm.response.to.have.status(200);",
+									"        const comicBookName = pm.response.json().name;",
+									"        pm.expect(comicBookName).to.eql('Coiling Dragon');",
+									"    });",
+									"}",
+									"",
+									"if (adminSingleComicIterator === 1) {",
+									"    pm.test('request returns 404 response', () => {",
+									"        pm.response.to.have.status(404);",
+									"    });",
+									"}",
+									"",
+									"adminSingleComicIterator < 1",
+									"    ? postman.setNextRequest('Admin: Single Comic Book')",
+									"    : postman.setNextRequest('Admin: Add New Comic Book');",
+									"",
+									"adminSingleComicIterator++;",
+									"pm.variables.set('adminSingleComicIterator', adminSingleComicIterator);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{admin-authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{sage-cave-base-url}}/comic-books/{{comic-book-id}}",
+							"host": [
+								"{{sage-cave-base-url}}"
+							],
+							"path": [
+								"comic-books",
+								"{{comic-book-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin: Add New Comic Book",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let newComicBookIterator = pm.variables.get('newComicBookIterator');",
+									"if (!newComicBookIterator) {",
+									"    pm.variables.set('newComicBookIterator', 0);",
+									"    newComicBookIterator = 0;",
+									"}",
+									"",
+									"// wrong name format",
+									"if (newComicBookIterator === 0) {",
+									"    let coverArtInBytes = new Uint8Array();",
+									"    pm.variables.set('new-comic-book-name', '{injectionAttack: malice}');",
+									"    pm.variables.set('new-comic-book-author', 'Morpheus');",
+									"    pm.variables.set('new-comic-book-price', 99.99);",
+									"    pm.variables.set('new-comic-book-quantity', 3);",
+									"    pm.variables.set('new-comic-book-cover-art', Array.from(coverArtInBytes));",
+									"    pm.variables.set('new-comic-book-carry-status', 'carrying');",
+									"}",
+									"// wrong author format",
+									"if (newComicBookIterator === 1) {",
+									"    pm.variables.set('new-comic-book-name', 'Binary Barons');",
+									"    pm.variables.set('new-comic-book-author', 'Examp!e $uthor');",
+									"}",
+									"// wrong price format",
+									"if (newComicBookIterator === 2) {",
+									"    pm.variables.set('new-comic-book-author', 'Morpheus');",
+									"    pm.variables.set('new-comic-book-price', 9999.00);",
+									"}",
+									"// wrong quantity format",
+									"if (newComicBookIterator === 3) {",
+									"    pm.variables.set('new-comic-book-price', 99.99);",
+									"    pm.variables.set('new-comic-book-quantity', -3);",
+									"}",
+									"// wrong carry status format",
+									"if (newComicBookIterator === 4) {",
+									"    pm.variables.set('new-comic-book-quantity', 3);",
+									"    pm.variables.set('new-comic-book-carry-status', 'carrying|discontinued');",
+									"}",
+									"// valid payload",
+									"if (newComicBookIterator === 5) {",
+									"    pm.variables.set('new-comic-book-carry-status', 'carrying');",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let newComicBookIterator = pm.variables.get('newComicBookIterator');",
+									"",
+									"if (newComicBookIterator === 0) {",
+									"    pm.test(\"Status code is 400 when an improperly formatted comic book name is entered\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400002007]);",
+									"    });",
+									"}",
+									"if (newComicBookIterator === 1) {",
+									"    pm.test(\"Status code is 400 when an improperly formatted author is entered\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400002008]);",
+									"    });",
+									"}",
+									"if (newComicBookIterator === 2) {",
+									"    pm.test(\"Status code is 400 when an improperly formatted price is entered\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400002009]);",
+									"    });",
+									"}",
+									"if (newComicBookIterator === 3) {",
+									"    pm.test(\"Status code is 400 when an improperly formatted quantity is entered\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400002010]);",
+									"    });",
+									"}",
+									"if (newComicBookIterator === 4) {",
+									"    pm.test(\"Status code is 400 when an improperly formated carry status is entered\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400002011]);",
+									"    });",
+									"}",
+									"if (newComicBookIterator === 5) {",
+									"    //NOTE: A manual deletion of the test comic book is required after each run of the below test.",
+									"    pm.test(\"Status code is 202 when a valid payload is entered\", () => {",
+									"        pm.response.to.have.status(202);",
+									"        ",
+									"        const comicBookId = pm.response.json().comicBookId;",
+									"        console.log(\"comicBookId: \", comicBookId);",
+									"        pm.variables.set('comic-book-id', comicBookId);",
+									"        pm.variables.set('deletable-comic-book-id', comicBookId);",
+									"    });",
+									"}",
+									"",
+									"newComicBookIterator < 5",
+									"    ? postman.setNextRequest('Admin: Add New Comic Book')",
+									"    : postman.setNextRequest('Admin: Update Comic Book');",
+									"",
+									"newComicBookIterator++;",
+									"pm.variables.set('newComicBookIterator', newComicBookIterator);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{admin-authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{new-comic-book-name}}\",\n    \"author\": \"{{new-comic-book-author}}\",\n    \"price\": {{new-comic-book-price}},\n    \"quantity\": \"{{new-comic-book-quantity}}\",\n    \"coverArt\": [{{new-comic-book-cover-art}}],\n    \"carryStatus\": \"{{new-comic-book-carry-status}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{sage-cave-base-url}}/comic-books/new",
+							"host": [
+								"{{sage-cave-base-url}}"
+							],
+							"path": [
+								"comic-books",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin: Update Comic Book",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let updateComicBookIterator = pm.variables.get('updateComicBookIterator');",
+									"if (!updateComicBookIterator) {",
+									"    pm.variables.set('updateComicBookIterator', 0);",
+									"    updateComicBookIterator = 0;",
+									"}",
+									"",
+									"// wrong name format",
+									"if (updateComicBookIterator === 0) {",
+									"    let coverArtInBytes = new Uint8Array();",
+									"    pm.variables.set('new-comic-book-name', '{injectionAttack: malice}');",
+									"    pm.variables.set('new-comic-book-author', 'Morpheus');",
+									"    pm.variables.set('new-comic-book-price', 99.99);",
+									"    pm.variables.set('new-comic-book-quantity', 3);",
+									"    pm.variables.set('new-comic-book-cover-art', Array.from(coverArtInBytes));",
+									"    pm.variables.set('new-comic-book-carry-status', 'carrying');",
+									"}",
+									"// wrong author format",
+									"if (updateComicBookIterator === 1) {",
+									"    pm.variables.set('new-comic-book-name', 'Binary Barons');",
+									"    pm.variables.set('new-comic-book-author', 'Examp!e $uthor');",
+									"}",
+									"// wrong price format",
+									"if (updateComicBookIterator === 2) {",
+									"    pm.variables.set('new-comic-book-author', 'Morpheus');",
+									"    pm.variables.set('new-comic-book-price', 9999.00);",
+									"}",
+									"// wrong quantity format",
+									"if (updateComicBookIterator === 3) {",
+									"    pm.variables.set('new-comic-book-price', 99.99);",
+									"    pm.variables.set('new-comic-book-quantity', -3);",
+									"}",
+									"// wrong carry status format",
+									"if (updateComicBookIterator === 4) {",
+									"    pm.variables.set('new-comic-book-quantity', 3);",
+									"    pm.variables.set('new-comic-book-carry-status', 'carrying|discontinued');",
+									"}",
+									"// comic book with no updates",
+									"if (updateComicBookIterator === 5) {",
+									"    pm.variables.set('new-comic-book-carry-status', 'carrying');",
+									"}",
+									"// valid payload",
+									"if (updateComicBookIterator === 6) {",
+									"    pm.variables.set('new-comic-book-carry-status', 'discontinued');",
+									"}",
+									"// comic book id not found",
+									"if (updateComicBookIterator === 7) {",
+									"    pm.variables.set('comic-book-id', '6963a34d-7c0a-42ed-961f-83b31e7c8f36');",
+									"}",
+									"// comic book id invalid",
+									"if (updateComicBookIterator === 8) {",
+									"    pm.variables.set('comic-book-id', '6963a34d-7c0a-42ed-961f-83b31e7c8f3');",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let updateComicBookIterator = pm.variables.get('updateComicBookIterator');",
+									"",
+									"if (updateComicBookIterator === 0) {",
+									"    pm.test(\"Status code is 400 when an improperly formatted comic book name is entered\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400002007]);",
+									"    });",
+									"}",
+									"if (updateComicBookIterator === 1) {",
+									"    pm.test(\"Status code is 400 when an improperly formatted author is entered\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400002008]);",
+									"    });",
+									"}",
+									"if (updateComicBookIterator === 2) {",
+									"    pm.test(\"Status code is 400 when an improperly formatted price is entered\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400002009]);",
+									"    });",
+									"}",
+									"if (updateComicBookIterator === 3) {",
+									"    pm.test(\"Status code is 400 when an improperly formatted quantity is entered\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400002010]);",
+									"    });",
+									"}",
+									"if (updateComicBookIterator === 4) {",
+									"    pm.test(\"Status code is 400 when an improperly formated carry status is entered\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400002011]);",
+									"    });",
+									"}",
+									"if (updateComicBookIterator === 5) {",
+									"    pm.test(\"Status code is 400 when there are no updates to the comic book\", () => {",
+									"        pm.response.to.have.status(400);",
+									"    });",
+									"}",
+									"if (updateComicBookIterator === 6) {",
+									"    pm.test(\"Status code is 202 when a valid payload is entered\", () => {",
+									"        pm.response.to.have.status(202);",
+									"    });",
+									"}",
+									"if (updateComicBookIterator === 7) {",
+									"    pm.test(\"Status code is 404 when the comicBookId is not in the database\", () => {",
+									"        pm.response.to.have.status(404);",
+									"    });",
+									"}",
+									"if (updateComicBookIterator === 8) {",
+									"    pm.test(\"Status code is 400 when a comicBookId of the wrong format is given\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400002006]);",
+									"    });",
+									"}",
+									"",
+									"updateComicBookIterator < 8",
+									"    ? postman.setNextRequest('Admin: Update Comic Book')",
+									"    : postman.setNextRequest('Admin: Delete Comic Book');",
+									"",
+									"updateComicBookIterator++;",
+									"pm.variables.set('updateComicBookIterator', updateComicBookIterator);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{admin-authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comicBookId\": \"{{comic-book-id}}\",\n    \"name\": \"{{new-comic-book-name}}\",\n    \"author\": \"{{new-comic-book-author}}\",\n    \"price\": {{new-comic-book-price}},\n    \"quantity\": \"{{new-comic-book-quantity}}\",\n    \"coverArt\": [{{new-comic-book-cover-art}}],\n    \"carryStatus\": \"{{new-comic-book-carry-status}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{sage-cave-base-url}}/comic-books/{{comic-book-id}}",
+							"host": [
+								"{{sage-cave-base-url}}"
+							],
+							"path": [
+								"comic-books",
+								"{{comic-book-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin: Delete Comic Book",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let deleteComicBookIterator = pm.variables.get('deleteComicBookIterator');",
+									"if (!deleteComicBookIterator) {",
+									"    pm.variables.set('deleteComicBookIterator', 0);",
+									"    deleteComicBookIterator = 0;",
+									"}",
+									"",
+									"// null id",
+									"if (deleteComicBookIterator === 1) {",
+									"        pm.variables.set('deletable-comic-book-id', '{injectionAttack:malice}');",
+									"",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let deleteComicBookIterator = pm.variables.get('deleteComicBookIterator');",
+									"",
+									"if (deleteComicBookIterator === 0) {",
+									"    pm.test(\"Status code is 202 when a known id is sent in the request\", () => {",
+									"        pm.response.to.have.status(202);",
+									"        pm.expect(pm.response.json().message).to.eql(\"Deletion successful\");",
+									"    });",
+									"}",
+									"if (deleteComicBookIterator === 1) {",
+									"    pm.test(\"Status code is 400 when no id is sent with the request\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400002006]);",
+									"    });",
+									"}",
+									"",
+									"deleteComicBookIterator < 1",
+									"    ? postman.setNextRequest('Admin: Delete Comic Book')",
+									"    : postman.setNextRequest('Admin: Logout');",
+									"",
+									"deleteComicBookIterator++;",
+									"pm.variables.set('deleteComicBookIterator', deleteComicBookIterator);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{admin-authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{sage-cave-base-url}}/comic-books/{{deletable-comic-book-id}}",
+							"host": [
+								"{{sage-cave-base-url}}"
+							],
+							"path": [
+								"comic-books",
+								"{{deletable-comic-book-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Meteor Shower",
+			"item": [
+				{
+					"name": "Customer: Comic Books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('request returns 200 response', () => {",
+									"    pm.response.to.have.status(200);",
+									"    const comicBookList = pm.response.json()._embedded.comicBookList;",
+									"    const targetComicBook = comicBookList.filter(comicBook => comicBook.name === 'Como Agua Para Chocolate');",
+									"    ",
+									"    pm.expect(targetComicBook[0].name).to.eql('Como Agua Para Chocolate');",
+									"    ",
+									"    /** FOR THE Customer: New Order TEST */",
+									"    const theLastChristian = comicBookList.filter(comicBook => comicBook.name === 'The Last Christian');",
+									"    const coilingDragon = comicBookList.filter(comicBook => comicBook.name === 'Coiling Dragon');",
+									"    pm.variables.set('the-last-christian-id', theLastChristian[0].comicBookId);",
+									"    pm.variables.set('coiling-dragon-id', coilingDragon[0].comicBookId);",
+									"});",
+									"",
+									"postman.setNextRequest('Customer: Single Comic Book');",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customer-authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{meteor-shower-base-url}}/comic-books",
+							"host": [
+								"{{meteor-shower-base-url}}"
+							],
+							"path": [
+								"comic-books"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Customer: Comic Books Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{customer-authorization}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{meteor-shower-base-url}}/comic-books",
+									"host": [
+										"{{meteor-shower-base-url}}"
+									],
+									"path": [
+										"comic-books"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Dec 2023 14:40:38 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_embedded\": {\n        \"comicBookList\": [\n            {\n                \"comicBookId\": \"383e7a0f-d3b9-47bf-8fa7-ae8be787f4df\",\n                \"name\": \"Como Agua Para Chocolate\",\n                \"author\": \"Laura Esquivel\",\n                \"price\": 24,\n                \"quantity\": 2,\n                \"coverArt\": null,\n                \"carryStatus\": \"carrying\",\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8091/comic-books/383e7a0f-d3b9-47bf-8fa7-ae8be787f4df\"\n                    },\n                    \"comicBooks\": {\n                        \"href\": \"http://localhost:8091/comic-books\"\n                    }\n                }\n            },\n            {\n                \"comicBookId\": \"523e4c09-59d0-4165-a0e3-695633d299a2\",\n                \"name\": \"Binary Barons\",\n                \"author\": \"Morpheus\",\n                \"price\": 99.99,\n                \"quantity\": 7,\n                \"coverArt\": \"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\",\n                \"carryStatus\": \"carrying\",\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8091/comic-books/523e4c09-59d0-4165-a0e3-695633d299a2\"\n                    },\n                    \"comicBooks\": {\n                        \"href\": \"http://localhost:8091/comic-books\"\n                    }\n                }\n            },\n            {\n                \"comicBookId\": \"6963a34d-7c0a-42ed-961f-83b31e7c8f33\",\n                \"name\": \"Coiling Dragon\",\n                \"author\": \"I Eat Tomatoes\",\n                \"price\": 108,\n                \"quantity\": 100,\n                \"coverArt\": null,\n                \"carryStatus\": \"carrying\",\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8091/comic-books/6963a34d-7c0a-42ed-961f-83b31e7c8f33\"\n                    },\n                    \"comicBooks\": {\n                        \"href\": \"http://localhost:8091/comic-books\"\n                    }\n                }\n            },\n            {\n                \"comicBookId\": \"74f3ed39-a491-4372-b203-ecac531ef560\",\n                \"name\": \"Binary Barons\",\n                \"author\": \"Morpheus\",\n                \"price\": 99.99,\n                \"quantity\": 7,\n                \"coverArt\": \"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\",\n                \"carryStatus\": \"carrying\",\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8091/comic-books/74f3ed39-a491-4372-b203-ecac531ef560\"\n                    },\n                    \"comicBooks\": {\n                        \"href\": \"http://localhost:8091/comic-books\"\n                    }\n                }\n            },\n            {\n                \"comicBookId\": \"88d9835e-e261-442b-8ecd-dd040e7c01ea\",\n                \"name\": \"Binary Barons 2\",\n                \"author\": \"Morpheus\",\n                \"price\": 99.99,\n                \"quantity\": 7,\n                \"coverArt\": \"\",\n                \"carryStatus\": \"carrying\",\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8091/comic-books/88d9835e-e261-442b-8ecd-dd040e7c01ea\"\n                    },\n                    \"comicBooks\": {\n                        \"href\": \"http://localhost:8091/comic-books\"\n                    }\n                }\n            },\n            {\n                \"comicBookId\": \"d17f85b9-dc7e-42a4-b917-9cf5f8033fed\",\n                \"name\": \"The Last Christian\",\n                \"author\": \"David Gregory\",\n                \"price\": 50,\n                \"quantity\": 1,\n                \"coverArt\": null,\n                \"carryStatus\": \"carrying\",\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8091/comic-books/d17f85b9-dc7e-42a4-b917-9cf5f8033fed\"\n                    },\n                    \"comicBooks\": {\n                        \"href\": \"http://localhost:8091/comic-books\"\n                    }\n                }\n            }\n        ]\n    },\n    \"_links\": {\n        \"self\": {\n            \"href\": \"http://localhost:8091/comic-books\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Customer: Single Comic Book",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let customerSingleComicIterator = pm.variables.get('customerSingleComicIterator');",
+									"if (!customerSingleComicIterator) {",
+									"    pm.variables.set('customerSingleComicIterator', 0);",
+									"    customerSingleComicIterator = 0;",
+									"}",
+									"",
+									"// existing comic book",
+									"if (customerSingleComicIterator == 0) {",
+									"    const coilingDragonId = pm.variables.get('coiling-dragon-id');",
+									"    pm.variables.set('comic-book-id', coilingDragonId);",
+									"}",
+									"",
+									"// unknown comic book",
+									"if (customerSingleComicIterator == 1) {",
+									"    pm.variables.set('comic-book-id', '6963a34d-7c0a-42ed-961f-83b31e7c8f36');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let customerSingleComicIterator = pm.variables.get('customerSingleComicIterator');",
+									"",
+									"if (customerSingleComicIterator === 0) {",
+									"    pm.test('request returns 200 response', () => {",
+									"        pm.response.to.have.status(200);",
+									"        const comicBookName = pm.response.json().name;",
+									"        pm.expect(comicBookName).to.eql('Coiling Dragon');",
+									"    });",
+									"}",
+									"",
+									"if (customerSingleComicIterator === 1) {",
+									"    pm.test('request returns 404 response', () => {",
+									"        pm.response.to.have.status(404);",
+									"    });",
+									"}",
+									"",
+									"customerSingleComicIterator < 1",
+									"    ? postman.setNextRequest('Customer: Single Comic Book')",
+									"    : postman.setNextRequest('Customer: New Order');",
+									"",
+									"customerSingleComicIterator++;",
+									"pm.variables.set('customerSingleComicIterator', customerSingleComicIterator);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customer-authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{meteor-shower-base-url}}/comic-books/{{comic-book-id}}",
+							"host": [
+								"{{meteor-shower-base-url}}"
+							],
+							"path": [
+								"comic-books",
+								"{{comic-book-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer: New Order",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let newOrderIterator = pm.variables.get('newOrderIterator');",
+									"if (!newOrderIterator) {",
+									"    pm.variables.set('newOrderIterator', 0);",
+									"    newOrderIterator = 0;",
+									"}",
+									"",
+									"//invalid Ids",
+									"if (newOrderIterator == 0) {",
+									"    const invalidCustomerId = 'aaaaaaa-aaaa-ddddddddddd';",
+									"    const invalidComicBookId = 'DROP TABLE comic_book;'",
+									"    const orderDate = new Date().toISOString();",
+									"    const returnStatus = 'none';",
+									"",
+									"    pm.variables.set('customer-id-1', invalidCustomerId);",
+									"    pm.variables.set('comic-book-id-1', invalidComicBookId);",
+									"    pm.variables.set('order-date-1', orderDate);",
+									"    pm.variables.set('return-status-1', returnStatus);",
+									"",
+									"    pm.variables.set('customer-id-2', invalidCustomerId);",
+									"    pm.variables.set('comic-book-id-2', invalidCustomerId);",
+									"    pm.variables.set('order-date-2', orderDate);",
+									"    pm.variables.set('return-status-2', returnStatus);",
+									"}",
+									"",
+									"// Invalid Order Date",
+									"if (newOrderIterator == 1) {",
+									"    const customerId = 'f10bd2fb-a2cb-48bd-bb63-5565c8a3b3c1';",
+									"    const theLastChristianId = pm.variables.get('the-last-christian-id');",
+									"",
+									"    pm.variables.replaceIn('{{$randomUUID}}');",
+									"    pm.variables.set('customer-id-1', customerId);",
+									"    pm.variables.set('comic-book-id-1', theLastChristianId);",
+									"    pm.variables.set('order-date-1', '3023-12-20T00:00:00Z');",
+									"",
+									"    const coilingDragonId = pm.variables.get('coiling-dragon-id');",
+									"    pm.variables.replaceIn('{{$randomUUID}}');",
+									"    pm.variables.set('customer-id-2', customerId);",
+									"    pm.variables.set('comic-book-id-2', coilingDragonId);",
+									"    pm.variables.set('order-date-2', '1923-12-20T00:00:00.000Z');",
+									"}",
+									"",
+									"// Invalid Return Status",
+									"if (newOrderIterator == 2) {",
+									"    const orderDate = new Date().toISOString();",
+									"",
+									"    pm.variables.set('order-date-1', orderDate);",
+									"    pm.variables.set('return-status-1', 'return');",
+									"",
+									"    pm.variables.set('order-date-2', orderDate);",
+									"    pm.variables.set('return-status-2', '');",
+									"}",
+									"",
+									"// Valid Payload",
+									"// Manually reset \"The Coiling Dragon\" quantity to 108 once it gets to 8;",
+									"if (newOrderIterator == 3) {",
+									"    const returnStatus = 'none';",
+									"",
+									"    pm.variables.set('return-status-1', returnStatus);",
+									"    pm.variables.set('return-status-2', returnStatus);",
+									"}",
+									" ",
+									"// Out of Stock Comic Book",
+									"if (newOrderIterator == 4) {",
+									"    const theLastChristianId = pm.variables.get('the-last-christian-id');",
+									"",
+									"    pm.variables.set('comic-book-id-1', theLastChristianId);",
+									"    pm.variables.set('comic-book-id-2', theLastChristianId);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let newOrderIterator = pm.variables.get('newOrderIterator');",
+									"",
+									"if (newOrderIterator === 0) {",
+									"    pm.test(\"Status code is 400 when improperly formatted customer and comic_book ids are entered\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400003007, 400003008, 400003007, 400003008]);",
+									"    });",
+									"}",
+									"",
+									"if (newOrderIterator === 1) {",
+									"    pm.test(\"Status code is 400 when improperly formatted order dates are entered\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400003009, 400003009]);",
+									"    });",
+									"}",
+									"",
+									"if (newOrderIterator === 2) {",
+									"    pm.test(\"Status code is 400 when improperly formatted return statuses are entered\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400003010, 400003010]);",
+									"    });",
+									"}",
+									"",
+									"if (newOrderIterator === 3) {",
+									"    pm.test('request returns 202 response when payload is valid', () => {",
+									"        pm.response.to.have.status(202);",
+									"    });",
+									"}",
+									"",
+									"// Reset the quantity value for \"The Last Christian\" to 1 in the database after running the below test.",
+									"if (newOrderIterator === 4) {",
+									"    pm.test(\"Status code is 400 when the requested comic book is out of stock\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400003011, 400003011]);",
+									"    });",
+									"}",
+									"",
+									"newOrderIterator < 4",
+									"    ? postman.setNextRequest('Customer: New Order')",
+									"    : postman.setNextRequest('Customer: Get Address');",
+									"",
+									"newOrderIterator++;",
+									"pm.variables.set('newOrderIterator', newOrderIterator);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customer-authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"orderId\": \"{{$randomUUID}}\",\n        \"customerId\": \"{{customer-id-1}}\",\n        \"comicBookId\": \"{{comic-book-id-1}}\",\n        \"orderDate\": \"{{order-date-1}}\",\n        \"returnStatus\": \"{{return-status-1}}\"\n    },\n    {\n        \"orderId\": \"{{$randomUUID}}\",\n        \"customerId\": \"{{customer-id-2}}\",\n        \"comicBookId\": \"{{comic-book-id-2}}\",\n        \"orderDate\": \"{{order-date-2}}\",\n        \"returnStatus\": \"{{return-status-2}}\"\n    }\n]\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{meteor-shower-base-url}}/order/new",
+							"host": [
+								"{{meteor-shower-base-url}}"
+							],
+							"path": [
+								"order",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer: View Orders",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('request returns 200 response', () => {",
+									"    pm.response.to.have.status(200);",
+									"    const comicBookList = pm.response.json()._embedded.savedComicBookOrderList;",
+									"    const targetOrder = comicBookList.filter(order => order.orderId === '819d98be-20e8-4dbf-8a0d-2b46fe052de1');",
+									"    ",
+									"    pm.expect(targetOrder[0].orderId).to.eql('819d98be-20e8-4dbf-8a0d-2b46fe052de1');",
+									"});",
+									"",
+									"postman.setNextRequest('Customer: Return Order');",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customer-authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{meteor-shower-base-url}}/orders",
+							"host": [
+								"{{meteor-shower-base-url}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer: Get Address",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('request returns 200 response', () => {",
+									"    pm.response.to.have.status(200);",
+									"    const country = pm.response.json().country;",
+									"    pm.expect(country).to.eql('Canada');",
+									"});",
+									"",
+									"postman.setNextRequest('Customer: Update Address');",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customer-authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{meteor-shower-base-url}}/customer/address",
+							"host": [
+								"{{meteor-shower-base-url}}"
+							],
+							"path": [
+								"customer",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer: Update Address",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let updateAddressIterator = pm.variables.get('updateAddressIterator');",
+									"if (!updateAddressIterator) {",
+									"    pm.variables.set('updateAddressIterator', 0);",
+									"    updateAddressIterator = 0;",
+									"}",
+									"",
+									"//invalid address",
+									"if (updateAddressIterator == 0) {",
+									"    pm.variables.set('address', '%@$#6645');",
+									"    pm.variables.set('city', 'Sky City');",
+									"    pm.variables.set('postal-code', 'm2z 9p9');",
+									"    pm.variables.set('country', 'Canada');",
+									"}",
+									"",
+									"// Invalid city",
+									"if (updateAddressIterator == 1) {",
+									"    pm.variables.set('address', '12 Superhero Way');",
+									"    pm.variables.set('city', 'Sk5 City');",
+									"}",
+									"",
+									"// Invalid postal code",
+									"if (updateAddressIterator == 2) {",
+									"    pm.variables.set('city', 'Sea City');",
+									"    pm.variables.set('postal-code', 'M2Z 9P99');",
+									"}",
+									"",
+									"// Invalid country",
+									"if (updateAddressIterator == 3) {",
+									"    pm.variables.set('postal-code', 'M2Y 9P8');",
+									"    pm.variables.set('country', 'JajaB00M!');",
+									"}",
+									" ",
+									"// Valid Payload",
+									"if (updateAddressIterator == 4) {",
+									"    pm.variables.set('country', 'Canada');",
+									"}",
+									"",
+									"// Undo the address changes",
+									"if (updateAddressIterator == 5) {",
+									"    pm.variables.set('address', '10 Superhero Way');",
+									"    pm.variables.set('city', 'Sky City');",
+									"    pm.variables.set('postal-code', 'm2z 9p9');",
+									"    pm.variables.set('country', 'Canada');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let updateAddressIterator = pm.variables.get('updateAddressIterator');",
+									"",
+									"if (updateAddressIterator === 0) {",
+									"    pm.test(\"Status code is 400 when improperly formatted address is given\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400003015]);",
+									"    });",
+									"}",
+									"",
+									"if (updateAddressIterator === 1) {",
+									"    pm.test(\"Status code is 400 when improperly formatted city name is given\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400003016]);",
+									"    });",
+									"}",
+									"",
+									"if (updateAddressIterator === 2) {",
+									"    pm.test(\"Status code is 400 when improperly formatted postal code is given\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400003017]);",
+									"    });",
+									"}",
+									"",
+									"if (updateAddressIterator === 3) {",
+									"    pm.test(\"Status code is 400 when improperly formatted country name is given\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400003018]);",
+									"    });",
+									"}",
+									"",
+									"if (updateAddressIterator === 4) {",
+									"    pm.test('request returns 202 response when payload is valid', () => {",
+									"        pm.response.to.have.status(202);",
+									"    });",
+									"}",
+									"",
+									"if (updateAddressIterator === 5) {",
+									"    pm.test('request returns 202 response when the address is reset to the old one', () => {",
+									"        pm.response.to.have.status(202);",
+									"    });",
+									"}",
+									"",
+									"if (updateAddressIterator === 6) {",
+									"    pm.test(\"Status code is 400 when there are no changes to make to the existing address\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400003019]);",
+									"    });",
+									"}",
+									"",
+									"updateAddressIterator < 6",
+									"    ? postman.setNextRequest('Customer: Update Address')",
+									"    : postman.setNextRequest('Customer: View Orders');",
+									"",
+									"updateAddressIterator++;",
+									"pm.variables.set('updateAddressIterator', updateAddressIterator);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customer-authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"address\": \"{{address}}\",\n    \"city\": \"{{city}}\",\n    \"postalCode\": \"{{postal-code}}\",\n    \"country\": \"{{country}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{meteor-shower-base-url}}/customer/address",
+							"host": [
+								"{{meteor-shower-base-url}}"
+							],
+							"path": [
+								"customer",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer: Return Order",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let returnOrderIterator = pm.variables.get('returnOrderIterator');",
+									"if (!returnOrderIterator) {",
+									"    pm.variables.set('returnOrderIterator', 0);",
+									"    returnOrderIterator = 0;",
+									"}",
+									"",
+									"//invalid comic book ID",
+									"if (returnOrderIterator == 0) {",
+									"    pm.variables.set('comic-book-id', '%@$#6645');",
+									"    pm.variables.set('return-status', 'return');",
+									"}",
+									"",
+									"// Invalid return status",
+									"if (returnOrderIterator == 1) {",
+									"    pm.variables.set('comic-book-id', '819d98be-20e8-4dbf-8a0d-2b46fe052de1');",
+									"    pm.variables.set('return-status', 'none');",
+									"}",
+									"",
+									"// Invalid comic book ID and return status",
+									"if (returnOrderIterator == 2) {",
+									"    pm.variables.set('comic-book-id', '%@$#6645');",
+									"    pm.variables.set('return-status', 'none');",
+									"}",
+									"",
+									"// unknown order ID",
+									"if (returnOrderIterator == 3) {",
+									"    pm.variables.set('order-id', '888d98be-20e8-4dbf-8a0d-2bbbfe052de1');",
+									"    pm.variables.set('comic-book-id', 'd17f85b9-dc7e-42a4-b917-9cf5f8033fed');",
+									"    pm.variables.set('return-status', 'return');",
+									"}",
+									"",
+									"// Valid Payload",
+									"if (returnOrderIterator == 4) {",
+									"    pm.variables.set('order-id', '819d98be-20e8-4dbf-8a0d-2b46fe052de1');",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let returnOrderIterator = pm.variables.get('returnOrderIterator');",
+									"",
+									"if (returnOrderIterator === 0) {",
+									"    pm.test(\"Status code is 400 when improperly formatted comic book ID is given\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400003008]);",
+									"    });",
+									"}",
+									"",
+									"if (returnOrderIterator === 1) {",
+									"    pm.test(\"Status code is 400 when improperly formatted return status is given\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400003010]);",
+									"    });",
+									"}",
+									"",
+									"if (returnOrderIterator === 2) {",
+									"    pm.test(\"Status code is 400 when both an invalid comic book ID and return status are given\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400003008, 400003010]);",
+									"    });",
+									"}",
+									"",
+									"if (returnOrderIterator === 3) {",
+									"    pm.test(\"Status code is 400 when unknown order ID is given\", () => {",
+									"        pm.response.to.have.status(400);",
+									"    });",
+									"}",
+									"",
+									"if (returnOrderIterator === 4) {",
+									"    pm.test('request returns 202 response when payload is valid', () => {",
+									"        pm.response.to.have.status(202);",
+									"    });",
+									"}",
+									"",
+									"returnOrderIterator < 5",
+									"    ? postman.setNextRequest('Customer: Return Order')",
+									"    : postman.setNextRequest('Customer: Logout');",
+									"",
+									"returnOrderIterator++;",
+									"pm.variables.set('returnOrderIterator', returnOrderIterator);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customer-authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comicBookId\": \"{{comic-book-id}}\",\n    \"returnStatus\": \"{{return-status}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{meteor-shower-base-url}}/orders/{{order-id}}",
+							"host": [
+								"{{meteor-shower-base-url}}"
+							],
+							"path": [
+								"orders",
+								"{{order-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shooting Star",
+			"item": [
+				{
+					"name": "Message from Customer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let messageFromCustomerIterator = pm.variables.get('messageFromCustomerIterator');",
+									"if (!messageFromCustomerIterator) {",
+									"    pm.variables.set('messageFromCustomerIterator', 0);",
+									"    messageFromCustomerIterator = 0;",
+									"}",
+									"",
+									"//invalid subject name",
+									"if (messageFromCustomerIterator === 0) {",
+									"    pm.variables.set('subject', '%@$#6645');",
+									"    pm.variables.set('text', 'Example Text 1');",
+									"}",
+									"",
+									"// Invalid text",
+									"if (messageFromCustomerIterator === 1) {",
+									"    pm.variables.set('subject', 'Example Subject 2');",
+									"    pm.variables.set('text', 'Example T{`}xt');",
+									"}",
+									"",
+									"// Both fields invalid",
+									"if (messageFromCustomerIterator === 2) {",
+									"    pm.variables.set('subject', '%@$#6645');",
+									"}",
+									"",
+									"// Valid Payload",
+									"if (messageFromCustomerIterator === 3) {",
+									"    pm.variables.set('subject', 'Example Subject 3');",
+									"    pm.variables.set('text', 'Example Text 3?');",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let messageFromCustomerIterator = pm.variables.get('messageFromCustomerIterator');",
+									"",
+									"if (messageFromCustomerIterator === 0) {",
+									"    pm.test(\"Status code is 400 when improperly formatted subject is given\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400004001]);",
+									"    });",
+									"}",
+									"",
+									"if (messageFromCustomerIterator === 1) {",
+									"    pm.test(\"Status code is 400 when improperly formatted text is given\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400004002]);",
+									"    });",
+									"}",
+									"",
+									"if (messageFromCustomerIterator === 2) {",
+									"    pm.test(\"Status code is 400 when improperly formatted subject and text are given\", () => {",
+									"        pm.response.to.have.status(400);",
+									"        pm.expect(pm.response.json().errorCodes).to.eql([400004001, 400004002]);",
+									"    });",
+									"}",
+									"",
+									"if (messageFromCustomerIterator === 3) {",
+									"    pm.test(\"Status code is 202 when properly formatted payload is given\", () => {",
+									"        pm.response.to.have.status(202);",
+									"        pm.expect(pm.response.json().message).to.eql(\"accepted\");",
+									"    });",
+									"}",
+									"",
+									"messageFromCustomerIterator < 3",
+									"    ? postman.setNextRequest('Message from Customer')",
+									"    : postman.setNextRequest('Customer: Logout (Email)');",
+									"",
+									"messageFromCustomerIterator++;",
+									"pm.variables.set('messageFromCustomerIterator', messageFromCustomerIterator);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customer-authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"subject\": \"{{subject}}\",\n    \"text\": \"{{text}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{shooting-star-base-url}}/mail/send",
+							"host": [
+								"{{shooting-star-base-url}}"
+							],
+							"path": [
+								"mail",
+								"send"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "fourth-wall-base-url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "sage-cave-base-url",
+			"value": "http://localhost:8090",
+			"type": "string"
+		},
+		{
+			"key": "meteor-shower-base-url",
+			"value": "http://localhost:8091",
+			"type": "string"
+		},
+		{
+			"key": "shooting-star-base-url",
+			"value": "http://localhost:8092",
+			"type": "string"
+		},
+		{
+			"key": "admin-login-email",
+			"value": "admin@test.com",
+			"type": "string"
+		},
+		{
+			"key": "admin-login-password",
+			"value": "@dM1nistr8tor",
+			"type": "string"
+		},
+		{
+			"key": "customer-login-email",
+			"value": "comicman@test.com",
+			"type": "string"
+		},
+		{
+			"key": "customer-login-password",
+			"value": "com1cFanat!c",
+			"type": "string"
+		},
+		{
+			"key": "admin-authorization",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "customer-authorization",
+			"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJmMTBiZDJmYi1hMmNiLTQ4YmQtYmI2My01NTY1YzhhM2IzYzEiLCJpYXQiOjE3MDk3MzI2OTAsImlzcyI6ImZvdXJ0aC13YWxsIiwiZXhwIjoxNzA5ODE5MDkwLCJyb2xlIjoiY3VzdG9tZXIifQ.DCn6YsIOm9DlB7kBxpuHFpihki29Hdm7q9gd04zBHGk",
+			"type": "string"
+		},
+		{
+			"key": "requestCount",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "deletable-comic-book-id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "the-last-christian-id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "coiling-dragon-id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "comic-book-id",
+			"value": "6963a34d-7c0a-42ed-961f-83b31e7c8f33",
+			"type": "string"
+		},
+		{
+			"key": "order-id",
+			"value": "819d98be-20e8-4dbf-8a0d-2b46fe052de1",
+			"type": "string"
+		}
+	]
+}

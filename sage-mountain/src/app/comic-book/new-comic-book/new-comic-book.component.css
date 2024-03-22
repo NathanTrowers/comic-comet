@@ -53,8 +53,15 @@ button:hover, a:hover {
 }
 
 a {
+    padding: 0.2rem 0;
+    height: 1.2rem;
     font-size: 0.8rem;
     text-decoration: none;
     text-align: center;
     color: var(--accent-dark);
+}
+
+a:hover {
+    padding-top: 0.4rem;
+    height: 1.4rem;
 }

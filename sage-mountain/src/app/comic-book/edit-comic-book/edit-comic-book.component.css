@@ -45,7 +45,7 @@ button, a {
 }
 
 a {
-    padding-top: 0.5rem;
+    padding: 0.2rem 0;
     height: 1.2rem;
     font-size: 0.8rem;
     text-decoration: none;

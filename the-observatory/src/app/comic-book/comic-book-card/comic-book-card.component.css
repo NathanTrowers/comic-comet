@@ -10,10 +10,11 @@ section:hover, section:focus {
 
 h2 {
     text-align: center;
+    height: 4.125rem;
 }
 
 h2, img {
-    width: 12.421875rem;/*6.625px * 30 * 16*/
+    width: 15.4rem;/*6.625px * 37.2830188679*/
 }
 
 img {
@@ -22,7 +23,6 @@ img {
 }
 
 a {
-    grid-column: 1/ span 1;
     width: 10.5rem;
     height: 1.5rem;
     text-decoration: none;
