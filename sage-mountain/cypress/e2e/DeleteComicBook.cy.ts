@@ -9,15 +9,15 @@ describe('Dashboard Page (Delete Comic Book)', () => {
         cy.url().should('include', '/dashboard');
     });
 
-    it('successfully deletes a comic book the page', () => {
+    it('successfully deletes a comic book from the page', () => {
         cy.contains('New Comic Book').click();
         cy.getByData('name-input').type('Binary Barons 3');
         cy.getByData('author-input').type('Morpheus');
         cy.getByData('price-input').type('99.99');
         cy.getByData('quantity-input').type('7');
         cy.get('input[type=file]').selectFile({
-            contents: 'cypress/fixtures/logo512.png',
-            fileName: 'logo512.png',
+            contents: 'cypress/fixtures/cover-coming-soon.png',
+            fileName: 'cover-coming-soon.png',
             mimeType: 'iamge/png',
             lastModified: Date.now(),
         });

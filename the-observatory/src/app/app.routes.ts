@@ -20,7 +20,7 @@ const routes: Routes = [
     { path: 'cart', component: CartComponent, title: 'Cart', canActivate: [authenticationGuard] },
     { path: 'address-confirmation', component: AddressConfirmationComponent, title: 'Address Confirmation', canActivate: [authenticationGuard] },
     { path: 'order-confirmation', component: OrderConfirmationComponent, title: 'Order Confirmation', canActivate: [authenticationGuard] },
-    { path: 'orders', component: OrderComponent, title: 'Order', canActivate: [authenticationGuard] },
+    { path: 'orders', component: OrderComponent, title: 'Orders', canActivate: [authenticationGuard] },
     { path: 'contact-us', component: ContactUsComponent, title: 'Contact Us', canActivate: [authenticationGuard] },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent, title: 'Page Not Found' }

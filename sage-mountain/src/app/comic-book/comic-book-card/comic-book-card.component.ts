@@ -29,7 +29,7 @@ export class ComicBookCardComponent {
       return this.coverArt;
     }
     
-    return '';
+    return '/assets/cover-coming-soon.png';
   }
 
   deleteComicBook(): void {

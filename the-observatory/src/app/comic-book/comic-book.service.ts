@@ -35,7 +35,7 @@ export class ComicBookService {
       return `data:image/png;base64,${coverArtString}`;
     }
     
-    return '';
+    return '/assets/cover-coming-soon.png';
   }
   
   private handleError<T>(operation = 'operation', result?: T) {

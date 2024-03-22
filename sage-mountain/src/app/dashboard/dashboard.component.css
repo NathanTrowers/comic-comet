@@ -1,3 +1,13 @@
+#imageContainer {
+    display: grid;
+    place-items: center;
+    background-color: var(--secondary-color);
+}
+
+#imageContainer > img {
+    height: 10rem;
+}
+
 header {
     display: grid;
     grid-template: 1fr 1fr 1fr;
@@ -25,12 +35,6 @@ a:hover, a:focus  {
     background-color: var(--secondary-color);
     color: var(--primary-color);
     cursor: pointer;
-}
-
-li {
-    grid-column: 2/ span 1;
-    list-style: none;
-    text-decoration: none;
 }
 
 button {

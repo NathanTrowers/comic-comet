@@ -61,8 +61,8 @@ describe('Add New Comic Book Page', () => {
         cy.getByData('price-input').type('99.99');
         cy.getByData('quantity-input').type('7');
         cy.get('input[type=file]').selectFile({
-            contents: 'cypress/fixtures/logo512.png',
-            fileName: 'logo512.png',
+            contents: 'cypress/fixtures/cover-coming-soon.png',
+            fileName: 'cover-coming-soon.png',
             mimeType: 'iamge/png',
             lastModified: Date.now(),
         });
