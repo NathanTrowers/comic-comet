@@ -1,0 +1,101 @@
+services:
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: MySQL.Dockerfile  
+    container_name: mysql
+    env_file: ./mysql.env
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+      start_period: 5s
+      interval: 5s
+      timeout: 20s
+      retries: 55
+    volumes:
+      - ./mysql/database:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  fourth-wall:
+    build: ./fourth-wall
+    container_name: fourth-wall
+    depends_on:
+      mysql:
+        condition: service_healthy
+    env_file:
+      - ./backend.env
+      - ./fourth-wall.env
+    ports:
+      - 8089:8080
+    volumes:
+      - ./fourth-wall:/app
+      - $HOME/.m2/repository/ /root/.m2/repository
+
+  meteor-shower:
+    build: ./meteor-shower
+    container_name: meteor-shower
+    depends_on:
+      mysql:
+        condition: service_healthy
+    env_file:
+      - ./backend.env
+      - ./meteor-shower.env
+    ports:
+      - 8091:8080
+    volumes:
+      - ./meteor-shower:/app
+      - $HOME/.m2/repository/ /root/.m2/repository
+
+  sage-cave:
+    build: ./sage-cave
+    container_name: sage-cave
+    depends_on:
+      mysql:
+        condition: service_healthy
+    env_file:
+      - ./backend.env
+      - ./sage-cave.env
+    ports:
+      - 8090:8080
+    volumes:
+      - ./sage-cave:/app
+      - $HOME/.m2/repository/ /root/.m2/repository
+
+  shooting-star:
+    build: ./shooting-star
+    container_name: shooting-star
+    depends_on:
+      mysql:
+        condition: service_healthy
+    env_file:
+      - ./backend.env
+      - ./shooting-star.env
+    ports:
+      - 8092:8080
+    volumes:
+      - ./shooting-star:/app
+      - $HOME/.m2/repository/ /root/.m2/repository
+
+  sage-mountain:
+    build: ./sage-mountain
+    container_name: sage-mountain
+    depends_on:
+      - fourth-wall
+      - sage-cave
+    env_file: ./sage-mountain.env
+    ports:
+      - 4200:4200
+    volumes:
+      - ./sage-mountain:/app
+
+  the-observatory:
+    build: ./the-observatory
+    container_name: the-observatory
+    depends_on:
+      - fourth-wall
+      - meteor-shower
+    env_file: ./the-observatory.env
+    ports:
+      - 4300:4200
+    volumes:
+      - ./the-observatory:/app

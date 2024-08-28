@@ -1,0 +1,5 @@
+export const environment = {
+    FOURTH_WALL_API: '${FOURTH_WALL_API}',
+    METEOR_SHOWER_API: '${METEOR_SHOWER_API}',
+    SHOOTING_STAR_API: '${SHOOTING_STAR_API}',
+}

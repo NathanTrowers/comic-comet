@@ -6,7 +6,7 @@ import { AuthenticationService } from 'src/app/authentication/authentication.ser
 import EditedComicBook from 'src/app/comic-book/interfaces/EditedComicBook';
 import ComicBookCatalogue from 'src/app/comic-book/interfaces/ComicBookCatalogue';
 import NewComicBookForm from 'src/app/comic-book/interfaces/NewComicBookForm';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ComicBookService {

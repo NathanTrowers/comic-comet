@@ -6,7 +6,7 @@ import { Observable, catchError, of, tap } from 'rxjs';
 import LoginCredentials from 'src/app/authentication/interfaces/LoginCredentials';
 import LoginResponse from 'src/app/authentication/interfaces/LoginResponse';
 import LogoutResponse from 'src/app/authentication/interfaces/LogoutResponse';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {

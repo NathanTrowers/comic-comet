@@ -63,7 +63,7 @@ bash-4.4$ exit
 ...
 $# docker exec -it comiccomet-fourth-wall-1 bash
 root@2345719d0f29:/app$ cd src/migrations
-root@2345719d0f29:/app/src/migrations$ /app/liquibase-libs/liquibase update --changelog-file=root-changelog.yaml --username springuser --password AdM1n
+root@2345719d0f29:/app/src/migrations$ /app/liquibase-libs/liquibase update --changelog-file=root-changelog.yaml --username $DATABASE_USERNAME --password $DATABASE_PASSWORD
 root@2345719d0f29:/app/src/migrations$ exit
 ```
 

@@ -6,7 +6,6 @@ VOLUME /root/.m2
 COPY .mvn .mvn
 COPY mvnw pom.xml ./
 RUN ./mvnw dependency:resolve
-COPY liquibase-libs ./liquibase-libs
 COPY src ./src
 
 CMD ./mvnw spring-boot:run

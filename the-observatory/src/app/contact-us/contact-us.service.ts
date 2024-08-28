@@ -4,7 +4,7 @@ import { Observable, catchError, of } from 'rxjs';
 
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import Correspondence from 'src/app/contact-us/interfaces/Correspondence';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ContactUsService {
