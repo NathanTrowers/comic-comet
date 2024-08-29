@@ -8,7 +8,7 @@ import AddressResponse from 'src/app/order/interfaces/AddressResponse';
 import Order from 'src/app/order/interfaces/Order';
 import OrderReturn from 'src/app/order/interfaces/OrderReturn';
 import SavedComicBookOrdersListResponse from 'src/app/order/interfaces/SavedComicBookOrdersListResponse';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({ providedIn: 'root' })

@@ -1,0 +1,6 @@
+# Database folder
+database
+
+#Docker files
+MySQL.Dockerfile
+.dockerignore

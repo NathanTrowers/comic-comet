@@ -1,7 +1,0 @@
-databaseChangeLog:
-   - include:
-         file: changelogs/db-creation.sql
-   - include:
-         file: changelogs/default-data-insertion.sql
-   - include:
-         file: changelogs/1-add-new-book.sql

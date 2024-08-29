@@ -1,4 +1,10 @@
+## Workspace Configs
 .history/
 .metadata/
 .vscode/
-mysql/
+
+## MySQL directory's contents
+mysql/database/*
+
+## ENV files
+*.env

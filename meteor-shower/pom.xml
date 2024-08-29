@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.comiccomet</groupId>
 	<artifactId>meteor-shower</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<name>meteor-shower</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Customer API</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

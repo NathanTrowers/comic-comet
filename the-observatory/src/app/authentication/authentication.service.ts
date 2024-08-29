@@ -8,7 +8,7 @@ import RegistrationCredentials from 'src/app/authentication/interfaces/request/R
 import LoginResponse from 'src/app/authentication/interfaces/response/LoginResponse';
 import LogoutResponse from 'src/app/authentication/interfaces/response/LogoutResponse';
 import RegistrationResponse from 'src/app/authentication/interfaces/response/RegistrationResponse';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {

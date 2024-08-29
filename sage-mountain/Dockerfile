@@ -1,18 +1,18 @@
 # syntax=docker/dockerfile:1
-FROM node:18.18.0-alpine
+FROM node:20-alpine
 
 RUN apk add chromium
+
+RUN apk add gettext
 
 WORKDIR /app
 
 ENV CHROME_BIN=/usr/bin/chromium-browser
 
-RUN npm install -g @angular/cli
-
-COPY package.json .
-
-RUN npm install
+COPY package*.json ./
 
 COPY . .
 
-CMD ng serve --host 0.0.0.0
+EXPOSE 4200
+
+CMD ["sh", "-c", "npm install && npm start"]
