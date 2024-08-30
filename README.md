@@ -1,73 +1,12 @@
-# ComicComet Installation Instructions
+# ComicComet Local Environment Installation Instructions
 
 On this page:
 
-- [ComicComet Installation Instructions](#comiccomet-installation-instructions)
-  - [General Start-up Instructions](#general-start-up-instructions)
-    - [Database Configuration](#database-configuration)
-    - [Database Migration](#database-migration)
+- [ComicComet Local Environment Installation Instructions](#comiccomet-local-environment-installation-instructions)
   - [Shooting Star Configuration](#shooting-star-configuration)
   - [Service Summary](#service-summary)
   - [Notes on the Testing Procedures](#notes-on-the-testing-procedures)
 
-## General Start-up Instructions
-
-All of the following is to be done using the command line:
-
-After running `git pull https://github.com/NathanTrowers/ComicComet`, the database needs to be configured.
-
-### Database Configuration
-
-Create an empty directory in the root of the project called ***mysql***.
-Run `docker compose up mysql` to create the database container. Wait until you see the below as part of the console message before doing anything else:
-`[Server] /usr/sbin/mysqld: ready for connections. Version: '8.1.0'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.`
-
-In another command-line window, run `docker exec -it mysql bash` to enter the container.  Afterwards, enter the following respective commands:
-
-``` shell
-bash-4.4$ mysql 
-Enter password: AdM1n
-...
-mysql> CREATE DATABASE comic_comet_warehouse;
-mysql> CREATE USER 'springuser'@'%' IDENTIFIED BY 'AdM1n';
-mysql> GRANT ALL ON comic_comet_warehouse.* TO 'springuser'@'%'; # grant these privileges only for the user on your local machine
-mysql> CREATE USER 'sage-cave'@'%' IDENTIFIED BY 'AdM1n';
-mysql> GRANT SELECT, INSERT, UPDATE, DELETE ON comic_comet_warehouse.* TO 'sage-cave'@'%';
-mysql> CREATE USER 'meteor-shower'@'%' IDENTIFIED BY 'AdM1n';
-mysql> GRANT SELECT, INSERT, UPDATE ON comic_comet_warehouse.* TO 'meteor-shower'@'%';
-mysql> CREATE USER 'shooting-star'@'%' IDENTIFIED BY 'AdM1n';
-mysql> GRANT SELECT ON comic_comet_warehouse.* TO 'shooting-star'@'%';
-mysql> exit
-...
-bash-4.4$ exit
-```
-
-### Database Migration
-
-After exiting the container, stop the mysql instance running in the other window.
-
-Before moviing on, ensure that NodeJS is installed locally.  If installed, go into the ***sage-mountain*** and ***the-observatory*** folders and run the following command: `npm install`.
-
-Next run `docker compose up`  This will start-up the entire application.  Once started, in another window, run the following commands:
-
-``` shell
-$# docker exec -it comiccomet-mysql-1 bash
-bash-4.4$ mysql 
-Enter password: AdM1n
-...
-mysql> USE comic_comet_warehouse;
-mysql> DROP TABLE admin, customer;
-mysql> exit
-...
-bash-4.4$ exit
-...
-$# docker exec -it comiccomet-fourth-wall-1 bash
-root@2345719d0f29:/app$ cd src/migrations
-root@2345719d0f29:/app/src/migrations$ /app/liquibase-libs/liquibase update --changelog-file=root-changelog.yaml --username $DATABASE_USERNAME --password $DATABASE_PASSWORD
-root@2345719d0f29:/app/src/migrations$ exit
-```
-
-The above commands will have you enter the ***fourth-wall*** container, change the directory to the folder container the database migrations, running those migrations, then finally exiting the container.
 
 ## Shooting Star Configuration
 
