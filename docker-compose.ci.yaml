@@ -1,0 +1,131 @@
+services:
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: MySQL.Dockerfile  
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: AdM1n
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+      start_period: 5s
+      interval: 5s
+      timeout: 20s
+      retries: 55
+    volumes:
+      - ./mysql/database:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  fourth-wall:
+    build: ./fourth-wall
+    command: /bin/sh -c "./mvnw test"
+    container_name: fourth-wall
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - DATABASE_PASSWORD=AdM1n
+      - DATABASE_URL=//mysql:3306/comic_comet_warehouse
+      - DATABASE_USERNAME=fourth-wall
+      - SAGE_MOUNTAIN_URL=http://localhost:4200
+      - SECRET_KEY=oeRaYY7Wo24sDqKSX3GM9ASEmeGPmkTd9jo1QTy4b7P9Ze5_9hKolVX8xNrQDcNRfVEdTZNOuOyqEGhXEbdJI-ZQ19k_o9MI0y3eZN2lp9jow55FfXMiINEdt1XR85VipRLSOkT6kSpzs2x-jbLDiz9iFVzkd81YKxMgPA7VfZeQUm4n-mOmnWMaVX30zGFU4L3oPBctYKkl4dYfqYWqRNfrgPJVi5DGFjywgxx0ASEiJHtV72paI3fDR2XwlSkyhhmY-ICjCRmsJN4fX1pdoL8a18-aQrvyu4j0Os6dVPYIoPvvY0SAZtWYKHfM15g7A3HD4cVREf9cUsprCRK93w;
+      - THE_OBSERVATORY_URL=http://localhost:4300
+    ports:
+      - 8089:8080
+    volumes:
+      - ./fourth-wall:/app
+      - $HOME/.m2/repository/ /root/.m2/repository
+
+  meteor-shower:
+    build: ./meteor-shower
+    command: /bin/sh -c "./mvnw test"
+    container_name: meteor-shower
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - DATABASE_PASSWORD=AdM1n
+      - DATABASE_URL=//mysql:3306/comic_comet_warehouse
+      - DATABASE_USERNAME=meteor-shower
+      - SECRET_KEY=oeRaYY7Wo24sDqKSX3GM9ASEmeGPmkTd9jo1QTy4b7P9Ze5_9hKolVX8xNrQDcNRfVEdTZNOuOyqEGhXEbdJI-ZQ19k_o9MI0y3eZN2lp9jow55FfXMiINEdt1XR85VipRLSOkT6kSpzs2x-jbLDiz9iFVzkd81YKxMgPA7VfZeQUm4n-mOmnWMaVX30zGFU4L3oPBctYKkl4dYfqYWqRNfrgPJVi5DGFjywgxx0ASEiJHtV72paI3fDR2XwlSkyhhmY-ICjCRmsJN4fX1pdoL8a18-aQrvyu4j0Os6dVPYIoPvvY0SAZtWYKHfM15g7A3HD4cVREf9cUsprCRK93w;
+      - THE_OBSERVATORY_URL=http://localhost:4300
+    ports:
+      - 8091:8080
+    volumes:
+      - ./meteor-shower:/app
+      - $HOME/.m2/repository/ /root/.m2/repository
+
+  sage-cave:
+    build: ./sage-cave
+    command: /bin/sh -c "./mvnw test"
+    container_name: sage-cave
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - DATABASE_PASSWORD=AdM1n
+      - DATABASE_URL=//mysql:3306/comic_comet_warehouse
+      - DATABASE_USERNAME=sage-cave
+      - SAGE_MOUNTAIN_URL=http://localhost:4200
+      - SECRET_KEY=oeRaYY7Wo24sDqKSX3GM9ASEmeGPmkTd9jo1QTy4b7P9Ze5_9hKolVX8xNrQDcNRfVEdTZNOuOyqEGhXEbdJI-ZQ19k_o9MI0y3eZN2lp9jow55FfXMiINEdt1XR85VipRLSOkT6kSpzs2x-jbLDiz9iFVzkd81YKxMgPA7VfZeQUm4n-mOmnWMaVX30zGFU4L3oPBctYKkl4dYfqYWqRNfrgPJVi5DGFjywgxx0ASEiJHtV72paI3fDR2XwlSkyhhmY-ICjCRmsJN4fX1pdoL8a18-aQrvyu4j0Os6dVPYIoPvvY0SAZtWYKHfM15g7A3HD4cVREf9cUsprCRK93w;
+    ports:
+      - 8090:8080
+    volumes:
+      - ./sage-cave:/app
+      - $HOME/.m2/repository/ /root/.m2/repository
+
+  shooting-star:
+    build: ./shooting-star
+    command: /bin/sh -c "./mvnw test"
+    container_name: shooting-star
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=//mysql:3306/comic_comet_warehouse
+      - DATABASE_PASSWORD=AdM1n
+      - DATABASE_USERNAME=shooting-star
+      - EMAIL_HOST=my.host.com
+      - EMAIL_PASSWORD=myAppPassword
+      - EMAIL_PORT=587
+      - EMAIL_USERNAME=myEmailUsername@host.com
+      - EMAIL_RECEIVING_ADDRESS=myEmailUsername@host.com
+      - SECRET_KEY=oeRaYY7Wo24sDqKSX3GM9ASEmeGPmkTd9jo1QTy4b7P9Ze5_9hKolVX8xNrQDcNRfVEdTZNOuOyqEGhXEbdJI-ZQ19k_o9MI0y3eZN2lp9jow55FfXMiINEdt1XR85VipRLSOkT6kSpzs2x-jbLDiz9iFVzkd81YKxMgPA7VfZeQUm4n-mOmnWMaVX30zGFU4L3oPBctYKkl4dYfqYWqRNfrgPJVi5DGFjywgxx0ASEiJHtV72paI3fDR2XwlSkyhhmY-ICjCRmsJN4fX1pdoL8a18-aQrvyu4j0Os6dVPYIoPvvY0SAZtWYKHfM15g7A3HD4cVREf9cUsprCRK93w;
+      - THE_OBSERVATORY_URL=http://localhost:4300
+    ports:
+      - 8092:8080
+    volumes:
+      - ./shooting-star:/app
+      - $HOME/.m2/repository/ /root/.m2/repository
+
+  sage-mountain:
+    build: ./sage-mountain
+    command: /bin/sh -c "npm i && npm run test:ci"
+    container_name: sage-mountain
+    depends_on:
+      - fourth-wall
+      - sage-cave
+    environment:
+      FOURTH_WALL_API: fourth-wall:8080
+      SAGE_CAVE_API: sage-cave:8090
+    ports:
+      - 4200:4200
+    volumes:
+      - ./sage-mountain:/app
+
+  the-observatory:
+    build: ./the-observatory
+    command: /bin/sh -c "npm i && npm run test:ci"
+    container_name: the-observatory
+    depends_on:
+      - fourth-wall
+      - meteor-shower
+    environment:
+      FOURTH_WALL_API: fourth-wall:8080
+      METEOR_SHOWER_API: meteor-shower:8091
+      SHOOTING_STAR_API: shooting-star:8092
+    ports:
+      - 4300:4200
+    volumes:
+      - ./the-observatory:/app

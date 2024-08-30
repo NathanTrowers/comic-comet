@@ -37,12 +37,12 @@ describe('Comic Book Service Test Suite', () => {
         expect(comicBookService).toBeDefined();
     });
 
-    it('tests "getSrcString" returns an empty string when no cover art is given', ()  => {
+    it('tests "getSrcString" returns an the "Cover Coming Soon" image path when no cover art is given', ()  => {
         /** Call to Test */
         let result: string = comicBookService.getSrcString(comicBook.coverArt);
 
         /** Expectation */
-        expect(result).toEqual('');
+        expect(result).toEqual('/assets/cover-coming-soon.png');
     });
 
     it('tests "getSrcString" returns an encoded image string when a cover art string is given', ()  => {
