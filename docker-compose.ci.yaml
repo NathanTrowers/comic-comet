@@ -1,3 +1,4 @@
+version: '3.3'
 services:
   mysql:
     build:
@@ -86,11 +87,11 @@ services:
       - DATABASE_URL=//mysql:3306/comic_comet_warehouse
       - DATABASE_PASSWORD=AdM1n
       - DATABASE_USERNAME=shooting-star
-      - EMAIL_HOST=myhostcom
+      - EMAIL_HOST=my.host.com
       - EMAIL_PASSWORD=myAppPassword
       - EMAIL_PORT=587
-      - EMAIL_USERNAME=myEmailUsername
-      - EMAIL_RECEIVING_ADDRESS=myEmailUsername
+      - EMAIL_USERNAME=myEmailUsername@host.com
+      - EMAIL_RECEIVING_ADDRESS=myEmailUsername@host.com
       - SECRET_KEY=oeRaYY7Wo24sDqKSX3GM9ASEmeGPmkTd9jo1QTy4b7P9Ze5_9hKolVX8xNrQDcNRfVEdTZNOuOyqEGhXEbdJI-ZQ19k_o9MI0y3eZN2lp9jow55FfXMiINEdt1XR85VipRLSOkT6kSpzs2x-jbLDiz9iFVzkd81YKxMgPA7VfZeQUm4n-mOmnWMaVX30zGFU4L3oPBctYKkl4dYfqYWqRNfrgPJVi5DGFjywgxx0ASEiJHtV72paI3fDR2XwlSkyhhmY-ICjCRmsJN4fX1pdoL8a18-aQrvyu4j0Os6dVPYIoPvvY0SAZtWYKHfM15g7A3HD4cVREf9cUsprCRK93w;
       - THE_OBSERVATORY_URL=http://localhost:4300
     ports:
