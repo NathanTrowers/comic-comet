@@ -7,12 +7,6 @@ services:
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: AdM1n
-    healthcheck:
-      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
-      start_period: 5s
-      interval: 5s
-      timeout: 20s
-      retries: 55
     volumes:
       - ./mysql/database:/var/lib/mysql
     ports:
@@ -34,6 +28,8 @@ services:
       - THE_OBSERVATORY_URL=http://localhost:4300
     ports:
       - 8089:8080
+    restart_policy:
+      condition: on_failure
     volumes:
       - ./fourth-wall:/app
       - $HOME/.m2/repository/ /root/.m2/repository
@@ -53,6 +49,8 @@ services:
       - THE_OBSERVATORY_URL=http://localhost:4300
     ports:
       - 8091:8080
+    restart_policy:
+      condition: on_failure      
     volumes:
       - ./meteor-shower:/app
       - $HOME/.m2/repository/ /root/.m2/repository
@@ -72,6 +70,8 @@ services:
       - SECRET_KEY=oeRaYY7Wo24sDqKSX3GM9ASEmeGPmkTd9jo1QTy4b7P9Ze5_9hKolVX8xNrQDcNRfVEdTZNOuOyqEGhXEbdJI-ZQ19k_o9MI0y3eZN2lp9jow55FfXMiINEdt1XR85VipRLSOkT6kSpzs2x-jbLDiz9iFVzkd81YKxMgPA7VfZeQUm4n-mOmnWMaVX30zGFU4L3oPBctYKkl4dYfqYWqRNfrgPJVi5DGFjywgxx0ASEiJHtV72paI3fDR2XwlSkyhhmY-ICjCRmsJN4fX1pdoL8a18-aQrvyu4j0Os6dVPYIoPvvY0SAZtWYKHfM15g7A3HD4cVREf9cUsprCRK93w;
     ports:
       - 8090:8080
+    restart_policy:
+      condition: on_failure      
     volumes:
       - ./sage-cave:/app
       - $HOME/.m2/repository/ /root/.m2/repository
@@ -96,6 +96,8 @@ services:
       - THE_OBSERVATORY_URL=http://localhost:4300
     ports:
       - 8092:8080
+    restart_policy:
+      condition: on_failure      
     volumes:
       - ./shooting-star:/app
       - $HOME/.m2/repository/ /root/.m2/repository
