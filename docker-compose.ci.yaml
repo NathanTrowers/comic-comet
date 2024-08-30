@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 version: '3.8'
-=======
-version: '3.3'
->>>>>>> 08727b4 (COMCOM-019 Changes for Concourse CI #2 (#20))
 services:
   mysql:
     build:
