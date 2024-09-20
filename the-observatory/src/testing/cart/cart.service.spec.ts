@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
 import { CartService } from 'src/app/cart/cart.service';
@@ -26,8 +26,9 @@ describe('CartService Test Suite', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+});
     cartService = TestBed.inject(CartService);
   });
 

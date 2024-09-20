@@ -9,5 +9,5 @@ RUN npm run build
 
 FROM nginx:1.27-alpine
 COPY default.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/dist/the-observatory/ /usr/share/nginx/html
+COPY --from=builder /app/dist/the-observatory/browser /usr/share/nginx/html
 EXPOSE 4300

@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
 import { ComicBookService } from 'src/app/comic-book/comic-book.service';
@@ -10,8 +10,9 @@ describe('Comic Book Service Test Suite', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-          imports: [HttpClientModule],
-        });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+});
         comicBookService = TestBed.inject(ComicBookService);
         comicBook = {
             comicBookId: '7963b34d-7c0a-42cd-964a-93b31e7c8f34',

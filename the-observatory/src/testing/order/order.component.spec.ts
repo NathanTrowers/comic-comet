@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,9 +11,9 @@ describe('OrderComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [OrderComponent, HttpClientModule],
-      providers: [{ provide: ActivatedRoute, useValue: activateRouteStub}]
-    });
+    imports: [OrderComponent],
+    providers: [{ provide: ActivatedRoute, useValue: activateRouteStub }, provideHttpClient(withInterceptorsFromDi())]
+});
     fixture = TestBed.createComponent(OrderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
