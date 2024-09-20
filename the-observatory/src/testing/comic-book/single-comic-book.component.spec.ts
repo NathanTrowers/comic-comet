@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
@@ -34,20 +34,21 @@ describe('SingleComicBookComponent', () => {
     }));
 
     TestBed.configureTestingModule({
-      imports: [HttpClientModule, SingleComicBookComponent],
-      providers: [
-        { provide: ActivatedRoute, useValue: { 
-          snapshot: {
-            paramMap: {
-              get: (id:number) => {
-                id:'7963b34d-7c0a-42cd-964a-93b31e7c8f34'
-              }
-            }
-          }
-        }},
-        { provide: ComicBookService, useValue: comicBookService }
-      ]
-    });
+    imports: [SingleComicBookComponent],
+    providers: [
+        { provide: ActivatedRoute, useValue: {
+                snapshot: {
+                    paramMap: {
+                        get: (id: number) => {
+                            id: '7963b34d-7c0a-42cd-964a-93b31e7c8f34';
+                        }
+                    }
+                }
+            } },
+        { provide: ComicBookService, useValue: comicBookService },
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+});
     fixture = TestBed.createComponent(SingleComicBookComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

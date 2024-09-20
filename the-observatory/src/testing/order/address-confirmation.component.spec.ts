@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
@@ -27,12 +27,13 @@ describe('AddressConfirmationComponent', () => {
     }));
 
     TestBed.configureTestingModule({
-      imports: [AddressConfirmationComponent, HttpClientModule],
-      providers: [
-        { provide:  ActivatedRoute, useValue: activateRouteStub },
-        { provide: OrderService, useValue: orderService }
-      ]
-    });
+    imports: [AddressConfirmationComponent],
+    providers: [
+        { provide: ActivatedRoute, useValue: activateRouteStub },
+        { provide: OrderService, useValue: orderService },
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+});
     fixture = TestBed.createComponent(AddressConfirmationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

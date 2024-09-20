@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 
@@ -41,12 +41,13 @@ describe('OrderConfirmationComponent', () => {
     );
 
     TestBed.configureTestingModule({
-      imports: [OrderConfirmationComponent, HttpClientModule],
-      providers: [
-        { provide:  ActivatedRoute, useValue: activateRouteStub },
-        { provide: CartService, useValue: cartService }
-      ]
-    });
+    imports: [OrderConfirmationComponent],
+    providers: [
+        { provide: ActivatedRoute, useValue: activateRouteStub },
+        { provide: CartService, useValue: cartService },
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+});
     fixture = TestBed.createComponent(OrderConfirmationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CartItemComponent } from 'src/app/cart/cart-item/cart-item.component';
@@ -9,8 +9,9 @@ describe('CartItemComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CartItemComponent, HttpClientModule]
-    });
+    imports: [CartItemComponent],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+});
     fixture = TestBed.createComponent(CartItemComponent);
     component = fixture.componentInstance;
     component.cartItem = {

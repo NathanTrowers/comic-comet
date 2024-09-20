@@ -1,4 +1,4 @@
-import { HttpClientModule } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,9 +11,9 @@ describe('NewComicBookComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule, NewComicBookComponent],
-      providers: [ { provide: ActivatedRoute, useValue: activatedRouteStub }]
-    });
+    imports: [NewComicBookComponent],
+    providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }, provideHttpClient(withInterceptorsFromDi())]
+});
     fixture = TestBed.createComponent(NewComicBookComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

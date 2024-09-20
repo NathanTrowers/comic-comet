@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,9 +9,9 @@ describe('LoginComponet Smoke Test', () => {
 
     it('renders without crashing', () => {
         TestBed.configureTestingModule({
-            imports: [HttpClientModule, LoginComponent],
-            providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }]
-        });
+    imports: [LoginComponent],
+    providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }, provideHttpClient(withInterceptorsFromDi())]
+});
         const loginFixture = TestBed.createComponent(LoginComponent);
         const loginComponentInstance  = loginFixture.componentInstance;
 

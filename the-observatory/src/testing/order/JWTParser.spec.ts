@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
@@ -16,11 +16,12 @@ describe('JWT Parser Test Suite', () => {
         }});
 
         TestBed.configureTestingModule({
-          imports: [HttpClientModule],
-          providers: [
-            { provide: AuthenticationService, useValue: authenticationService }
-          ]
-        });
+    imports: [],
+    providers: [
+        { provide: AuthenticationService, useValue: authenticationService },
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+});
         jwtParser = TestBed.inject(JWTParser);
     });
 

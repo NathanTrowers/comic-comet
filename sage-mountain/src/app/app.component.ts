@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -11,8 +10,7 @@ import { MessageComponent } from 'src/app/message/message.component';
   imports: [
     LoginComponent,
     MessageComponent,
-    RouterModule,
-    HttpClientModule
+    RouterModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

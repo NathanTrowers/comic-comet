@@ -1,4 +1,4 @@
-import { HttpClientModule } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrderCardComponent } from 'src/app/order/order-card/order-card.component';
@@ -9,8 +9,9 @@ describe('OrderCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [OrderCardComponent, HttpClientModule]
-    });
+    imports: [OrderCardComponent],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+});
     fixture = TestBed.createComponent(OrderCardComponent);
     component = fixture.componentInstance;
     component.comicBookOrder = {
