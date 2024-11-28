@@ -7,14 +7,13 @@ import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
 import { ComicBookService } from 'src/app/comic-book/comic-book.service';
 
 @Component({
-  selector: 'app-comic-book-card',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  templateUrl: './comic-book-card.component.html',
-  styleUrls: ['./comic-book-card.component.css']
+    selector: 'app-comic-book-card',
+    imports: [
+        CommonModule,
+        RouterModule
+    ],
+    templateUrl: './comic-book-card.component.html',
+    styleUrls: ['./comic-book-card.component.css']
 })
 export class ComicBookCardComponent implements OnInit {
   @Input() comicBook!: ComicBook;

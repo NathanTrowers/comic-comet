@@ -8,14 +8,13 @@ import { ComicBookCardComponent } from 'src/app/comic-book/comic-book-card/comic
 import { ComicBookService } from 'src/app/comic-book/comic-book.service';
 
 @Component({
-  selector: 'app-comic-book-catalogue',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ComicBookCardComponent
-  ],
-  templateUrl: './comic-book-catalogue.component.html',
-  styleUrls: ['./comic-book-catalogue.component.css']
+    selector: 'app-comic-book-catalogue',
+    imports: [
+        CommonModule,
+        ComicBookCardComponent
+    ],
+    templateUrl: './comic-book-catalogue.component.html',
+    styleUrls: ['./comic-book-catalogue.component.css']
 })
 export class ComicBookCatalogueComponent {
   comicBookList: ComicBook[] = [];

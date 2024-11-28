@@ -8,15 +8,14 @@ import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
 import { infoMessages } from 'src/app/message/message.constants';
 
 @Component({
-  selector: 'app-cart',
-  standalone: true,
-  imports: [
-    CommonModule,
-    CartItemComponent,
-    RouterModule
-  ],
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+    selector: 'app-cart',
+    imports: [
+        CommonModule,
+        CartItemComponent,
+        RouterModule
+    ],
+    templateUrl: './cart.component.html',
+    styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
   cart!: ComicBook[];

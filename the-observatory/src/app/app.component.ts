@@ -6,15 +6,14 @@ import { MessageComponent } from 'src/app/message/message.component';
 
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    LoginComponent,
-    MessageComponent,
-    RouterModule
-  ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    imports: [
+        LoginComponent,
+        MessageComponent,
+        RouterModule
+    ],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 
 export class AppComponent {

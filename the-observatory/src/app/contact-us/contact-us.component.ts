@@ -13,17 +13,16 @@ import { MessageService } from 'src/app/message/message.service';
 import { InfoComponent } from 'src/app/message/info/info.component';
 
 @Component({
-  selector: 'app-contact-us',
-  standalone: true,
-  imports: [
-    CommonModule,
-    InfoComponent,
-    MessageComponent,
-    ReactiveFormsModule,
-    RouterModule
-  ],
-  templateUrl: './contact-us.component.html',
-  styleUrls: ['./contact-us.component.css']
+    selector: 'app-contact-us',
+    imports: [
+        CommonModule,
+        InfoComponent,
+        MessageComponent,
+        ReactiveFormsModule,
+        RouterModule
+    ],
+    templateUrl: './contact-us.component.html',
+    styleUrls: ['./contact-us.component.css']
 })
 export class ContactUsComponent {
   contactForm = new FormGroup({

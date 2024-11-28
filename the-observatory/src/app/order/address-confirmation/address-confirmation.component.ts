@@ -13,17 +13,16 @@ import Address from 'src/app/order/interfaces/Address';
 import AddressResponse from 'src/app/order/interfaces/AddressResponse';
 
 @Component({
-  selector: 'app-address-confirmation',
-  standalone: true,
-  imports: [
-    CommonModule,
-    InfoComponent,
-    MessageComponent,
-    ReactiveFormsModule,
-    RouterModule
-  ],
-  templateUrl: './address-confirmation.component.html',
-  styleUrls: ['./address-confirmation.component.css']
+    selector: 'app-address-confirmation',
+    imports: [
+        CommonModule,
+        InfoComponent,
+        MessageComponent,
+        ReactiveFormsModule,
+        RouterModule
+    ],
+    templateUrl: './address-confirmation.component.html',
+    styleUrls: ['./address-confirmation.component.css']
 })
 export class AddressConfirmationComponent implements OnInit{
   // error: boolean = false;

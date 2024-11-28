@@ -12,16 +12,15 @@ import SavedComicBookOrdersListResponse from 'src/app/order/interfaces/SavedComi
 import { OrderCardComponent } from 'src/app/order/order-card/order-card.component';
 
 @Component({
-  selector: 'app-order',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MessageComponent,
-    OrderCardComponent,
-    RouterModule
-  ],
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css']
+    selector: 'app-order',
+    imports: [
+        CommonModule,
+        MessageComponent,
+        OrderCardComponent,
+        RouterModule
+    ],
+    templateUrl: './order.component.html',
+    styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
   RETURN_STATUS: string = 'return';
