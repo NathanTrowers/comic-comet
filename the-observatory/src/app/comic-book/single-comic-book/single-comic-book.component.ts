@@ -8,15 +8,14 @@ import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
 import { FooterComponent } from 'src/app/footer/footer.component';
 
 @Component({
-  selector: 'app-single-comic-book',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FooterComponent,
-    RouterModule
-  ],
-  templateUrl: './single-comic-book.component.html',
-  styleUrls: ['./single-comic-book.component.css']
+    selector: 'app-single-comic-book',
+    imports: [
+        CommonModule,
+        FooterComponent,
+        RouterModule
+    ],
+    templateUrl: './single-comic-book.component.html',
+    styleUrls: ['./single-comic-book.component.css']
 })
 export class SingleComicBookComponent implements OnInit {
   comicBook!: ComicBook;

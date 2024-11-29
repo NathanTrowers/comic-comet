@@ -11,16 +11,15 @@ import { errorMessage, messageClass } from 'src/app/message/message.constants';
 import { MessageService } from 'src/app/message/message.service';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MessageComponent,
-    RouterModule
-  ],
-  templateUrl: './login.component.html',
-  styleUrls: ['../authentication.css']
+    selector: 'app-login',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MessageComponent,
+        RouterModule
+    ],
+    templateUrl: './login.component.html',
+    styleUrls: ['../authentication.css']
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({

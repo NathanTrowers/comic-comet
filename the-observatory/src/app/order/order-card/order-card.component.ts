@@ -5,11 +5,10 @@ import { ComicBookService } from 'src/app/comic-book/comic-book.service';
 import ComicBookOrder from 'src/app/order/interfaces/ComicBookOrder';
 
 @Component({
-  selector: 'app-order-card',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './order-card.component.html',
-  styleUrls: ['./order-card.component.css']
+    selector: 'app-order-card',
+    imports: [CommonModule],
+    templateUrl: './order-card.component.html',
+    styleUrls: ['./order-card.component.css']
 })
 export class OrderCardComponent {
   @Input() comicBookOrder!: ComicBookOrder;

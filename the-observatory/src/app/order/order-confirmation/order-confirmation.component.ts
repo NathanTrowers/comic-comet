@@ -13,15 +13,14 @@ import Order from 'src/app/order/interfaces/Order';
 import { JWTParser } from 'src/app/order/order-confirmation/JWTParser';
 
 @Component({
-  selector: 'app-order-confirmation',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MessageComponent,
-    RouterModule
-  ],
-  templateUrl: './order-confirmation.component.html',
-  styleUrls: ['./order-confirmation.component.css']
+    selector: 'app-order-confirmation',
+    imports: [
+        CommonModule,
+        MessageComponent,
+        RouterModule
+    ],
+    templateUrl: './order-confirmation.component.html',
+    styleUrls: ['./order-confirmation.component.css']
 })
 export class OrderConfirmationComponent implements OnInit{
   itemsToPurchase: ComicBook[] = [];

@@ -12,17 +12,16 @@ import { formMessages } from 'src/app/message/message.constants';
 import { MessageService } from 'src/app/message/message.service';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [
-    CommonModule,
-    InfoComponent,
-    ReactiveFormsModule,
-    MessageComponent,
-    RouterModule
-  ],
-  templateUrl: './register.component.html',
-  styleUrls: ['../authentication.css']
+    selector: 'app-register',
+    imports: [
+        CommonModule,
+        InfoComponent,
+        ReactiveFormsModule,
+        MessageComponent,
+        RouterModule
+    ],
+    templateUrl: './register.component.html',
+    styleUrls: ['../authentication.css']
 })
 export class RegisterComponent implements OnInit {
   registrationForm = new FormGroup({

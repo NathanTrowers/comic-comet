@@ -10,17 +10,16 @@ import { errorMessage, messageClass } from 'src/app/message/message.constants';
 import { MessageService } from 'src/app/message/message.service';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ComicBookCatalogueComponent,
-    FooterComponent,
-    MessageComponent,
-    RouterModule
-  ],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+    selector: 'app-dashboard',
+    imports: [
+        CommonModule,
+        ComicBookCatalogueComponent,
+        FooterComponent,
+        MessageComponent,
+        RouterModule
+    ],
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
   token: string | null  = '';
