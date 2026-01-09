@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -10,10 +10,9 @@ import { infoMessages } from 'src/app/message/message.constants';
 @Component({
     selector: 'app-cart',
     imports: [
-        CommonModule,
-        CartItemComponent,
-        RouterModule
-    ],
+    CartItemComponent,
+    RouterModule
+],
     templateUrl: './cart.component.html',
     styleUrls: ['./cart.component.css']
 })

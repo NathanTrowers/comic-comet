@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
@@ -17,12 +17,11 @@ import { MessageService } from 'src/app/message/message.service';
   selector: 'app-edit-comic-book',
   standalone: true,
   imports: [
-    CommonModule,
     InfoComponent,
     ReactiveFormsModule,
     MessageComponent,
     RouterModule
-  ],
+],
   templateUrl: './edit-comic-book.component.html',
   styleUrls: ['./edit-comic-book.component.css']
 })

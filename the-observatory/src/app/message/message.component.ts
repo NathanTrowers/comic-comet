@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 import { MessageService } from 'src/app/message/message.service';
 
 @Component({
     selector: 'app-messages',
-    imports: [
-        CommonModule
-    ],
+    imports: [],
     templateUrl: './message.component.html',
     styleUrls: ['./message.component.css']
 })

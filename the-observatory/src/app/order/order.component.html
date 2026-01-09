@@ -1,51 +1,53 @@
 <section>
-    <form>
-        <h2>Orders</h2>
-        <a [routerLink]="['/comic-books']">Back</a>
-        <label for='searchBar'>Search Bar </label>
-        <input 
-            name='searchBar'
-            data-test='search-bar-input'
-            type='text'
-            placeholder='Filter by comic book name'
-            #searchQuery
-            (input)='filterResults(searchQuery.value)'
-        >
-    </form>
-    <app-messages></app-messages>
-    <div 
-        id='modal'
-        *ngIf='confirmReturn'
-    >
-        <div id='modalContent'>
-            <p>Are you sure you want to return comic book {{ returnedOrder.comicBook.name }} from order {{returnedOrder.orderId}} ?</p>
-            <button 
-                id='returnButton'
-                data-test='return-confirmation-button'
-                (click)='return()' 
-            >
-                Return
-            </button>
-            <button
-                id='cancelButton'
-                (click)='confirmReturn = false'
-            >
-                Cancel
-            </button>
-        </div>
+  <form>
+    <h2>Orders</h2>
+    <a [routerLink]="['/comic-books']">Back</a>
+    <label for='searchBar'>Search Bar </label>
+    <input
+      name='searchBar'
+      data-test='search-bar-input'
+      type='text'
+      placeholder='Filter by comic book name'
+      #searchQuery
+      (input)='filterResults(searchQuery.value)'
+      >
+  </form>
+  <app-messages></app-messages>
+  @if (confirmReturn) {
+    <div
+      id='modal'
+      >
+      <div id='modalContent'>
+        <p>Are you sure you want to return comic book {{ returnedOrder.comicBook.name }} from order {{returnedOrder.orderId}} ?</p>
+        <button
+          id='returnButton'
+          data-test='return-confirmation-button'
+          (click)='return()'
+          >
+          Return
+        </button>
+        <button
+          id='cancelButton'
+          (click)='confirmReturn = false'
+          >
+          Cancel
+        </button>
+      </div>
     </div>
-    <div 
-        class='ordersList' 
-        *ngIf='filteredOrderList.length > 0 else showLoadingCircle'
-    >
+  }
+  @if (filteredOrderList.length > 0) {
+    <div
+      class='ordersList'
+      >
+      @for (comicBookOrder of filteredOrderList; track comicBookOrder) {
         <app-order-card
-            *ngFor='let comicBookOrder of filteredOrderList'
-            [comicBookOrder]='comicBookOrder'
-            (returnComicBookOrderEvent)='showConfirmReturnDialog($event)'
-        >
+          [comicBookOrder]='comicBookOrder'
+          (returnComicBookOrderEvent)='showConfirmReturnDialog($event)'
+          >
         </app-order-card>
+      }
     </div>
-    <ng-template #showLoadingCircle>
-        <div class='loadingCircle'></div>
-    </ng-template>
+  } @else {
+    <div class='loadingCircle'></div>
+  }
 </section>

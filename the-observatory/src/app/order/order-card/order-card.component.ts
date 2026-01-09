@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ComicBookService } from 'src/app/comic-book/comic-book.service';
@@ -6,7 +6,7 @@ import ComicBookOrder from 'src/app/order/interfaces/ComicBookOrder';
 
 @Component({
     selector: 'app-order-card',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './order-card.component.html',
     styleUrls: ['./order-card.component.css']
 })

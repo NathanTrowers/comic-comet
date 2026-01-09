@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
@@ -15,10 +15,9 @@ import { JWTParser } from 'src/app/order/order-confirmation/JWTParser';
 @Component({
     selector: 'app-order-confirmation',
     imports: [
-        CommonModule,
-        MessageComponent,
-        RouterModule
-    ],
+    MessageComponent,
+    RouterModule
+],
     templateUrl: './order-confirmation.component.html',
     styleUrls: ['./order-confirmation.component.css']
 })

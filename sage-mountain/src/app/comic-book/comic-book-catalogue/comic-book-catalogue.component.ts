@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 
 import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
@@ -13,10 +13,9 @@ import { errorMessage, messageClass } from 'src/app/message/message.constants';
   selector: 'app-comic-book-catalogue',
   standalone: true,
   imports: [
-    CommonModule,
     ComicBookCardComponent,
     MessageComponent
-  ],
+],
   templateUrl: './comic-book-catalogue.component.html',
   styleUrls: ['./comic-book-catalogue.component.css']
 })

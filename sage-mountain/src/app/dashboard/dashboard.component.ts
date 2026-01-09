@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
@@ -12,11 +12,10 @@ import { MessageService } from 'src/app/message/message.service';
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CommonModule,
     ComicBookCatalogueComponent,
     MessageComponent,
     RouterModule
-  ],
+],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })

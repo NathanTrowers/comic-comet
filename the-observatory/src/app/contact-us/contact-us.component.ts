@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -15,12 +15,11 @@ import { InfoComponent } from 'src/app/message/info/info.component';
 @Component({
     selector: 'app-contact-us',
     imports: [
-        CommonModule,
-        InfoComponent,
-        MessageComponent,
-        ReactiveFormsModule,
-        RouterModule
-    ],
+    InfoComponent,
+    MessageComponent,
+    ReactiveFormsModule,
+    RouterModule
+],
     templateUrl: './contact-us.component.html',
     styleUrls: ['./contact-us.component.css']
 })

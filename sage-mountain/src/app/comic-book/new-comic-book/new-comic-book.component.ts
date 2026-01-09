@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -18,12 +18,11 @@ import { MessageService } from 'src/app/message/message.service';
   selector: 'app-new-comic-book',
   standalone: true,
   imports: [
-    CommonModule,
     InfoComponent,
     ReactiveFormsModule,
     MessageComponent,
     RouterModule
-  ],
+],
   templateUrl: './new-comic-book.component.html',
   styleUrls: ['./new-comic-book.component.css']
 })

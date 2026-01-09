@@ -1,48 +1,50 @@
 <section>
-    <form>
-        <label for='searchBar'>Search Bar </label>
-        <input 
-            name='searchBar'
-            data-test='search-bar-input'
-            type='text'
-            placeholder='Filter by name'
-            #searchQuery
-            (input)='filterResults(searchQuery.value)'
-        >
-    </form>
-    <app-messages></app-messages>
-    <div 
-        id='modal'
-        *ngIf='confirmDelete'
-    >
-        <div id='modalContent'>
-            <p>Are you sure you want to delete {{deletionCandidate.name}}?</p>
-            <button 
-                id='deleteButton'    
-                (click)='delete()' 
-            >
-                Delete
-            </button>
-            <button
-                id='cancelButton'
-                (click)='confirmDelete = false'
-            >
-                Cancel
-            </button>
-        </div>
+  <form>
+    <label for='searchBar'>Search Bar </label>
+    <input
+      name='searchBar'
+      data-test='search-bar-input'
+      type='text'
+      placeholder='Filter by name'
+      #searchQuery
+      (input)='filterResults(searchQuery.value)'
+      >
+  </form>
+  <app-messages></app-messages>
+  @if (confirmDelete) {
+    <div
+      id='modal'
+      >
+      <div id='modalContent'>
+        <p>Are you sure you want to delete {{deletionCandidate.name}}?</p>
+        <button
+          id='deleteButton'
+          (click)='delete()'
+          >
+          Delete
+        </button>
+        <button
+          id='cancelButton'
+          (click)='confirmDelete = false'
+          >
+          Cancel
+        </button>
+      </div>
     </div>
-    <div class='catalogue' 
-        *ngIf='comicBookList.length > 0 else showLoadingCircle'
-        data-test='catalogue-section'
-    >
+  }
+  @if (comicBookList.length > 0) {
+    <div class='catalogue'
+      data-test='catalogue-section'
+      >
+      @for (comicBook of filteredComicBookList; track comicBook) {
         <app-comic-book-card
-            *ngFor='let comicBook of filteredComicBookList'
-            [comicBook]='comicBook'
-            (deleteComicBookEvent)='showConfirmDeleteDialog($event)'
-        >
+          [comicBook]='comicBook'
+          (deleteComicBookEvent)='showConfirmDeleteDialog($event)'
+          >
         </app-comic-book-card>
+      }
     </div>
-    <ng-template #showLoadingCircle>
-        <div class='loadingCircle'></div>
-    </ng-template>
+  } @else {
+    <div class='loadingCircle'></div>
+  }
 </section>

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -9,9 +9,8 @@ import { ComicBookService } from 'src/app/comic-book/comic-book.service';
 @Component({
     selector: 'app-comic-book-card',
     imports: [
-        CommonModule,
-        RouterModule
-    ],
+    RouterModule
+],
     templateUrl: './comic-book-card.component.html',
     styleUrls: ['./comic-book-card.component.css']
 })

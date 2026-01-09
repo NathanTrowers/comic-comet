@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Router, RouterModule } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
@@ -12,12 +12,11 @@ import { MessageService } from 'src/app/message/message.service';
 @Component({
     selector: 'app-dashboard',
     imports: [
-        CommonModule,
-        ComicBookCatalogueComponent,
-        FooterComponent,
-        MessageComponent,
-        RouterModule
-    ],
+    ComicBookCatalogueComponent,
+    FooterComponent,
+    MessageComponent,
+    RouterModule
+],
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css']
 })
