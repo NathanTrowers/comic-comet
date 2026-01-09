@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -8,9 +8,8 @@ import ComicBook from 'src/app/comic-book/interfaces/ComicBook';
   selector: 'app-comic-book-card',
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule
-  ],
+],
   templateUrl: './comic-book-card.component.html',
   styleUrls: ['./comic-book-card.component.css']
 })

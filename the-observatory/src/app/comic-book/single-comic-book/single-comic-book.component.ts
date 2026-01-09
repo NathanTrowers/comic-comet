@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
@@ -10,10 +10,9 @@ import { FooterComponent } from 'src/app/footer/footer.component';
 @Component({
     selector: 'app-single-comic-book',
     imports: [
-        CommonModule,
-        FooterComponent,
-        RouterModule
-    ],
+    FooterComponent,
+    RouterModule
+],
     templateUrl: './single-comic-book.component.html',
     styleUrls: ['./single-comic-book.component.css']
 })

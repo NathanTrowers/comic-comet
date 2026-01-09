@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -14,12 +14,11 @@ import { MessageService } from 'src/app/message/message.service';
 @Component({
     selector: 'app-register',
     imports: [
-        CommonModule,
-        InfoComponent,
-        ReactiveFormsModule,
-        MessageComponent,
-        RouterModule
-    ],
+    InfoComponent,
+    ReactiveFormsModule,
+    MessageComponent,
+    RouterModule
+],
     templateUrl: './register.component.html',
     styleUrls: ['../authentication.css']
 })

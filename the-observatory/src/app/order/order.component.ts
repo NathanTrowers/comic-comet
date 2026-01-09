@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -14,11 +14,10 @@ import { OrderCardComponent } from 'src/app/order/order-card/order-card.componen
 @Component({
     selector: 'app-order',
     imports: [
-        CommonModule,
-        MessageComponent,
-        OrderCardComponent,
-        RouterModule
-    ],
+    MessageComponent,
+    OrderCardComponent,
+    RouterModule
+],
     templateUrl: './order.component.html',
     styleUrls: ['./order.component.css']
 })

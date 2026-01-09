@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -15,12 +15,11 @@ import AddressResponse from 'src/app/order/interfaces/AddressResponse';
 @Component({
     selector: 'app-address-confirmation',
     imports: [
-        CommonModule,
-        InfoComponent,
-        MessageComponent,
-        ReactiveFormsModule,
-        RouterModule
-    ],
+    InfoComponent,
+    MessageComponent,
+    ReactiveFormsModule,
+    RouterModule
+],
     templateUrl: './address-confirmation.component.html',
     styleUrls: ['./address-confirmation.component.css']
 })

@@ -1,29 +1,31 @@
 <section>
-    <div 
-        class='row top'
-        data-test='cart-section'
+  <div
+    class='row top'
+    data-test='cart-section'
     >
-        <h2>Cart</h2>
-        <a [routerLink]="['/comic-books']">Back</a>
-        <a
-            *ngIf='cart.length > 0'
-            [routerLink]="['/address-confirmation']"
+    <h2>Cart</h2>
+    <a [routerLink]="['/comic-books']">Back</a>
+    @if (cart.length > 0) {
+      <a
+        [routerLink]="['/address-confirmation']"
         >
-            Proceed to Checkout
-        </a>
-    </div>
-    <div 
-        id='cart' 
-        *ngIf='cart.length > 0 else showEmptyCartMessage'
-    >
+        Proceed to Checkout
+      </a>
+    }
+  </div>
+  @if (cart.length > 0) {
+    <div
+      id='cart'
+      >
+      @for (comicBook of cart; track comicBook) {
         <app-cart-item
-            *ngFor='let comicBook of cart'
-            [cartItem]='comicBook'
-            (removeCartItemEvent)='removeCartItem($event)'
-        >
+          [cartItem]='comicBook'
+          (removeCartItemEvent)='removeCartItem($event)'
+          >
         </app-cart-item>
+      }
     </div>
-    <ng-template #showEmptyCartMessage>
-        <p> {{ emptyCartMessage }}</p>
-    </ng-template>
+  } @else {
+    <p> {{ emptyCartMessage }}</p>
+  }
 </section>

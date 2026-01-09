@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 
 import { MessageService } from 'src/app/message/message.service';
@@ -6,9 +6,7 @@ import { MessageService } from 'src/app/message/message.service';
 @Component({
   selector: 'app-messages',
   standalone: true,
-  imports: [
-    CommonModule
-  ],
+  imports: [],
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css']
 })

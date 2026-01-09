@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -13,11 +13,10 @@ import { MessageService } from 'src/app/message/message.service';
 @Component({
     selector: 'app-login',
     imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        MessageComponent,
-        RouterModule
-    ],
+    ReactiveFormsModule,
+    MessageComponent,
+    RouterModule
+],
     templateUrl: './login.component.html',
     styleUrls: ['../authentication.css']
 })
